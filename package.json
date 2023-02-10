@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/agilathon/auto_parts_store#readme",
   "dependencies": {
-    "dotnet": "^1.1.4",
+    "dotenv": "^16.0.3",
     "morgan": "^1.10.0",
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
