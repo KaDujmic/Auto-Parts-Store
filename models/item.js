@@ -22,7 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'item'
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'item',
+    updatedAt: 'updated_at',
+    createdAt: 'created_at'
   });
   return Item;
 };
