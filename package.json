@@ -6,7 +6,8 @@
   "scripts": {
     "start:dev": "nodemon -r dotenv/config server dotenv_config_path=.env.development",
     "migrate:dev": "npx sequelize-cli db:migrate --env=development",
-    "seed:dev": "npx sequelize-cli db:seed:all --env=development"
+    "seed:dev": "npx sequelize-cli db:seed:all --env=development",
+    "undo:migrate:dev": "npx sequelize-cli db:migrate:undo:all --env=development"
   },
   "repository": {
     "type": "git",

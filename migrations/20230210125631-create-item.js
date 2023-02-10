@@ -5,7 +5,6 @@ module.exports = {
     await queryInterface.createTable('item', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.UUID
       },
@@ -38,6 +37,6 @@ module.exports = {
     });
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('item');
+    await queryInterface.dropTable('item', { cascade: true });
   }
 };
