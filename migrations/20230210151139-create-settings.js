@@ -5,9 +5,8 @@ module.exports = {
     await queryInterface.createTable('settings', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       key: {
         type: Sequelize.INTEGER
@@ -26,6 +25,6 @@ module.exports = {
     });
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('settings');
+    await queryInterface.dropTable('settings', { cascade: true });
   }
 };

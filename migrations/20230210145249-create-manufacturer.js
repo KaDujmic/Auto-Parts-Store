@@ -5,9 +5,8 @@ module.exports = {
     await queryInterface.createTable('manufacturer', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       name: {
         type: Sequelize.STRING
@@ -23,6 +22,6 @@ module.exports = {
     });
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('manufacturer');
+    await queryInterface.dropTable('manufacturer', { cascade: true });
   }
 };

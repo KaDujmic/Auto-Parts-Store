@@ -5,9 +5,8 @@ module.exports = {
     await queryInterface.createTable('currency', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       date: {
         type: Sequelize.DATEONLY
@@ -26,6 +25,6 @@ module.exports = {
     });
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('currency');
+    await queryInterface.dropTable('currency', { cascade: true });
   }
 };

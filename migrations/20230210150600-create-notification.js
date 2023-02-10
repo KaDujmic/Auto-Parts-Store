@@ -5,9 +5,8 @@ module.exports = {
     await queryInterface.createTable('notification', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       user_id: {
         type: Sequelize.UUID
@@ -35,6 +34,6 @@ module.exports = {
     });
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('notification');
+    await queryInterface.dropTable('notification', { cascade: true });
   }
 };
