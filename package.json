@@ -1,0 +1,39 @@
+{
+  "name": "auto_parts_storee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon -r dotenv/config server dotenv_config_path=.env.development",
+    "migrate:dev": "npx sequelize-cli db:migrate --env=development",
+    "seed:dev": "npx sequelize-cli db:seed:all --env=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agilathon/auto_parts_store.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agilathon/auto_parts_store/issues"
+  },
+  "homepage": "https://github.com/agilathon/auto_parts_store#readme",
+  "dependencies": {
+    "dotnet": "^1.1.4",
+    "morgan": "^1.10.0",
+    "pg": "^8.9.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.28.0",
+    "sqlite3": "^5.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.20",
+    "sequelize-cli": "^6.6.0"
+  }
+}
