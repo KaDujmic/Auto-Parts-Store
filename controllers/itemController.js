@@ -1,22 +1,22 @@
 const { item } = require('..db/models');
 const crudController = require('./crudController');
 
-exports.getUser = async (res, req) => {
-  crudController.getUser(item, res, req);
+exports.getItem = async (res, req) => {
+  crudController.findModel(item, res, req);
 };
 
-exports.getAllUsers = async (res, req) => {
-  crudController.getAllUsers(item, res, req);
+exports.getAllItem = async (res, req) => {
+  crudController.findAllModel(item, res, req);
 };
 
-exports.updateUser = async (res, req) => {
-  crudController.updateUser(item, res, req);
+exports.updateItem = async (res, req) => {
+  crudController.updateModel(item, res, req);
 };
 
-exports.deleteUser = async (res, req) => {
-  crudController.deleteUser(item, res, req);
+exports.deleteItem = async (res, req) => {
+  crudController.deleteModel(item, res, req);
 };
 
-exports.createUser = async (res, req) => {
-  crudController.createUser(item, res, req);
+exports.createItem = async (res, req) => {
+  crudController.createModel(item, res, req);
 };
