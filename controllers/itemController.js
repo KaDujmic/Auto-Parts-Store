@@ -1,4 +1,4 @@
-const { item } = require('..db/models');
+const { item } = require('../models');
 const crudController = require('./crudController');
 
 exports.getItem = async (res, req) => {
