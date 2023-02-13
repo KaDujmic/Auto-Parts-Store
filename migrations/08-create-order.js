@@ -24,7 +24,7 @@ module.exports = {
       order_status: {
         type: Sequelize.STRING
       },
-      items: {
+      item_list: {
         type: Sequelize.JSONB
       },
       final_price: {
