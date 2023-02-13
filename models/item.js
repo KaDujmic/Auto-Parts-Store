@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
 
-      Item.belongsToMany(models.order_item, {
+      Item.belongsToMany(models.Order, {
         through: models.order_item,
         foreignKey: {
           name: 'item_id'
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'item',
+    modelName: 'Item',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
     hooks: {

@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'currency',
+    modelName: 'Currency',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
     hooks: {

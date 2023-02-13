@@ -4,7 +4,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class notification extends Model {
+  class Notification extends Model {
     static associate (models) {
       models.User.hasMany(Notification, {
         foreignKey: {
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  notification.init({
+  Notification.init({
     user_id: DataTypes.UUID,
     order_id: DataTypes.UUID,
     status: DataTypes.STRING,
@@ -47,5 +47,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return notification;
+  return Notification;
 };
