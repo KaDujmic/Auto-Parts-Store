@@ -1,5 +1,6 @@
 exports.findAllModel = async (Model, req, res) => {
   const models = await Model.findAll({
+    limit: 10,
     hooks: true
   });
   res.status(200).json({ models });
