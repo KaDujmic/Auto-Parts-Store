@@ -4,20 +4,20 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Order extends Model {
+  class order extends Model {
     static associate (models) {
-      models.User.hasMany(Order, {
+      models.user.hasMany(order, {
         foreignKey: {
           name: 'user_id'
         }
       });
-      Order.belongsTo(models.User, {
+      order.belongsTo(models.user, {
         foreignKey: {
           name: 'id'
         }
       });
 
-      Order.belongsToMany(models.Item, {
+      order.belongsToMany(models.item, {
         through: models.order_item,
         foreignKey: {
           name: 'order_id'
@@ -25,20 +25,20 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Order.init({
+  order.init({
     user_id: DataTypes.UUID,
     delivery_address: DataTypes.STRING,
     delivery_date: DataTypes.DATEONLY,
     order_date: DataTypes.DATEONLY,
     order_status: DataTypes.STRING,
-    items: DataTypes.JSONB,
+    item_list: DataTypes.JSONB,
     final_price: DataTypes.FLOAT,
     full_price: DataTypes.FLOAT
   }, {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Order',
+    modelName: 'order',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
     hooks: {
@@ -47,5 +47,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return Order;
+  return order;
 };

@@ -4,21 +4,21 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class user extends Model {
     static associate (models) {
-      models.Role.hasMany(User, {
+      models.role.hasMany(user, {
         foreignKey: {
           name: 'role_id'
         }
       });
-      User.belongsTo(models.Role, {
+      user.belongsTo(models.role, {
         foreignKey: {
           name: 'id'
         }
       });
     }
   }
-  User.init({
+  user.init({
     full_name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'User',
+    modelName: 'user',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
     hooks: {
@@ -40,5 +40,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return User;
+  return user;
 };

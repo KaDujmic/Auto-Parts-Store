@@ -4,30 +4,30 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Item extends Model {
+  class item extends Model {
     static associate (models) {
-      models.Category.hasMany(Item, {
+      models.category.hasMany(item, {
         foreignKey: {
           name: 'category_id'
         }
       });
-      Item.belongsTo(models.Category, {
+      item.belongsTo(models.category, {
         foreignKey: {
           name: 'id'
         }
       });
-      models.Manufacturer.hasMany(Item, {
+      models.manufacturer.hasMany(item, {
         foreignKey: {
           name: 'manufacturer_id'
         }
       });
-      Item.belongsTo(models.Manufacturer, {
+      item.belongsTo(models.manufacturer, {
         foreignKey: {
           name: 'id'
         }
       });
 
-      Item.belongsToMany(models.Order, {
+      item.belongsToMany(models.order, {
         through: models.order_item,
         foreignKey: {
           name: 'item_id'
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Item.init({
+  item.init({
     name: DataTypes.STRING,
     serial_number: DataTypes.STRING,
     price: DataTypes.FLOAT,
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Item',
+    modelName: 'item',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
     hooks: {
@@ -55,5 +55,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return Item;
+  return item;
 };
