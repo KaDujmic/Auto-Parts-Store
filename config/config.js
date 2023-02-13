@@ -3,8 +3,7 @@ if (envArg) {
   const env = envArg.split('=')[1];
   require('dotenv').config({ path: `./.env.${env}` });
 }
-console.log(process.env.DB_USERNAME);
-console.log(process.env.DB_PASSWORD);
+
 module.exports =
 {
   development: {

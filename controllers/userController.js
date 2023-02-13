@@ -5,7 +5,7 @@ exports.getUser = async (res, req) => {
   crudController.findModel(user, res, req);
 };
 
-exports.getAllUsers = async (res, req) => {
+exports.getAllUser = async (res, req) => {
   crudController.findAllModel(user, res, req);
 };
 
