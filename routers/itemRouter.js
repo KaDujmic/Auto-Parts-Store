@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { getUser, getAllUsers, createUser, updateUser, deleteUser } = require('../controllers/itemController');
+const { getItem, getAllItem, updateItem, createItem, deleteItem } = require('../controllers/itemController');
 
 router
   .route('/')
-  .get(getAllUsers)
-  .post(createUser);
+  .get(getAllItem)
+  .post(createItem);
 
 router
   .route('/:id')
-  .get(getUser)
-  .put(updateUser)
-  .delete(deleteUser);
+  .get(getItem)
+  .put(updateItem)
+  .delete(deleteItem);
 
 module.exports = router;
