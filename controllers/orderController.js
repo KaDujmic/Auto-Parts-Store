@@ -8,11 +8,11 @@ exports.getOrder = async (req, res) => {
   await crudController.findOne(order, req, res);
 };
 exports.createOrder = async (req, res) => {
-  await crudController.create(order, req, res);
+  await crudController.createModel(order, req, res);
 };
 exports.updateOrder = async (req, res) => {
-  await crudController.update(order, req, res);
+  await crudController.updateModel(order, req, res);
 };
 exports.deleteOrder = async (req, res) => {
-  await crudController.delete(order, req, res);
+  await crudController.deleteModel(order, req, res);
 };
