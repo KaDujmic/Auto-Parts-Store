@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { getUser, getAllUsers, createUser, updateUser, deleteUser } = require('../controllers/userController');
+const { getUser, getAllUser, updateUser, createUser, deleteUser } = require('../controllers/userController');
 
 router
   .route('/')
-  .get(getAllUsers)
+  .get(getAllUser)
   .post(createUser);
 
 router
