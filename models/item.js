@@ -26,6 +26,13 @@ module.exports = (sequelize, DataTypes) => {
           name: 'id'
         }
       });
+
+      Item.belongsToMany(models.order_item, {
+        through: models.order_item,
+        foreignKey: {
+          name: 'item_id'
+        }
+      });
     }
   }
   Item.init({
