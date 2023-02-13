@@ -1,5 +1,5 @@
 'use strict';
-const uuid = require('uuid');
+const { createUUID } = require('../utils/hooks');
 const {
   Model
 } = require('sequelize');
@@ -25,10 +25,16 @@ module.exports = (sequelize, DataTypes) => {
     currency: DataTypes.STRING
   }, {
     sequelize,
+    freezeTableName: true,
+    underscored: true,
     modelName: 'user',
     updatedAt: 'updated_at',
-    createdAt: 'created_at'
+    createdAt: 'created_at',
+    hooks: {
+      beforeCreate: (user, options) => {
+        createUUID(user, options);
+      }
+    }
   });
-  User.beforeCreate(user => { user.id = uuid.v4(); });
   return User;
 };
