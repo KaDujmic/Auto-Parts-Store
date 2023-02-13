@@ -4,31 +4,31 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Notification extends Model {
+  class notification extends Model {
     static associate (models) {
-      models.User.hasMany(Notification, {
+      models.user.hasMany(notification, {
         foreignKey: {
           name: 'user_id'
         }
       });
-      Notification.belongsTo(models.User, {
+      notification.belongsTo(models.user, {
         foreignKey: {
           name: 'id'
         }
       });
-      models.Order.hasMany(Notification, {
+      models.order.hasMany(notification, {
         foreignKey: {
           name: 'order_id'
         }
       });
-      Notification.belongsTo(models.Order, {
+      notification.belongsTo(models.order, {
         foreignKey: {
           name: 'id'
         }
       });
     }
   }
-  Notification.init({
+  notification.init({
     user_id: DataTypes.UUID,
     order_id: DataTypes.UUID,
     status: DataTypes.STRING,
@@ -47,5 +47,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return Notification;
+  return notification;
 };
