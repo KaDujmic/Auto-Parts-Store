@@ -24,6 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       role_id: {
+        allowNull: false,
         type: Sequelize.UUID
       },
       discount: {
