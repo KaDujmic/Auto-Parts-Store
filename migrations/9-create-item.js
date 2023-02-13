@@ -2,26 +2,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('notification', {
+    await queryInterface.createTable('item', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      user_id: {
-        type: Sequelize.UUID
-      },
-      order_id: {
-        type: Sequelize.UUID
-      },
-      status: {
+      name: {
         type: Sequelize.STRING
       },
-      last_sent: {
-        type: Sequelize.DATE
+      serial_number: {
+        type: Sequelize.STRING
       },
-      sent_history: {
-        type: Sequelize.JSONB
+      price: {
+        type: Sequelize.FLOAT
+      },
+      category_id: {
+        allowNull: false,
+        type: Sequelize.UUID
+      },
+      manufacturer_id: {
+        allowNull: false,
+        type: Sequelize.UUID
+      },
+      quantity: {
+        type: Sequelize.INTEGER
       },
       created_at: {
         allowNull: false,
@@ -34,6 +39,6 @@ module.exports = {
     });
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('notification', { cascade: true });
+    await queryInterface.dropTable('item', { cascade: true });
   }
 };
