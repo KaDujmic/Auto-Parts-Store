@@ -37,13 +37,13 @@ module.exports = {
     });
 
     await queryInterface.addConstraint('user', {
-      fields: ['role_id'],
+      fields: ['role'],
       onDelete: 'cascade',
       onUpdate: 'cascade',
       type: 'foreign key',
       references: {
         table: 'role',
-        field: 'id'
+        field: 'name'
       }
     });
 

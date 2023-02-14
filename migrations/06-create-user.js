@@ -12,6 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
+        unique: true,
         type: Sequelize.STRING
       },
       address: {
@@ -23,9 +24,9 @@ module.exports = {
       phone_number: {
         type: Sequelize.STRING
       },
-      role_id: {
+      role: {
         allowNull: false,
-        type: Sequelize.UUID
+        type: Sequelize.STRING
       },
       discount: {
         type: Sequelize.FLOAT
