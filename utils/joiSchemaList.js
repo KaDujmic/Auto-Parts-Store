@@ -9,7 +9,7 @@ exports.userSchema = joi.object({
       post: (userSchema) => userSchema.required(),
       put: (userSchema) => userSchema.forbidden()
     }),
-  full_name: joi.string()
+  fullName: joi.string()
     .min(5)
     .max(50)
     .alter({
@@ -36,14 +36,14 @@ exports.userSchema = joi.object({
       post: (userSchema) => userSchema.required(),
       put: (userSchema) => userSchema.optional()
     }),
-  phone_number: joi.string()
+  phoneNumber: joi.string()
     .min(10)
     .max(10)
     .alter({
       post: (userSchema) => userSchema.required(),
       put: (userSchema) => userSchema.optional()
     }),
-  role_name: joi.string()
+  roleName: joi.string()
     .min(5)
     .max(50),
   discount: joi.number()
@@ -68,15 +68,15 @@ exports.orderSchema = joi.object({
       post: (orderSchema) => orderSchema.required(),
       put: (orderSchema) => orderSchema.forbidden()
     }),
-  user_id: joi.string()
+  userId: joi.string()
     .guid({ version: 'uuidv4' })
     .alter({
       post: (orderSchema) => orderSchema.required(),
       put: (orderSchema) => orderSchema.forbidden()
     }),
-  item_list: joi.array()
+  itemList: joi.array()
     .items({
-      item_id: joi.string()
+      itemId: joi.string()
         .guid({ version: 'uuidv4' })
         .alter({
           post: (orderSchema) => orderSchema.required(),
@@ -120,7 +120,7 @@ exports.itemSchema = joi.object({
       post: (userSchema) => userSchema.required(),
       put: (userSchema) => userSchema.optional()
     }),
-  serial_number: joi.string()
+  serialNumber: joi.string()
     .guid({ version: 'uuidv4' })
     .alter({
       post: (orderSchema) => orderSchema.required(),
@@ -128,13 +128,13 @@ exports.itemSchema = joi.object({
     }),
   price: joi.number()
     .positive(),
-  category_id: joi.string()
+  categoryId: joi.string()
     .guid({ version: 'uuidv4' })
     .alter({
       post: (orderSchema) => orderSchema.required(),
       put: (orderSchema) => orderSchema.forbidden()
     }),
-  manufacturer_id: joi.string()
+  manufacturerId: joi.string()
     .guid({ version: 'uuidv4' })
     .alter({
       post: (orderSchema) => orderSchema.required(),
