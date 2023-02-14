@@ -6,19 +6,19 @@ module.exports = (sequelize, DataTypes) => {
   class notification extends Model {
     static associate (models) {
       notification.belongsTo(models.user, {
-        foreignKey: 'user_id'
+        foreignKey: 'userId'
       });
       notification.belongsTo(models.order, {
-        foreignKey: 'order_id'
+        foreignKey: 'orderId'
       });
     }
   }
   notification.init({
-    user_id: {
+    userId: {
       primaryKey: true,
       type: DataTypes.UUID
     },
-    order_id: {
+    orderId: {
       primaryKey: true,
       type: DataTypes.UUID
     },
@@ -30,8 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     underscored: true,
     modelName: 'notification',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
     hooks: {}
   });
   return notification;
