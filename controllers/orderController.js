@@ -10,7 +10,7 @@ exports.getOrder = async (req, res) => {
 };
 exports.createOrder = async (req, res) => {
   await checkAllElements(item, req, res);
-  req.body.item_list = JSON.stringify(req.body.item_list);
+  // req.body.item_list = JSON.stringify(req.body.item_list);
   await crudController.createModel(order, req, res);
 };
 exports.updateOrder = async (req, res) => {

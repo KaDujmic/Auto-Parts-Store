@@ -3,11 +3,11 @@ const Op = Sequelize.Op;
 const { NotFoundError } = require('./errors');
 
 exports.checkAllElements = async (model, req, res) => {
-  const model_id = req.body.model_list.map(el => el.id);
-  const model_list = await model.findAndCountAll({
+  const ids = req.body.items.map(el => el.id);
+  const items = await model.findAndCountAll({
     where: {
-      id: { [Op.or]: model_id }
+      id: { [Op.or]: ids }
     }
   });
-  if (model_list !== model_id) throw new NotFoundError();
+  if (items !== ids.length) throw new NotFoundError();
 };
