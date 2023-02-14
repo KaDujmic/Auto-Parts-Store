@@ -14,8 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   currency.init({
-    date: DataTypes.DATEONLY,
-    history: DataTypes.JSONB
+    date: {
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
+    rates: DataTypes.JSONB
   }, {
     sequelize,
     freezeTableName: true,
