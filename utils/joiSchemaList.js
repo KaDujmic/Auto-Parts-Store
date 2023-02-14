@@ -76,7 +76,7 @@ exports.orderSchema = joi.object({
     }),
   itemList: joi.array()
     .items({
-      itemId: joi.string()
+      id: joi.string()
         .guid({ version: 'uuidv4' })
         .alter({
           post: (orderSchema) => orderSchema.required(),
@@ -100,8 +100,15 @@ exports.orderSchema = joi.object({
     .max(3)
     .valid(...listOfCurrencies)
     .alter({
-      post: (userSchema) => userSchema.required(),
-      put: (userSchema) => userSchema.optional()
+      post: (orderSchema) => orderSchema.required(),
+      put: (orderSchema) => orderSchema.optional()
+    }),
+  deliveryAddress: joi.string()
+    .min(3)
+    .max(50)
+    .alter({
+      post: (orderSchema) => orderSchema.required(),
+      put: (orderSchema) => orderSchema.optional()
     })
 }).options({ abortEarly: false });
 
