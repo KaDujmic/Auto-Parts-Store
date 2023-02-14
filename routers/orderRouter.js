@@ -1,7 +1,7 @@
 const express = require('express');
-const router = express.Router({ mergeParams: true });
-const { callbackErrorHandler } = require('../utils/errorHandler');
 const { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder } = require('../controllers/orderController');
+const { callbackErrorHandler } = require('../utils/errorHandler');
+const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
 
 router
