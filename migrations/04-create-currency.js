@@ -3,15 +3,11 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('currency', {
-      id: {
-        allowNull: false,
-        primaryKey: true,
-        type: Sequelize.UUID
-      },
       date: {
-        type: Sequelize.DATEONLY
+        primaryKey: true,
+        type: Sequelize.STRING
       },
-      history: {
+      rates: {
         type: Sequelize.JSONB
       }
     });
