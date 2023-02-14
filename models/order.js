@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       models.user.hasMany(order, {
         foreignKey: {
-          name: 'user_id'
+          name: 'userId'
         }
       });
       order.belongsTo(models.user, {
@@ -19,14 +19,14 @@ module.exports = (sequelize, DataTypes) => {
       order.belongsToMany(models.item, {
         through: models.order_item,
         foreignKey: {
-          name: 'order_id'
+          name: 'orderId'
         }
       });
 
       order.belongsToMany(models.user, {
         through: models.notification,
         foreignKey: {
-          name: 'order_id'
+          name: 'orderId'
         }
       });
     }
@@ -36,21 +36,20 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID
     },
-    user_id: DataTypes.UUID,
-    delivery_address: DataTypes.STRING,
-    delivery_date: DataTypes.DATEONLY,
-    order_date: DataTypes.DATEONLY,
-    order_status: DataTypes.STRING,
-    item_list: DataTypes.JSONB,
-    final_price: DataTypes.FLOAT,
-    full_price: DataTypes.FLOAT
+    userId: DataTypes.UUID,
+    deliveryAddress: DataTypes.STRING,
+    deliveryDate: DataTypes.DATEONLY,
+    orderDate: DataTypes.DATEONLY,
+    orderStatus: DataTypes.STRING,
+    itemList: DataTypes.JSONB,
+    finalPrice: DataTypes.FLOAT,
+    fullPrice: DataTypes.FLOAT,
+    currency: DataTypes.STRING
   }, {
     sequelize,
     freezeTableName: true,
     underscored: true,
     modelName: 'order',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
     hooks: {}
   });
   return order;

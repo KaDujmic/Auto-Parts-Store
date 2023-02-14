@@ -10,8 +10,23 @@ exports.getOrder = async (req, res) => {
 };
 exports.createOrder = async (req, res) => {
   await checkAllElements(item, req, res);
-  // req.body.item_list = JSON.stringify(req.body.item_list);
-  await crudController.createModel(order, req, res);
+
+  // eslint-disable-next-line max-len
+  const { id, userId, deliveryAddress, deliveryDate, orderStatus, itemList, finalPrice, fullPrice, currency } = req.body;
+  const orderDate = new Date();
+  const model = await order.create({
+    id,
+    userId,
+    deliveryAddress,
+    deliveryDate,
+    orderDate,
+    orderStatus,
+    itemList,
+    finalPrice,
+    fullPrice,
+    currency
+  });
+  res.status(201).json(model);
 };
 exports.updateOrder = async (req, res) => {
   await crudController.updateModel(order, req, res);

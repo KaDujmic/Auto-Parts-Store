@@ -6,19 +6,19 @@ module.exports = (sequelize, DataTypes) => {
   class order_item extends Model {
     static associate (models) {
       order_item.belongsTo(models.order, {
-        foreignKey: 'order_id'
+        foreignKey: 'orderId'
       });
       order_item.belongsTo(models.item, {
-        foreignKey: 'item_id'
+        foreignKey: 'itemId'
       });
     }
   }
   order_item.init({
-    order_id: {
+    orderId: {
       primaryKey: true,
       type: DataTypes.UUID
     },
-    item_id: {
+    itemId: {
       primaryKey: true,
       type: DataTypes.UUID
     },
@@ -28,9 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'order_item',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at'
+    modelName: 'order_item'
   });
   return order_item;
 };

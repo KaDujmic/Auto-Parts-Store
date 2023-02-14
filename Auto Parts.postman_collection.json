@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "1388a900-11cc-4236-825a-963c656cf158",
+		"name": "Auto Parts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24878283"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/user/20c1297e-58f6-4587-842b-231ff6583086",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"20c1297e-58f6-4587-842b-231ff6583086"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"full_name\": \"John Doe\",\n        \"email\": \"ivana@example.com\",\n        \"address\": \"1st Blvd\",\n        \"password\": \"test1234\",\n        \"phone_number\": \"+385915969819\",\n        \"role_name\": \"Salesperson\",\n        \"discount\": 10.20,\n        \"currency\": \"USD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"full_name\": \"John Doe\",\n        \"email\": \"ivana@example.com\",\n        \"address\": \"1st Blvd\",\n        \"password\": \"test1234\",\n        \"phone_number\": \"+385915969819\",\n        \"role_name\": \"Salesperson\",\n        \"discount\": 10.20,\n        \"currency\": \"USD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/20c1297e-58f6-4587-842b-231ff6583086",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"20c1297e-58f6-4587-842b-231ff6583086"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/user/20c1297e-58f6-4587-842b-231ff6583086",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"20c1297e-58f6-4587-842b-231ff6583086"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get All Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/order/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"6eedf265-b249-4674-91e2-4870f02ca752\",\n    \"userId\": \"20c1297e-58f6-4587-842b-231ff6583086\",\n    \"deliveryAddress\":\"4rd Blvd\",\n    \"deliveryDate\": \"2023-03-15\",\n    \"orderDate\": \"2023-02-14\",\n    \"orderStatus\": \"in process\",\n    \"itemList\": [\n        {\"id\": \"f0d0ea4d-0e40-4987-866e-154da59552c5\",\"quantity\": 2}, \n        {\"id\":\"fff3cb51-f73a-4fbd-985f-e76054e1a9ea\" ,\"quantity\": 2}\n        ],\n    \"finalPrice\": 20,\n    \"fullPrice\": 120,\n    \"currency\": \"EUR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"full_name\": \"John Doe\",\n        \"email\": \"ivana@example.com\",\n        \"address\": \"1st Blvd\",\n        \"password\": \"test1234\",\n        \"phone_number\": \"+385915969819\",\n        \"role_name\": \"Salesperson\",\n        \"discount\": 10.20,\n        \"currency\": \"USD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/order/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/order/6eedf265-b249-4674-91e2-4880f01cf782",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order",
+								"6eedf265-b249-4674-91e2-4880f01cf782"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
