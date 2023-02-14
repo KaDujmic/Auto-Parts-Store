@@ -24,8 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     underscored: true,
     modelName: 'category',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
     hooks: {}
   });
   return category;

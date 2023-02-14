@@ -16,14 +16,14 @@ exports.createOrder = async (req, res) => {
   const orderDate = new Date();
   const model = await order.create({
     id,
-    user_id: userId,
-    delivery_address: deliveryAddress,
-    delivery_date: deliveryDate,
-    order_date: orderDate,
-    order_status: orderStatus,
-    item_list: itemList,
-    final_price: finalPrice,
-    full_price: fullPrice,
+    userId,
+    deliveryAddress,
+    deliveryDate,
+    orderDate,
+    orderStatus,
+    itemList,
+    finalPrice,
+    fullPrice,
     currency
   });
   res.status(201).json(model);

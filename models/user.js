@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       models.role.hasMany(user, {
         foreignKey: {
-          name: 'role_name'
+          name: 'roleName'
         }
       });
       user.belongsTo(models.role, {
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       user.belongsToMany(models.order, {
         through: models.notification,
         foreignKey: {
-          name: 'user_id'
+          name: 'userId'
         }
       });
     }
@@ -29,12 +29,12 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID
     },
-    full_name: DataTypes.STRING,
+    fullName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     address: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
-    role_name: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
+    roleName: DataTypes.STRING,
     discount: DataTypes.FLOAT,
     currency: DataTypes.STRING
   }, {
@@ -42,8 +42,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     underscored: true,
     modelName: 'user',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
     hooks: {}
   });
   return user;

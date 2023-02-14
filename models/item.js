@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       models.category.hasMany(item, {
         foreignKey: {
-          name: 'category_id'
+          name: 'categoryId'
         }
       });
       item.belongsTo(models.category, {
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       models.manufacturer.hasMany(item, {
         foreignKey: {
-          name: 'manufacturer_id'
+          name: 'manufacturerId'
         }
       });
       item.belongsTo(models.manufacturer, {
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       item.belongsToMany(models.order, {
         through: models.order_item,
         foreignKey: {
-          name: 'item_id'
+          name: 'itemId'
         }
       });
     }
@@ -40,18 +40,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID
     },
     name: DataTypes.STRING,
-    serial_number: DataTypes.STRING,
+    serialNumber: DataTypes.STRING,
     price: DataTypes.FLOAT,
-    category_id: DataTypes.UUID,
-    manufacturer_id: DataTypes.UUID,
+    categoryId: DataTypes.UUID,
+    manufacturerId: DataTypes.UUID,
     quantity: DataTypes.INTEGER
   }, {
     sequelize,
     freezeTableName: true,
     underscored: true,
     modelName: 'item',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
     hooks: {}
   });
   return item;

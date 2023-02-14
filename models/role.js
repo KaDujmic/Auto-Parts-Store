@@ -23,8 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     underscored: true,
     modelName: 'role',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
     hooks: {}
   });
   return role;
