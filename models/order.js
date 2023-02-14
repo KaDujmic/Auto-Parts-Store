@@ -43,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     order_status: DataTypes.STRING,
     item_list: DataTypes.JSONB,
     final_price: DataTypes.FLOAT,
-    full_price: DataTypes.FLOAT
+    full_price: DataTypes.FLOAT,
+    currency: DataTypes.STRING
   }, {
     sequelize,
     freezeTableName: true,
