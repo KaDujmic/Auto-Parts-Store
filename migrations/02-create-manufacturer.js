@@ -8,16 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      name: {
+      brand: {
         type: Sequelize.STRING
       },
-      created_at: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updated_at: {
-        allowNull: false,
-        type: Sequelize.DATE
+      model: {
+        type: Sequelize.STRING
       }
     });
   },

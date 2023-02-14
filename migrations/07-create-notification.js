@@ -3,17 +3,14 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('notification', {
-      id: {
+      user_id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      user_id: {
-        allowNull: false,
-        type: Sequelize.UUID
-      },
       order_id: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.UUID
       },
       status: {

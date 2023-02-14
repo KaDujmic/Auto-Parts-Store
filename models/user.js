@@ -1,5 +1,4 @@
 'use strict';
-const { createUUID } = require('../utils/hooks');
 const {
   Model
 } = require('sequelize');
@@ -16,15 +15,26 @@ module.exports = (sequelize, DataTypes) => {
           name: 'id'
         }
       });
+
+      user.belongsToMany(models.order, {
+        through: models.notification,
+        foreignKey: {
+          name: 'user_id'
+        }
+      });
     }
   }
   user.init({
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
     full_name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     address: DataTypes.STRING,
     phone_number: DataTypes.STRING,
-    role_id: DataTypes.UUID,
+    role_name: DataTypes.STRING,
     discount: DataTypes.FLOAT,
     currency: DataTypes.STRING
   }, {
@@ -34,11 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'user',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
-    hooks: {
-      beforeCreate: (user, options) => {
-        createUUID(user, options);
-      }
-    }
+    hooks: {}
   });
   return user;
 };
