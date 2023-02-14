@@ -1,5 +1,4 @@
 'use strict';
-const { createUUID } = require('../utils/hooks');
 const {
   Model
 } = require('sequelize');
@@ -23,9 +22,17 @@ module.exports = (sequelize, DataTypes) => {
           name: 'order_id'
         }
       });
+
+      order.belongsToMany(models.user, {
+        through: models.notification,
+        foreignKey: {
+          name: 'order_id'
+        }
+      });
     }
   }
   order.init({
+    id: DataTypes.UUID,
     user_id: DataTypes.UUID,
     delivery_address: DataTypes.STRING,
     delivery_date: DataTypes.DATEONLY,
@@ -41,11 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'order',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
-    hooks: {
-      beforeCreate: (order, options) => {
-        createUUID(order, options);
-      }
-    }
+    hooks: {}
   });
   return order;
 };

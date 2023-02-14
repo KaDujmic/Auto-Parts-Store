@@ -1,30 +1,15 @@
 'use strict';
-const { createUUID } = require('../utils/hooks');
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class notification extends Model {
     static associate (models) {
-      models.user.hasMany(notification, {
-        foreignKey: {
-          name: 'user_id'
-        }
-      });
       notification.belongsTo(models.user, {
-        foreignKey: {
-          name: 'id'
-        }
-      });
-      models.order.hasMany(notification, {
-        foreignKey: {
-          name: 'order_id'
-        }
+        foreignKey: 'user_id'
       });
       notification.belongsTo(models.order, {
-        foreignKey: {
-          name: 'id'
-        }
+        foreignKey: 'order_id'
       });
     }
   }
@@ -41,11 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'notification',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
-    hooks: {
-      beforeCreate: (notification, options) => {
-        createUUID(notification, options);
-      }
-    }
+    hooks: {}
   });
   return notification;
 };

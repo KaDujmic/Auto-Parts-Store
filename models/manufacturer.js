@@ -1,5 +1,4 @@
 'use strict';
-const { createUUID } = require('../utils/hooks');
 const {
   Model
 } = require('sequelize');
@@ -15,19 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   manufacturer.init({
-    name: DataTypes.STRING
+    id: DataTypes.UUID,
+    brand: DataTypes.STRING,
+    model: DataTypes.STRING
   }, {
     sequelize,
     freezeTableName: true,
     underscored: true,
     modelName: 'manufacturer',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
-    hooks: {
-      beforeCreate: (manufacturer, options) => {
-        createUUID(manufacturer, options);
-      }
-    }
+    timestamps: false,
+    hooks: {}
   });
   return manufacturer;
 };

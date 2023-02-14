@@ -1,5 +1,4 @@
 'use strict';
-const { createUUID } = require('../utils/hooks');
 const {
   Model
 } = require('sequelize');
@@ -36,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   item.init({
+    id: DataTypes.UUID,
     name: DataTypes.STRING,
     serial_number: DataTypes.STRING,
     price: DataTypes.FLOAT,
@@ -49,11 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'item',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
-    hooks: {
-      beforeCreate: (item, options) => {
-        createUUID(item, options);
-      }
-    }
+    hooks: {}
   });
   return item;
 };
