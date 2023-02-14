@@ -32,7 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   order.init({
-    id: DataTypes.UUID,
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
     user_id: DataTypes.UUID,
     delivery_address: DataTypes.STRING,
     delivery_date: DataTypes.DATEONLY,

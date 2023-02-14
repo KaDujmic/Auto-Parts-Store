@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   manufacturer.init({
-    id: DataTypes.UUID,
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
     brand: DataTypes.STRING,
     model: DataTypes.STRING
   }, {

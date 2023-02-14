@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   notification.init({
-    user_id: DataTypes.UUID,
-    order_id: DataTypes.UUID,
+    user_id: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
+    order_id: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
     status: DataTypes.STRING,
     last_sent: DataTypes.DATE,
     sent_history: DataTypes.JSONB

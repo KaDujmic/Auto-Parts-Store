@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   role.init({
-    name: DataTypes.STRING
+    name: {
+      primaryKey: true,
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     freezeTableName: true,
