@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   settings.init({
-    key: DataTypes.STRING,
+    key: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     value: DataTypes.STRING
   }, {
     sequelize,
