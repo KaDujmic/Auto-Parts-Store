@@ -7,7 +7,7 @@ exports.setCurrency = async () => {
     // Get the cached currency and if exists for todays date, set ttl to 1h exit the function
     const currencyCached = cache.getCache('currency');
     if (currencyCached !== undefined && currencyCached.date === new Date().toISOString().split('T')[0]) return;
-    // cached currency is outdated, check the database if there is todays date currnecy, if there is set it, if not get it from the api
+    // cached currency is outdated, check the database if there is todays date currency, if there is set it, if not get it from the api
     const latestCurrency = await currency.findOne({
       order: [
         ['date', 'desc']
