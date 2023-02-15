@@ -1,4 +1,4 @@
-const NOTIFICATION_DEFAULT_KEY = 'order_notification_recurrence';
+const { ValidationError } = require('sequelize');
 
 exports.verifyKey = async (model, req, res) => {
   const receivedKey = req.body.key;
@@ -8,6 +8,6 @@ exports.verifyKey = async (model, req, res) => {
     }
   });
   if (!dbKey.length) {
-    req.body.key = NOTIFICATION_DEFAULT_KEY;
+    throw new ValidationError('Bad Request');
   }
 };
