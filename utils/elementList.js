@@ -1,3 +1,4 @@
+const { ValidationError } = require('sequelize');
 const { Sequelize } = require('../models');
 const Op = Sequelize.Op;
 const { NotFoundError } = require('./errors');
@@ -9,10 +10,15 @@ function onlyUnique (value, index, array) {
 exports.checkAllElements = async (model, req, res) => {
   const idList = req.body.itemList.map(el => el.id);
   const uniqueIdList = idList.filter(onlyUnique);
-  const items = await model.findAndCountAll({
+  const items = await model.findAll({
     where: {
       id: { [Op.or]: uniqueIdList }
-    }
+    },
+    attributes: ['id', 'serialNumber', 'quantity']
   });
-  if (items.count !== uniqueIdList.length) throw new NotFoundError();
+  if (items.length !== uniqueIdList.length) throw new NotFoundError();
+  items.forEach(el => {
+    const requestItem = req.body.itemList.find(item => item.id === el.id);
+    if (el.quantity < requestItem.quantity) { throw new ValidationError('Can not order right now'); };
+  });
 };
