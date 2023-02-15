@@ -4,7 +4,7 @@ const cron = require('node-cron');
 
 const port = process.env.PORT || 8080;
 
-cron.schedule('* * * * *', function () {
+cron.schedule('0 * * * *', function () {
   setCurrency();
 });
 
