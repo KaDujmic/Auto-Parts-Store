@@ -14,8 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   settings.init({
-    key: DataTypes.STRING,
-    value: DataTypes.STRING
+    key: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    value: DataTypes.STRING,
+    template: DataTypes.STRING
   }, {
     sequelize,
     freezeTableName: true,
