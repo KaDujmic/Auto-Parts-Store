@@ -12,6 +12,8 @@ const errorMiddleware = async (err, req, res, next) => {
     res.status(err.statusCode).json({ message: err.message });
   } else if (err.name === 'NotFoundError') {
     res.status(err.statusCode).json({ message: err.message });
+  } else if (err.name === 'SequelizeUniqueConstraintError') {
+    res.status(400).json({ message: 'Item has to be unique' });
   } else {
     console.error(err);
     res.status(err.statusCode ?? 500).json({
