@@ -6,7 +6,7 @@ exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);
 };
 exports.getOrder = async (req, res) => {
-  await crudController.findOne(order, req, res);
+  await crudController.findModel(order, req, res);
 };
 exports.createOrder = async (req, res) => {
   await checkAllElements(item, req, res);
