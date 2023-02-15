@@ -1,15 +1,19 @@
 const { currency } = require('../models');
+const cache = require('./cache');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 exports.setCurrency = async () => {
   try {
+    // Get the cached currency and if exists for todays date, set ttl to 1h exit the function
+    const currencyCached = cache.getCache('currency');
+    if (currencyCached !== undefined && currencyCached.date === new Date().toISOString().split('T')[0]) return;
+    // cached currency is outdated, check the database if there is todays date currnecy, if there is set it, if not get it from the api
     const latestCurrency = await currency.findOne({
       order: [
         ['date', 'desc']
       ],
       limit: 1
     });
-
     if (!latestCurrency || latestCurrency.date !== new Date().toISOString().split('T')[0]) {
       const response = await fetch('https://api.exchangerate.host/latest');
       const currencies = await response.json();
@@ -19,22 +23,30 @@ exports.setCurrency = async () => {
           rates: currencies.rates
         };
         await currency.create(newCurrencies);
+        cache.setCache(newCurrencies.dataValues, 'currency');
       }
+    } else {
+      cache.setCache(latestCurrency.dataValues, 'currency');
     }
   } catch (err) {
     console.log(err);
   }
 };
 
-exports.getCurrency = async (currency) => {
-  const latestCurrency = await currency.findOne({
-    order: [
-      ['date', 'desc']
-    ],
-    limit: 1
-  });
+exports.getCurrency = async (curr) => {
+  const cachedCurrency = cache.getCache('currency');
+  if (!cachedCurrency) {
+    const latestCurrency = await currency.findOne({
+      order: [
+        ['date', 'desc']
+      ],
+      limit: 1
+    });
 
-  if (!latestCurrency) throw new Error('Create bad request error');
+    if (!latestCurrency) throw new Error('Create bad request error');
 
-  return latestCurrency.rates[currency];
+    cache.setCache(latestCurrency.dataValues, 'currency');
+    return latestCurrency.rates[curr];
+  }
+  return cachedCurrency.rates[curr];
 };
