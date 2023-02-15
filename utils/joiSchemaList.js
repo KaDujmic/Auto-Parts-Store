@@ -2,6 +2,7 @@ const joi = require('joi');
 const { listOfCurrencies } = require('./supportedCurrencies');
 
 // User Entity Schema
+//
 exports.userSchema = joi.object({
   id: joi.string()
     .guid({ version: 'uuidv4' })
@@ -61,6 +62,7 @@ exports.userSchema = joi.object({
 }).options({ abortEarly: false });
 
 // Order Entity Schema
+//
 exports.orderSchema = joi.object({
   id: joi.string()
     .guid({ version: 'uuidv4' })
@@ -113,40 +115,87 @@ exports.orderSchema = joi.object({
 }).options({ abortEarly: false });
 
 // Item Entity Schema
+//
 exports.itemSchema = joi.object({
   id: joi.string()
     .guid({ version: 'uuidv4' })
     .alter({
-      post: (orderSchema) => orderSchema.required(),
-      put: (orderSchema) => orderSchema.forbidden()
+      post: (itemSchema) => itemSchema.required(),
+      put: (itemSchema) => itemSchema.forbidden()
     }),
   name: joi.string()
     .min(1)
     .max(50)
     .alter({
-      post: (userSchema) => userSchema.required(),
-      put: (userSchema) => userSchema.optional()
+      post: (itemSchema) => itemSchema.required(),
+      put: (itemSchema) => itemSchema.optional()
     }),
   serialNumber: joi.string()
-    .guid({ version: 'uuidv4' })
+    .min(1)
+    .max(50)
     .alter({
-      post: (orderSchema) => orderSchema.required(),
-      put: (orderSchema) => orderSchema.forbidden()
+      post: (itemSchema) => itemSchema.required(),
+      put: (itemSchema) => itemSchema.optional()
     }),
   price: joi.number()
     .positive(),
   categoryId: joi.string()
     .guid({ version: 'uuidv4' })
     .alter({
-      post: (orderSchema) => orderSchema.required(),
-      put: (orderSchema) => orderSchema.forbidden()
+      post: (itemSchema) => itemSchema.required(),
+      put: (itemSchema) => itemSchema.forbidden()
     }),
   manufacturerId: joi.string()
     .guid({ version: 'uuidv4' })
     .alter({
-      post: (orderSchema) => orderSchema.required(),
-      put: (orderSchema) => orderSchema.forbidden()
+      post: (itemSchema) => itemSchema.required(),
+      put: (itemSchema) => itemSchema.forbidden()
     }),
   quantity: joi.number()
     .positive()
+}).options({ abortEarly: false });
+
+// Manufacturer Entity Schema
+//
+exports.manufacturerSchema = joi.object({
+  id: joi.string()
+    .guid({ version: 'uuidv4' })
+    .alter({
+      post: (manufacturerSchema) => manufacturerSchema.required(),
+      put: (manufacturerSchema) => manufacturerSchema.forbidden()
+    }),
+  name: joi.string()
+    .min(3)
+    .max(50)
+    .required()
+}).options({ abortEarly: false });
+
+// Role Entity Schema
+//
+exports.roleSchema = joi.object({
+  id: joi.string()
+    .guid({ version: 'uuidv4' })
+    .alter({
+      post: (roleSchema) => roleSchema.required(),
+      put: (roleSchema) => roleSchema.forbidden()
+    }),
+  name: joi.string()
+    .min(3)
+    .max(50)
+    .required()
+}).options({ abortEarly: false });
+
+// Category Entity Schema
+//
+exports.categorySchema = joi.object({
+  id: joi.string()
+    .guid({ version: 'uuidv4' })
+    .alter({
+      post: (categorySchema) => categorySchema.required(),
+      put: (categorySchema) => categorySchema.forbidden()
+    }),
+  name: joi.string()
+    .min(3)
+    .max(50)
+    .required()
 }).options({ abortEarly: false });
