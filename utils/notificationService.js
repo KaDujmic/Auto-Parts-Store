@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const db = require('../models');
+const { notification } = require('../models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerName, customerEmail) {
@@ -36,7 +36,7 @@ async function setUpRecurranceEmail (customer) {
     name: customer.name,
     status: 'scheduled'
   };
-  await db.notification.create({ notificationData });
+  await notification.create({ notificationData });
 }
 
 // Send all customer recurring emails for the day
@@ -80,7 +80,7 @@ async function getEmailTemplate (emailKey, customerName) {
   let emailTemplate = null;
 
   if (!emailTemplateList) {
-    emailTemplate = await db.notification.findOne({
+    emailTemplate = await notification.findOne({
       where: { key: emailKey }
     });
   } else {
