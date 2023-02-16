@@ -3,19 +3,19 @@ const { getAllRole, getRole, createRole, updateRole, deleteRole } = require('../
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
-const { isLoggedIn } = require('../controllers/authController');
+const { isLoggedIn, restrictTo } = require('../controllers/authController');
 
 router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
-  .get(callbackErrorHandler(getAllRole))
-  .post(bodyValidator, callbackErrorHandler(createRole));
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getAllRole))
+  .post(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(createRole));
 
 router
   .route('/:id')
-  .get(callbackErrorHandler(getRole))
-  .put(bodyValidator, callbackErrorHandler(updateRole))
-  .delete(callbackErrorHandler(deleteRole));
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getRole))
+  .put(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(updateRole))
+  .delete(restrictTo('Salesperson'), callbackErrorHandler(deleteRole));
 
 module.exports = router;

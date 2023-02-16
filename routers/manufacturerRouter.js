@@ -4,19 +4,19 @@ const { getAllManufacturer, getManufacturer, createManufacturer, updateManufactu
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
-const { isLoggedIn } = require('../controllers/authController');
+const { isLoggedIn, restrictTo } = require('../controllers/authController');
 
 router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
-  .get(callbackErrorHandler(getAllManufacturer))
-  .post(bodyValidator, callbackErrorHandler(createManufacturer));
+  .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getAllManufacturer))
+  .post(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(createManufacturer));
 
 router
   .route('/:id')
-  .get(callbackErrorHandler(getManufacturer))
-  .put(bodyValidator, callbackErrorHandler(updateManufacturer))
-  .delete(callbackErrorHandler(deleteManufacturer));
+  .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getManufacturer))
+  .put(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(updateManufacturer))
+  .delete(restrictTo('Salesperson'), callbackErrorHandler(deleteManufacturer));
 
 module.exports = router;

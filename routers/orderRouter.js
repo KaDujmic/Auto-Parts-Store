@@ -3,18 +3,18 @@ const { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder } = requir
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
-const { isLoggedIn } = require('../controllers/authController');
+const { isLoggedIn, restrictTo } = require('../controllers/authController');
 
 router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
-  .get(callbackErrorHandler(getAllOrders))
-  .post(bodyValidator, callbackErrorHandler(createOrder));
+  .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getAllOrders))
+  .post(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(createOrder));
 
 router
   .route('/:id')
-  .get(callbackErrorHandler(getOrder))
-  .put(bodyValidator, callbackErrorHandler(updateOrder))
-  .delete(callbackErrorHandler(deleteOrder));
+  .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getOrder))
+  .put(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(updateOrder))
+  .delete(restrictTo('Salesperson'), callbackErrorHandler(deleteOrder));
 module.exports = router;
