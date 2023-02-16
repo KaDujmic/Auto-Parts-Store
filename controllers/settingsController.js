@@ -11,7 +11,7 @@ exports.getSettings = async (req, res) => {
 exports.createSettings = async (req, res) => {
   await verifySettings(settings, req, res);
   // eslint-disable-next-line no-unused-vars
-  const [model, created] = await settings.upsert({
+  const [model] = await settings.upsert({
     key: req.body.key,
     value: req.body.value,
     template: req.body.template
