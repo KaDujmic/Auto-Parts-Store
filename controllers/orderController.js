@@ -1,6 +1,6 @@
 const { order, item } = require('../models');
 const crudController = require('../controllers/crudController');
-const { checkAllElements } = require('../utils/elementList');
+const { checkAllElements } = require('../utils/orderService');
 
 exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);
