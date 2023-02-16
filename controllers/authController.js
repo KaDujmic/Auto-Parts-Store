@@ -70,7 +70,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes(req.user.roleName)) {
       return res
         .status(403)
         .json('You do not have permission to access this route!');
