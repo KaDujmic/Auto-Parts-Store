@@ -4,16 +4,19 @@ const { getAllCategory, getCategory, createCategory, updateCategory, deleteCateg
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
+const { isLoggedIn, restrictTo } = require('../controllers/authController');
+
+router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
-  .get(callbackErrorHandler(getAllCategory))
-  .post(bodyValidator, callbackErrorHandler(createCategory));
+  .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getAllCategory))
+  .post(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(createCategory));
 
 router
   .route('/:id')
-  .get(callbackErrorHandler(getCategory))
-  .put(bodyValidator, callbackErrorHandler(updateCategory))
-  .delete(callbackErrorHandler(deleteCategory));
+  .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getCategory))
+  .put(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(updateCategory))
+  .delete(restrictTo('Salesperson'), callbackErrorHandler(deleteCategory));
 
 module.exports = router;

@@ -6,6 +6,7 @@ const settingsRouter = require('./settingsRouter');
 const manufacturerRouter = require('./itemRouter');
 const categoryRouter = require('./orderRouter');
 const roleRouter = require('./userRouter');
+const authRouter = require('./authRouter');
 const settingsHelperRouter = require('./settingsHelperRouter');
 
 const router = express.Router({ mergeParams: true });
@@ -18,5 +19,6 @@ router.use('/category', categoryRouter);
 router.use('/manufacturer', manufacturerRouter);
 router.use('/role', roleRouter);
 router.use('/settingsHelper', settingsHelperRouter);
+router.use('/', authRouter);
 
 module.exports = router;
