@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const { getAllSettings, getSettings, createSettings } = require('../controllers/settingsController');
+const { isLoggedIn } = require('../controllers/authController');
+
+router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')

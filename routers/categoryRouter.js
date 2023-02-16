@@ -4,6 +4,9 @@ const { getAllCategory, getCategory, createCategory, updateCategory, deleteCateg
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
+const { isLoggedIn } = require('../controllers/authController');
+
+router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')

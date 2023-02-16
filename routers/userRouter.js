@@ -3,6 +3,9 @@ const router = express.Router({ mergeParams: true });
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const { getUser, getAllUser, updateUser, createUser, deleteUser } = require('../controllers/userController');
 const { bodyValidator } = require('../middleware/dataValidator');
+const { isLoggedIn } = require('../controllers/authController');
+
+router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
