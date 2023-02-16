@@ -1,11 +1,17 @@
 const { Sequelize } = require('../models');
 const Op = Sequelize.Op;
 const { NotFoundError } = require('./errors');
-const { getRandomDate } = require('./generateDate');
 
 function onlyUnique (value, index, array) {
   return array.indexOf(value) === index;
 }
+function getRandomDate () {
+  const today = new Date();
+  const future = new Date(today);
+  future.setDate(today.getDate() + 3);
+  const randomTimestamp = Math.random() * (future.getTime() - today.getTime()) + today.getTime();
+  return new Date(randomTimestamp);
+};
 
 exports.checkAllElements = async (model, req, res) => {
   const idList = req.body.itemList.map(el => el.id);
@@ -21,6 +27,12 @@ exports.checkAllElements = async (model, req, res) => {
     const requestItem = req.body.itemList.find(item => item.id === el.id);
     if (el.quantity < requestItem.quantity) {
       req.body.deliveryDate = getRandomDate();
-    } else req.body.deliveryDate = new Date();
+    } else {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      req.body.deliveryDate = new Date(tomorrow);
+    };
   });
 };
