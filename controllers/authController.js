@@ -1,5 +1,5 @@
 const { ValidationError, AuthorizationError } = require('../utils/errors');
-const { user } = require('../models');
+const { user, order } = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
     throw new ValidationError('Please enter email and password');
   }
   // 2) Find the current user that wants to log in
-  const current_user = await user.findOne({ email });
+  const current_user = await user.findOne({ where: { email } });
   if (!current_user || (await correct_password(current_user.password, password) === false)) {
     throw new ValidationError('Incorrect email or password!');
   }
@@ -59,7 +59,7 @@ exports.isLoggedIn = async (req, res, next) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
   // 3) Check if the user still exists
-  const current_user = await user.findOne({ id: decoded.id });
+  const current_user = await user.findByPk(decoded.id);
   if (!current_user) { throw new ValidationError('The user no longer exists!'); }
 
   // 4) Set local storage and req.user to current_user
@@ -77,4 +77,16 @@ exports.restrictTo = (...roles) => {
     }
     next();
   };
+};
+
+exports.getCustomerOrders = async (req, res) => {
+  // eslint-disable-next-line max-len
+  const query = req.body.orderStatus === undefined ? ['pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
+  const customerOrders = await order.findAll({
+    where: {
+      userId: req.user.id,
+      orderStatus: query
+    }
+  });
+  res.status(200).json(customerOrders);
 };
