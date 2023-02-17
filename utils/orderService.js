@@ -38,17 +38,13 @@ exports.checkAllElements = async (model, req, res) => {
   });
   if (items.length !== idList.length) throw new NotFoundError();
 
-  items.forEach(el => {
-    const requestItem = req.body.itemList.find(item => item.id === el.id);
-    if (el.quantity < requestItem.quantity) {
+  await items.forEach(item => {
+    const requestItem = req.body.itemList.find(requestItem => requestItem.id === item.id);
+    if (item.quantity < requestItem.quantity) {
       req.body.deliveryDate = getRandomDate();
     } else {
-      const savePromises = items.map(item => {
-        const requestItem = req.body.itemList.find(requestItem => requestItem.id === item.id);
-        item.quantity -= requestItem.quantity;
-        return item.save();
-      });
-      Promise.all(savePromises);
+      item.quantity -= requestItem.quantity;
+      item.save();
     }
   });
 };
