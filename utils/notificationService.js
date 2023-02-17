@@ -28,8 +28,8 @@ exports.orderArrivedEmail = async function (customer) {
   setUpRecurranceEmail(customer);
 };
 
-// Creates a notification table entry for the recurrance email
-async function setUpRecurranceEmail (customer) {
+// Creates a notification table entry for the recurrence email
+async function setUpRecurrenceEmail (customer) {
   const notificationData = {
     user_id: customer.userID,
     order_id: customer.order_ID,
