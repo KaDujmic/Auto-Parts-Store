@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const { notification } = require('../models');
+const { user, notification, settings, sequelize } = require('../models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerName, customerEmail) {
-  const emailKey = 'order_confirmation';
-  const emailTemplate = getEmailTemplate(emailKey, customerName, customerEmail);
-  const mailOptions = createMailOptions(customerEmail, emailTemplate);
+  let emailTemplate = await getSetting('order_confirmation_template');
+  emailTemplate = personalizeEmail(emailTemplate, customerName);
 
+  const mailOptions = createMailOptions(customerEmail, emailTemplate);
   sendEmail(mailOptions);
 };
 
@@ -20,12 +20,13 @@ exports.orderConfirmEmail = async function (customerName, customerEmail) {
 //    email: STRING
 // }
 exports.orderArrivedEmail = async function (customer) {
-  const emailKey = 'order_arrived';
-  const emailTemplate = getEmailTemplate(emailKey, customer.name);
-  const mailOptions = createMailOptions(customer.email, emailTemplate);
+  let emailTemplate = await getSetting('order_arrived_template');
+  emailTemplate = personalizeEmail(emailTemplate, customer.name);
 
+  const mailOptions = createMailOptions(customer.email, emailTemplate);
   sendEmail(mailOptions);
-  setUpRecurranceEmail(customer);
+
+  setUpRecurrenceEmail(customer);
 };
 
 // Creates a notification table entry for the recurrence email
@@ -33,24 +34,46 @@ async function setUpRecurrenceEmail (customer) {
   const notificationData = {
     user_id: customer.userID,
     order_id: customer.order_ID,
-    name: customer.name,
     status: 'scheduled'
   };
   await notification.create({ notificationData });
 }
 
-// Send all customer recurring emails for the day
+// Send all recurring emails for the day
 exports.sendRecurringEmails = async function () {
-  // const listOfNotifications = await db.notification.findAll({
-  //   where: {
-  //     last_sent: {
-  //       [db.sequelize.Op.not]: ''
-  //     }
-  //   }
-  // });
+  const emailTemplate = await getSetting('order_pickup_template');
+  const recurranceSetting = await getSetting('order_pickup_recurrence');
+
+  const date = new Date();
+  date.setDate(date.getDate() - recurranceSetting.value.recurrence);
+
+  const listOfNotifications = await notification.findAll({
+    where: {
+      last_sent: {
+        [sequelize.Op.lte]: date
+      },
+      status: 'scheduled'
+    },
+    include: {
+      model: user,
+      attributes: ['full_name', 'email']
+    }
+  });
+
+  listOfNotifications.forEach(notif => {
+    const userEmail = personalizeEmail(emailTemplate, notif.user.fullName);
+    const mailOptions = createMailOptions(notif.user.email, userEmail);
+    sendEmail(mailOptions);
+
+    notif.set({
+      lastSent: new Date(),
+      sentHistory: notif.sendHistory.push(new Date())
+    });
+    notif.save();
+  });
 };
 
-// Send an email to a customer
+// Email sender
 function sendEmail (mailOptions) {
   const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
@@ -70,24 +93,29 @@ function createMailOptions (customerEmail, template) {
   return {
     from: process.env.EMAIL,
     to: customerEmail,
-    subject: template.title,
-    text: template.body
+    subject: template.value.title,
+    text: template.value.body
   };
 }
 
-async function getEmailTemplate (emailKey, customerName) {
-  const emailTemplateList = getCache('emailCache');
-  let emailTemplate = null;
+async function getSetting (keyToGet) {
+  const cacheSettings = getCache('settingsCache');
+  let setting = null;
 
-  if (!emailTemplateList) {
-    emailTemplate = await notification.findOne({
-      where: { key: emailKey }
+  if (!cacheSettings) {
+    setting = await settings.findOne({
+      where: { key: keyToGet }
     });
   } else {
-    emailTemplate = emailTemplateList.find(item => item.key === emailKey);
+    setting = cacheSettings.find(item => item.key === keyToGet);
   }
 
-  emailTemplate.body = emailTemplate.body.replace('customerName', customerName);
+  return setting;
+}
 
-  return emailTemplate;
+function personalizeEmail (emailTemplate, customerName) {
+  const personalEmailTemplate = emailTemplate;
+  personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
+
+  return personalEmailTemplate;
 }
