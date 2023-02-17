@@ -10,9 +10,6 @@ module.exports = {
       },
       value: {
         type: Sequelize.STRING
-      },
-      template: {
-        type: Sequelize.STRING
       }
     });
   },
