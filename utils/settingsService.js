@@ -1,5 +1,7 @@
 const { ValidationError } = require('./errors.js');
-const NOTIFICATION_LIST = require('./settingsHelper');
+const cache = require('./cache');
+const { settings } = require('../models/settings');
+const { NOTIFICATION_LIST } = require('./settingsHelper');
 
 exports.verifySettings = async (model, req, res) => {
   const { key, value, template } = req.body;
@@ -12,5 +14,13 @@ exports.verifySettings = async (model, req, res) => {
   }
   if (!template) {
     req.body.template = notificationKey.template;
+  }
+};
+
+exports.setSettings = async () => {
+  const settingsCache = cache.getCache('emailCache');
+  if (!settingsCache) {
+    const notificationList = await settings.findAll();
+    cache.setCache(notificationList, 'emailCache');
   }
 };

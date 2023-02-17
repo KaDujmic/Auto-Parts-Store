@@ -1,4 +1,4 @@
-const NOTIFICATION_LIST = [{
+module.exports.NOTIFICATION_LIST = [{
   key: 'order_notification_recurrence',
   value: '1',
   // eslint-disable-next-line max-len
@@ -13,4 +13,3 @@ const NOTIFICATION_LIST = [{
   
   Auto Parts Store`
 }];
-module.exports = NOTIFICATION_LIST;
