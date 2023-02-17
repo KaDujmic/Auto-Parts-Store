@@ -6,7 +6,11 @@ exports.getAllSettings = async (req, res) => {
   await crudController.findAllModel(settings, req, res);
 };
 exports.getSettings = async (req, res) => {
-  await crudController.findOne(settings, req, res);
+  const model = await settings.findOne({
+    where: { key: req.params.id },
+    hooks: true
+  });
+  res.status(200).json(model);
 };
 exports.createSettings = async (req, res) => {
   await verifySettings(settings, req, res);
