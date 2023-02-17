@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder } = require('../controllers/orderController');
+const { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder, getCustomerOrders } = require('../controllers/orderController');
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
@@ -11,6 +11,10 @@ router
   .route('/')
   .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getAllOrders))
   .post(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(createOrder));
+
+router
+  .route('/userOrders')
+  .get(callbackErrorHandler(getCustomerOrders));
 
 router
   .route('/:id')
