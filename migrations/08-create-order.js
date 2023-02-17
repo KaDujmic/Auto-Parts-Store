@@ -22,7 +22,9 @@ module.exports = {
         type: Sequelize.DATEONLY
       },
       order_status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'pending_delivery',
+        enum: ['pending_delivery', 'ready_for_pickup', 'completed']
       },
       item_list: {
         type: Sequelize.JSONB
