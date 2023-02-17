@@ -57,7 +57,6 @@ exports.checkAllElements = async (model, req, res) => {
     }
   });
 };
-
 exports.setOrderPrice = async (req, res) => {
   const customer = await user.findByPk(req.body.userId);
   const itemList = req.body.itemList.map(item => item.id);
