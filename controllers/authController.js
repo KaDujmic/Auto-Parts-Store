@@ -1,5 +1,5 @@
 const { ValidationError, AuthorizationError } = require('../utils/errors');
-const { user, order } = require('../models');
+const { user } = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -77,16 +77,4 @@ exports.restrictTo = (...roles) => {
     }
     next();
   };
-};
-
-exports.getCustomerOrders = async (req, res) => {
-  // eslint-disable-next-line max-len
-  const query = req.body.orderStatus === undefined ? ['pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
-  const customerOrders = await order.findAll({
-    where: {
-      userId: req.user.id,
-      orderStatus: query
-    }
-  });
-  res.status(200).json(customerOrders);
 };

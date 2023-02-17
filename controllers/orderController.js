@@ -35,3 +35,15 @@ exports.updateOrder = async (req, res) => {
 exports.deleteOrder = async (req, res) => {
   await crudController.deleteModel(order, req, res);
 };
+
+exports.getCustomerOrders = async (req, res) => {
+  // eslint-disable-next-line max-len
+  const query = req.body.orderStatus === undefined ? ['pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
+  const customerOrders = await order.findAll({
+    where: {
+      userId: res.locals.user.id,
+      orderStatus: query
+    }
+  });
+  res.status(200).json(customerOrders);
+};
