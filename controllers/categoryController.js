@@ -1,22 +1,22 @@
 const { category } = require('../models');
 const crudController = require('./crudController');
 
-exports.getCategory = async (res, req) => {
-  await crudController.findModel(category, res, req);
+exports.getCategory = async (req, res) => {
+  await crudController.findModel(category, req, res);
 };
 
-exports.getAllCategory = async (res, req) => {
-  await crudController.findAllModel(category, res, req);
+exports.getAllCategory = async (req, res) => {
+  await crudController.findAllModel(category, req, res);
 };
 
-exports.updateCategory = async (res, req) => {
-  await crudController.updateModel(category, res, req);
+exports.updateCategory = async (req, res) => {
+  await crudController.updateModel(category, req, res);
 };
 
-exports.deleteCategory = async (res, req) => {
-  await crudController.deleteModel(category, res, req);
+exports.deleteCategory = async (req, res) => {
+  await crudController.deleteModel(category, req, res);
 };
 
-exports.createCategory = async (res, req) => {
-  await crudController.createModel(category, res, req);
+exports.createCategory = async (req, res) => {
+  await crudController.createModel(category, req, res);
 };
