@@ -164,8 +164,12 @@ exports.manufacturerSchema = joi.object({
       post: (manufacturerSchema) => manufacturerSchema.required(),
       put: (manufacturerSchema) => manufacturerSchema.forbidden()
     }),
-  name: joi.string()
+  brand: joi.string()
     .min(3)
+    .max(50)
+    .required(),
+  model: joi.string()
+    .min(1)
     .max(50)
     .required()
 }).options({ abortEarly: false });
@@ -173,15 +177,8 @@ exports.manufacturerSchema = joi.object({
 // Role Entity Schema
 //
 exports.roleSchema = joi.object({
-  id: joi.string()
-    .guid({ version: 'uuidv4' })
-    .alter({
-      post: (roleSchema) => roleSchema.required(),
-      put: (roleSchema) => roleSchema.forbidden()
-    }),
   name: joi.string()
-    .min(3)
-    .max(50)
+    .min(5)
     .required()
 }).options({ abortEarly: false });
 
