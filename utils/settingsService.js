@@ -3,7 +3,7 @@ const cache = require('./cache');
 const { settings } = require('../models/settings');
 const { NOTIFICATION_LIST } = require('./settingsHelper');
 
-exports.verifySettings = async (_model, req, _res) => {
+exports.verifySettings = async (model, req, res) => {
   const { key, value, template } = req.body;
   const notificationKey = await NOTIFICATION_LIST.find(el => el.key === key);
   if (notificationKey === undefined) {

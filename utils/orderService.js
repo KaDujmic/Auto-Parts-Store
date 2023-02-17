@@ -4,7 +4,6 @@ const { NotFoundError, ValidationError } = require('./errors');
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);
-  console.log(typeof (duplicate));
   if (duplicate.length !== 0) { throw new ValidationError('Can not have duplicate elements'); }
 };
 
