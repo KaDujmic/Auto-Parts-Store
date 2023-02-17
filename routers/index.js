@@ -3,9 +3,9 @@ const itemRouter = require('./itemRouter');
 const orderRouter = require('./orderRouter');
 const userRouter = require('./userRouter');
 const settingsRouter = require('./settingsRouter');
-const manufacturerRouter = require('./itemRouter');
-const categoryRouter = require('./orderRouter');
-const roleRouter = require('./userRouter');
+const manufacturerRouter = require('./manufacturerRouter');
+const categoryRouter = require('./categoryRouter');
+const roleRouter = require('./roleRouter');
 const authRouter = require('./authRouter');
 const settingsHelperRouter = require('./settingsHelperRouter');
 

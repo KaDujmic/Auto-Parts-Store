@@ -1,6 +1,6 @@
 const { order, item } = require('../models');
 const crudController = require('../controllers/crudController');
-const { checkAllElements } = require('../utils/orderService');
+const { checkAllElements, setOrderPrice } = require('../utils/orderService');
 
 exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);
@@ -10,6 +10,7 @@ exports.getOrder = async (req, res) => {
 };
 exports.createOrder = async (req, res) => {
   await checkAllElements(item, req, res);
+  await setOrderPrice(req, res);
 
   // eslint-disable-next-line max-len
   const { id, userId, deliveryAddress, deliveryDate, orderStatus, itemList, finalPrice, fullPrice, currency } = req.body;

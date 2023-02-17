@@ -1,4 +1,4 @@
-const NOTIFICATION_LIST = [
+module.exports.NOTIFICATION_LIST = [
   {
     key: 'order_confirmation',
     template: {
@@ -17,6 +17,7 @@ const NOTIFICATION_LIST = [
     template: {
       title: 'Auto Parts Store: Your order has arrived!',
       body: `Dear customerName,
+
   
     The order you have placed on orderDate is ready.
     Please come by our shop during working hours to pick up your order.
@@ -36,12 +37,9 @@ const NOTIFICATION_LIST = [
     The order you have placed on orderDate is waiting for pickup. 
     Please come by our shop during working hours to pick up your order.
 
-  
     We are looking forward to seeing you!
     
     Auto Parts Store`
     }
   }
 ];
-
-module.exports = NOTIFICATION_LIST;
