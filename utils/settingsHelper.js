@@ -1,15 +1,45 @@
-module.exports.NOTIFICATION_LIST = [{
-  key: 'order_notification_recurrence',
-  value: '1',
-  // eslint-disable-next-line max-len
-  template: `Dear {full_name},
+module.exports.NOTIFICATION_LIST = [
+  {
+    key: 'order_confirmation',
+    template: {
+      title: 'Auto Parts Store: Your order has been confirmed!',
+      body: `Dear customerName,
+    
+    The order you have placed has been confirmed. We will contact you once your order is ready for pickup. 
+    
+
+    Thank you for your purchase,
+    Auto Parts Store`
+    }
+  },
+  {
+    key: 'order_arrived',
+    template: {
+      title: 'Auto Parts Store: Your order has arrived!',
+      body: `Dear customerName,
+
   
-  The order you have placed on {order_date} has arrived, and is ready for pickup.
+    The order you have placed on orderDate is ready.
+    Please come by our shop during working hours to pick up your order.
+    
+    We are looking forward to seeing you!
+    
+    Auto Parts Store`
+    }
+  },
+  {
+    recurrence: '1',
+    key: 'order_pickup_recurring',
+    template: {
+      title: 'Auto Parts Store: Order Reminder',
+      body: `Dear customerName,
   
-  Please stop by our shop during our working hours.
-  
-  
-  We are looking forward to seeing you!
-  
-  Auto Parts Store`
-}];
+    The order you have placed on orderDate is waiting for pickup. 
+    Please come by our shop during working hours to pick up your order.
+
+    We are looking forward to seeing you!
+    
+    Auto Parts Store`
+    }
+  }
+];
