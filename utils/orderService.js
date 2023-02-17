@@ -1,4 +1,4 @@
-const { Sequelize, user, item } = require('../models');
+const { Sequelize, user, item, order_item } = require('../models');
 const Op = Sequelize.Op;
 const { NotFoundError, ValidationError } = require('./errors');
 
@@ -12,7 +12,7 @@ const getRandomDate = function () {
   const future = new Date(today);
   future.setDate(today.getDate() + 3);
   const randomTimestamp = Math.random() * (future.getTime() - today.getTime()) + today.getTime();
-  return new Date(randomTimestamp);
+  return new Date(randomTimestamp).toISOString().split('T')[0];
 };
 
 const priceCalculation = function (priceList, itemList) {
@@ -41,7 +41,16 @@ exports.checkAllElements = async (model, req, res) => {
   req.body.itemList.forEach(requestItem => {
     const item = items.find(item => item.id === requestItem.id);
     if (item.quantity < requestItem.quantity) {
-      requestItem.deliveryDate = getRandomDate();
+      const promise = order_item.create({
+        orderId: req.body.id,
+        itemId: requestItem.id,
+        deliveryDate: getRandomDate()
+      });
+      promise.then((createdItem) => {
+        console.log('Created order item:', createdItem);
+      }).catch((error) => {
+        console.log(error);
+      });
     } else {
       item.quantity -= requestItem.quantity;
       item.save();

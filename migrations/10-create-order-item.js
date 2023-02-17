@@ -13,6 +13,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID
       },
+      delivery_date: {
+        type: Sequelize.STRING
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

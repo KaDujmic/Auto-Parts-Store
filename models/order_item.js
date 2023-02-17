@@ -5,12 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class order_item extends Model {
     static associate (models) {
-      order_item.belongsTo(models.order, {
-        foreignKey: 'orderId'
-      });
-      order_item.belongsTo(models.item, {
-        foreignKey: 'itemId'
-      });
     }
   }
   order_item.init({
@@ -22,8 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID
     },
-    quantity: DataTypes.INTEGER,
-    status: DataTypes.STRING
+    deliveryDate: DataTypes.STRING
   }, {
     sequelize,
     freezeTableName: true,
