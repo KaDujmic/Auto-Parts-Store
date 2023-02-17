@@ -38,10 +38,10 @@ exports.checkAllElements = async (model, req, res) => {
   });
   if (items.length !== idList.length) throw new NotFoundError();
 
-  await items.forEach(item => {
-    const requestItem = req.body.itemList.find(requestItem => requestItem.id === item.id);
+  req.body.itemList.forEach(requestItem => {
+    const item = items.find(item => item.id === requestItem.id);
     if (item.quantity < requestItem.quantity) {
-      req.body.deliveryDate = getRandomDate();
+      requestItem.deliveryDate = getRandomDate();
     } else {
       item.quantity -= requestItem.quantity;
       item.save();
