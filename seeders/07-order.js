@@ -14,7 +14,8 @@ module.exports = {
         ],
         currency: 'EUR',
         created_at: new Date(),
-        updated_at: new Date()
+        updated_at: new Date(),
+        deleted: false
       },
       {
         id: '5de49635-dbd9-4ecd-9705-53731f42033b',
@@ -26,7 +27,8 @@ module.exports = {
         ],
         currency: 'USD',
         created_at: new Date(),
-        updated_at: new Date()
+        updated_at: new Date(),
+        deleted: false
       }
     ], {}, { item_list: { type: new Sequelize.JSONB() } });
   },

@@ -24,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: DataTypes.STRING,
     last_sent: DataTypes.DATE,
-    sent_history: DataTypes.JSONB
+    sent_history: DataTypes.JSONB,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     freezeTableName: true,

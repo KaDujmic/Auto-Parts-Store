@@ -10,6 +10,9 @@ module.exports = {
       },
       value: {
         type: Sequelize.JSONB
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN
       }
     });
   },

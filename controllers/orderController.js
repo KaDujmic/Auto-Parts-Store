@@ -34,7 +34,7 @@ exports.createOrder = async (req, res) => {
 
 exports.updateOrder = async (req, res) => {
   const updatedData = await order.update(req.body, {
-    where: { id: req.params.id },
+    where: { id: req.params.id, deleted: false },
     returning: true
   });
 
@@ -53,7 +53,8 @@ exports.getCustomerOrders = async (req, res) => {
   const customerOrders = await order.findAll({
     where: {
       userId: res.locals.user.id,
-      orderStatus: query
+      orderStatus: query,
+      deleted: false
     }
   });
   res.status(200).json(customerOrders);

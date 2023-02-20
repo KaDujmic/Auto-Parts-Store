@@ -15,7 +15,8 @@ module.exports = {
     
         Thank you for your purchase,
         Auto Parts Store`
-        }
+        },
+        deleted: false
       },
       {
         key: 'order_arrived_template',
@@ -29,7 +30,8 @@ module.exports = {
         We are looking forward to seeing you!
         
         Auto Parts Store`
-        }
+        },
+        deleted: false
       },
       {
         key: 'order_pickup_template',
@@ -44,11 +46,13 @@ module.exports = {
         We are looking forward to seeing you!
         
         Auto Parts Store`
-        }
+        },
+        deleted: false
       },
       {
         key: 'order_pickup_recurrence',
-        value: { recurrence: '1' }
+        value: { recurrence: '1' },
+        deleted: false
       }
     ], {}, { value: { type: new Sequelize.JSONB() } });
   },

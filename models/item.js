@@ -44,7 +44,11 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.FLOAT,
     categoryId: DataTypes.UUID,
     manufacturerId: DataTypes.UUID,
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     freezeTableName: true,

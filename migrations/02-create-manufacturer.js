@@ -13,6 +13,9 @@ module.exports = {
       },
       model: {
         type: Sequelize.STRING
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN
       }
     });
   },

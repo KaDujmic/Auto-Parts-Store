@@ -7,12 +7,14 @@ module.exports = {
       {
         name: 'Salesperson',
         created_at: new Date(),
-        updated_at: new Date()
+        updated_at: new Date(),
+        deleted: false
       },
       {
         name: 'Customer',
         created_at: new Date(),
-        updated_at: new Date()
+        updated_at: new Date(),
+        deleted: false
       }
     ]);
   },

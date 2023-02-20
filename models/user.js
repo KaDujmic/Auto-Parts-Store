@@ -36,7 +36,11 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: DataTypes.STRING,
     roleName: DataTypes.STRING,
     discount: DataTypes.FLOAT,
-    currency: DataTypes.STRING
+    currency: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     freezeTableName: true,

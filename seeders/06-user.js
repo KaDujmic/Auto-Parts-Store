@@ -15,7 +15,8 @@ module.exports = {
         discount: 10.20,
         currency: 'USD',
         created_at: new Date(),
-        updated_at: new Date()
+        updated_at: new Date(),
+        deleted: false
       },
       {
         id: '805a10d7-1735-4a6c-a4cd-0be767aaeca1',
@@ -28,7 +29,8 @@ module.exports = {
         discount: 15.00,
         currency: 'USD',
         created_at: new Date(),
-        updated_at: new Date()
+        updated_at: new Date(),
+        deleted: false
       }
     ]);
   },

@@ -19,7 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID
     },
     brand: DataTypes.STRING,
-    model: DataTypes.STRING
+    model: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     freezeTableName: true,
