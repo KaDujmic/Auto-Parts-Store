@@ -1,27 +1,31 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const { user, notification, settings, sequelize } = require('../models');
+const { user, notification, settings, order, sequelize } = require('../models');
 
 // Email created on order confirmation
-exports.orderConfirmEmail = async function (customerName, customerEmail) {
-  let emailTemplate = await getSetting('order_confirmation_template');
-  emailTemplate = personalizeEmail(emailTemplate, customerName);
+exports.orderConfirmEmail = async function (customerId) {
+  const customer = await user.findOne({ where: { id: customerId } });
 
-  const mailOptions = createMailOptions(customerEmail, emailTemplate);
+  let emailTemplate = await getSetting('order_confirmation_template');
+  emailTemplate = personalizeEmail(customer.name, emailTemplate);
+
+  const mailOptions = createMailOptions(customer.email, emailTemplate);
   sendEmail(mailOptions);
 };
 
-// Email created after order has arrived and ready for pickup
-// Customer object's structure:
-// {
-//    userId: UUID,
-//    orderId: UUID,
-//    name: STRING (full_name),
-//    email: STRING
-// }
-exports.orderArrivedEmail = async function (customer) {
+exports.orderArrivedEmail = async function (customerId) {
+  const customer = await user.findOne({
+    where: {
+      id: customerId
+    },
+    include: {
+      model: order,
+      attributes: ['orderId']
+    }
+  });
+
   let emailTemplate = await getSetting('order_arrived_template');
-  emailTemplate = personalizeEmail(emailTemplate, customer.name);
+  emailTemplate = personalizeEmail(customer.name, emailTemplate);
 
   const mailOptions = createMailOptions(customer.email, emailTemplate);
   sendEmail(mailOptions);
@@ -32,8 +36,8 @@ exports.orderArrivedEmail = async function (customer) {
 // Creates a notification table entry for the recurrence email
 async function setUpRecurrenceEmail (customer) {
   const notificationData = {
-    user_id: customer.userID,
-    order_id: customer.order_ID,
+    user_id: customer.userId,
+    order_id: customer.orderId,
     status: 'scheduled'
   };
   await notification.create({ notificationData });
@@ -61,7 +65,7 @@ exports.sendRecurringEmails = async function () {
   });
 
   listOfNotifications.forEach(notif => {
-    const userEmail = personalizeEmail(emailTemplate, notif.user.fullName);
+    const userEmail = personalizeEmail(notif.user.fullName, emailTemplate);
     const mailOptions = createMailOptions(notif.user.email, userEmail);
     sendEmail(mailOptions);
 
@@ -113,7 +117,7 @@ async function getSetting (keyToGet) {
   return setting;
 }
 
-function personalizeEmail (emailTemplate, customerName) {
+function personalizeEmail (customerName, emailTemplate) {
   const personalEmailTemplate = emailTemplate;
   personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
 
