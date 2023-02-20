@@ -1,6 +1,6 @@
 const { ValidationError } = require('./errors.js');
 const cache = require('./cache');
-const { settings } = require('../models/settings');
+const { settings } = require('../models');
 
 exports.verifySettings = async (req) => {
   const { key, value } = req.body;
@@ -11,8 +11,8 @@ exports.verifySettings = async (req) => {
 };
 
 exports.setSettings = async () => {
-  const settingsCache = cache.getCache('settingsCache');
-  if (!settingsCache) {
+  const retrievedCache = cache.getCache('settingsCache');
+  if (!retrievedCache) {
     const settingsEntity = await settings.findAll();
     cache.setCache(settingsEntity, 'settingsCache');
   }
