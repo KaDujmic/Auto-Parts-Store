@@ -15,6 +15,9 @@ module.exports = {
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN
       }
     });
   },

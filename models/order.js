@@ -44,7 +44,11 @@ module.exports = (sequelize, DataTypes) => {
     itemList: DataTypes.JSONB,
     finalPrice: DataTypes.FLOAT,
     fullPrice: DataTypes.FLOAT,
-    currency: DataTypes.STRING
+    currency: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     freezeTableName: true,

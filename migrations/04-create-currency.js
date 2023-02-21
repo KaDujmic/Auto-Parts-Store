@@ -9,6 +9,9 @@ module.exports = {
       },
       rates: {
         type: Sequelize.JSONB
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN
       }
     });
   },

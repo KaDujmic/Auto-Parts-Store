@@ -1,18 +1,20 @@
 const { order, item } = require('../models');
 const crudController = require('../controllers/crudController');
 const { checkAllElements, setOrderPrice } = require('../utils/orderService');
+const { orderConfirmEmail, orderArrivedEmail } = require('../utils/notificationService');
 
 exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);
 };
+
 exports.getOrder = async (req, res) => {
   await crudController.findModel(order, req, res);
 };
+
 exports.createOrder = async (req, res) => {
   await checkAllElements(item, req, res);
   await setOrderPrice(req, res);
 
-  // eslint-disable-next-line max-len
   const { id, userId, deliveryAddress, deliveryDate, orderStatus, itemList, finalPrice, fullPrice, currency } = req.body;
   const orderDate = new Date();
   const model = await order.create({
@@ -29,20 +31,30 @@ exports.createOrder = async (req, res) => {
   });
   res.status(201).json(model);
 };
+
 exports.updateOrder = async (req, res) => {
-  await crudController.updateModel(order, req, res);
+  const updatedData = await order.update(req.body, {
+    where: { id: req.params.id, deleted: false },
+    returning: true
+  });
+
+  if (req.body.orderStatus === 'pending_delivery') orderConfirmEmail(req.body.id);
+  else if (req.body.orderStatus === 'ready_for_pickup') orderArrivedEmail(req.body.id);
+
+  res.status(200).json(updatedData[1]);
 };
+
 exports.deleteOrder = async (req, res) => {
   await crudController.deleteModel(order, req, res);
 };
 
 exports.getCustomerOrders = async (req, res) => {
-  // eslint-disable-next-line max-len
-  const query = req.body.orderStatus === undefined ? ['pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
+  const query = req.body.orderStatus === undefined ? ['order_confirmed', 'pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
   const customerOrders = await order.findAll({
     where: {
       userId: res.locals.user.id,
-      orderStatus: query
+      orderStatus: query,
+      deleted: false
     }
   });
   res.status(200).json(customerOrders);

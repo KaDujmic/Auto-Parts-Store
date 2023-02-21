@@ -18,7 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.STRING
     },
-    rates: DataTypes.JSONB
+    rates: DataTypes.JSONB,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     freezeTableName: true,
