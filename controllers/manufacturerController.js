@@ -1,22 +1,22 @@
 const { manufacturer } = require('../models');
 const crudController = require('./crudController');
 
-exports.getManufacturer = async (res, req) => {
-  await crudController.findModel(manufacturer, res, req);
+exports.getManufacturer = async (req, res) => {
+  await crudController.findModel(manufacturer, req, res);
 };
 
-exports.getAllManufacturer = async (res, req) => {
-  await crudController.findAllModel(manufacturer, res, req);
+exports.getAllManufacturer = async (req, res) => {
+  await crudController.findAllModel(manufacturer, req, res);
 };
 
-exports.updateManufacturer = async (res, req) => {
-  await crudController.updateModel(manufacturer, res, req);
+exports.updateManufacturer = async (req, res) => {
+  await crudController.updateModel(manufacturer, req, res);
 };
 
-exports.deleteManufacturer = async (res, req) => {
-  await crudController.deleteModel(manufacturer, res, req);
+exports.deleteManufacturer = async (req, res) => {
+  await crudController.deleteModel(manufacturer, req, res);
 };
 
-exports.createManufacturer = async (res, req) => {
-  await crudController.createModel(manufacturer, res, req);
+exports.createManufacturer = async (req, res) => {
+  await crudController.createModel(manufacturer, req, res);
 };
