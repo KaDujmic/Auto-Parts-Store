@@ -23,8 +23,8 @@ module.exports = {
       },
       order_status: {
         type: Sequelize.STRING,
-        defaultValue: 'pending_delivery',
-        enum: ['pending_delivery', 'ready_for_pickup', 'completed']
+        defaultValue: 'pending_confirmation',
+        enum: ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed']
       },
       item_list: {
         type: Sequelize.JSONB
