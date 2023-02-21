@@ -1,6 +1,6 @@
 const { settings } = require('../models');
 const crudController = require('../controllers/crudController');
-const { verifySettings, refreshSettings } = require('../utils/settingsService');
+const { verifySettings, setSettings } = require('../utils/settingsService');
 
 exports.getAllSettings = async (req, res) => {
   await crudController.findAllModel(settings, req, res);
@@ -19,7 +19,7 @@ exports.createSettings = async (req, res) => {
   });
 
   // Refresh current cache state on db update/create
-  refreshSettings();
+  setSettings();
 
   res.status(200).json(model);
 };
