@@ -1,6 +1,6 @@
 const { order, item } = require('../models');
 const crudController = require('../controllers/crudController');
-const { checkAllElements, setOrderPrice } = require('../utils/orderService');
+const { checkAllElements, setOrderPrice, retriveItemOnOrder } = require('../utils/orderService');
 const { orderConfirmEmail, orderArrivedEmail } = require('../utils/notificationService');
 
 exports.getAllOrders = async (req, res) => {
@@ -48,8 +48,16 @@ exports.deleteOrder = async (req, res) => {
   await crudController.deleteModel(order, req, res);
 };
 
+exports.confirmOrder = async (req, res) => {
+  const pendingOrder = await order.findByPk(req.params.id);
+  await retriveItemOnOrder(pendingOrder.dataValues, req, res);
+  pendingOrder.orderStatus = 'pending_delivery';
+  pendingOrder.save();
+  res.status(200).json(pendingOrder);
+};
+
 exports.getCustomerOrders = async (req, res) => {
-  const query = req.body.orderStatus === undefined ? ['order_confirmed', 'pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
+  const query = req.body.orderStatus === undefined ? ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
   const customerOrders = await order.findAll({
     where: {
       userId: res.locals.user.id,

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder, getCustomerOrders } = require('../controllers/orderController');
+const { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder, getCustomerOrders, confirmOrder } = require('../controllers/orderController');
 const { callbackErrorHandler } = require('../utils/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
@@ -21,4 +21,9 @@ router
   .get(restrictTo('Salesperson', 'Customer'), callbackErrorHandler(getOrder))
   .put(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(updateOrder))
   .delete(restrictTo('Salesperson'), callbackErrorHandler(deleteOrder));
+
+router
+  .route('/confirm/:id')
+  .put(restrictTo('Salesperson'), callbackErrorHandler(confirmOrder));
+
 module.exports = router;
