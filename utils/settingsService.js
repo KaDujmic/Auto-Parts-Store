@@ -11,21 +11,20 @@ exports.verifySettings = async (req) => {
 };
 
 exports.setSettings = async () => {
-  const retrievedCache = cache.getCache('settingsCache');
+  const retrievedCache = cache.getCache('settings');
   if (!retrievedCache) {
     const settingsEntity = await settings.findAll();
-    cache.setCache(settingsEntity, 'settingsCache');
+    cache.setCache(settingsEntity, 'settings');
   }
 };
 
-exports.refreshSettings = async () => {
-  const key = 'settingsCache';
+exports.setSettings = async () => {
+  const key = 'settings';
   const retrievedCache = cache.getCache(key);
+  const settingsEntity = await settings.findAll();
 
-  if (!retrievedCache) {
-    const settingsEntity = await settings.findAll();
-    cache.setCache(settingsEntity, key);
-  } else {
-    cache.ttl(key, 3600);
+  if (retrievedCache) {
+    cache.del(key);
   }
+  cache.setCache(settingsEntity, key);
 };
