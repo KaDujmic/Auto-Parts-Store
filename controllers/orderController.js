@@ -1,7 +1,6 @@
-const { order, item } = require('../models');
+const { order, item, order_item } = require('../models');
 const crudController = require('../controllers/crudController');
 const { checkAllElements, setOrderPrice, retriveItemOnOrder } = require('../utils/orderService');
-const { orderConfirmEmail, orderArrivedEmail } = require('../utils/notificationService');
 
 exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);
@@ -37,10 +36,6 @@ exports.updateOrder = async (req, res) => {
     where: { id: req.params.id, deleted: false },
     returning: true
   });
-
-  if (req.body.orderStatus === 'pending_delivery') orderConfirmEmail(req.body.id);
-  else if (req.body.orderStatus === 'ready_for_pickup') orderArrivedEmail(req.body.id);
-
   res.status(200).json(updatedData[1]);
 };
 
@@ -66,4 +61,22 @@ exports.getCustomerOrders = async (req, res) => {
     }
   });
   res.status(200).json(customerOrders);
+};
+
+exports.orderStatusCheck = async (req, res) => {
+  const orderItems = await order_item.findAll({
+    where: {
+      orderId: req.params.firstId,
+      deleted: false
+    }
+  });
+  if (orderItems.length === 0) {
+    const currentOrder = await order.findOne({
+      where: {
+        id: req.params.firstId
+      }
+    });
+    currentOrder.orderStatus = 'ready_for_pickup';
+    currentOrder.save();
+  }
 };
