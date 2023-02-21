@@ -5,8 +5,9 @@ exports.getOrderedItems = async (req, res) => {
   const items = await order_item.findAll({
     where: {
       deliveryDate: {
-        [Op.gte]: new Date().toISOString().split('T')[0]
-      }
+        [Op.lte]: new Date().toISOString().split('T')[0]
+      },
+      deleted: false
     }
   });
 
@@ -15,7 +16,7 @@ exports.getOrderedItems = async (req, res) => {
 
 exports.updateOrderedItem = async (req, res) => {
   const { firstId, secondId } = req.params;
-  const items = await order_item.update(req.body, {
+  const items = await order_item.update({ deleted: true }, {
     where: { orderId: firstId, itemId: secondId, deleted: false },
     returning: true
   });
