@@ -37,12 +37,21 @@ exports.checkAllElements = async (model, req, res) => {
     attributes: ['id', 'serialNumber', 'quantity']
   });
   if (items.length !== idList.length) throw new NotFoundError();
+};
 
-  req.body.itemList.forEach(requestItem => {
-    const item = items.find(item => item.id === requestItem.id);
-    if (item.quantity < requestItem.quantity) {
+exports.retriveItemOnOrder = async (currentOrder, req, res) => {
+  const idList = currentOrder.itemList.map(el => el.id);
+  const items = await item.findAll({
+    where: {
+      id: { [Op.or]: idList }
+    },
+    attributes: ['id', 'quantity']
+  });
+  currentOrder.itemList.forEach(requestItem => {
+    const orderItem = items.find(item => item.id === requestItem.id);
+    if (orderItem.quantity < requestItem.quantity) {
       const promise = order_item.create({
-        orderId: req.body.id,
+        orderId: currentOrder.id,
         itemId: requestItem.id,
         deliveryDate: getRandomDate()
       });
@@ -52,11 +61,12 @@ exports.checkAllElements = async (model, req, res) => {
         console.log(error);
       });
     } else {
-      item.quantity -= requestItem.quantity;
-      item.save();
+      orderItem.quantity -= requestItem.quantity;
+      orderItem.save();
     }
   });
 };
+
 exports.setOrderPrice = async (req, res) => {
   const customer = await user.findByPk(req.body.userId);
   const itemList = req.body.itemList.map(item => item.id);
