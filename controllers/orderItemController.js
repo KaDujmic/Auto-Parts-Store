@@ -1,4 +1,5 @@
 const { order_item, Sequelize } = require('../models');
+const { orderStatusCheck } = require('../controllers/orderController');
 const Op = Sequelize.Op;
 
 exports.getOrderedItems = async (req, res) => {
@@ -20,5 +21,6 @@ exports.updateOrderedItem = async (req, res) => {
     where: { orderId: firstId, itemId: secondId, deleted: false },
     returning: true
   });
+  orderStatusCheck(req, res);
   res.status(200).json(items);
 };
