@@ -16,6 +16,11 @@ module.exports = {
       delivery_date: {
         type: Sequelize.STRING
       },
+      status: {
+        type: Sequelize.STRING,
+        defaultValue: 'pending',
+        enum: ['pending', 'delivered']
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,6 +1,6 @@
 const { order, item, order_item } = require('../models');
 const crudController = require('../controllers/crudController');
-const { checkAllElements, setOrderPrice, retriveItemOnOrder } = require('../utils/orderService');
+const { checkAllElements, setOrderPrice, retrieveItemOnOrder } = require('../utils/orderService');
 const { orderConfirmEmail, orderArrivedEmail } = require('../utils/notificationService');
 exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);
@@ -41,7 +41,7 @@ exports.deleteOrder = async (req, res) => {
 
 exports.confirmOrder = async (req, res) => {
   const pendingOrder = await order.findByPk(req.params.id);
-  await retriveItemOnOrder(pendingOrder.dataValues, req, res);
+  await retrieveItemOnOrder(pendingOrder.dataValues, req, res);
   pendingOrder.orderStatus = 'pending_delivery';
   pendingOrder.save();
   orderConfirmEmail(pendingOrder.userId);
@@ -64,7 +64,7 @@ exports.orderStatusCheck = async (req, res) => {
   const orderItems = await order_item.findAll({
     where: {
       orderId: req.params.firstId,
-      deleted: false
+      status: 'pending'
     }
   });
   if (orderItems.length === 0) {
