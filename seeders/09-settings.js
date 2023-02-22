@@ -53,6 +53,24 @@ module.exports = {
         key: 'order_pickup_recurrence',
         value: { recurrence: '1' },
         deleted: false
+      },
+      {
+        key: 'item_arrival_template',
+        value: {
+          title: 'Auto Parts Store: Order Reminder',
+          body: `Dear salesPersonName,
+      
+        This is a reminder to review today's received orders.
+        Please confirm all items that have arrived at the store. 
+        
+        Thank you!`
+        },
+        deleted: false
+      },
+      {
+        key: 'item_arrival_recurrence',
+        value: { recurrence: '1' },
+        deleted: false
       }
     ], {}, { value: { type: new Sequelize.JSONB() } });
   },
