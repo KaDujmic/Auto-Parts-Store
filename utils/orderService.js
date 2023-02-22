@@ -1,5 +1,6 @@
 const { Sequelize, user, item, order_item } = require('../models');
 const Op = Sequelize.Op;
+const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('./errors');
 
 const checkDuplicateElements = function (array) {
@@ -70,6 +71,7 @@ exports.retriveItemOnOrder = async (currentOrder, req, res) => {
 exports.setOrderPrice = async (req, res) => {
   const customer = await user.findByPk(req.body.userId);
   const itemList = req.body.itemList.map(item => item.id);
+  const customerCurrency = await getCurrency(customer.currency);
   const priceList = await item.findAll({
     where: {
       id: { [Op.or]: itemList }
@@ -79,6 +81,7 @@ exports.setOrderPrice = async (req, res) => {
 
   const fullPrice = priceCalculation(priceList, req.body.itemList);
 
-  req.body.fullPrice = fullPrice;
-  req.body.finalPrice = fullPrice - (fullPrice * (customer.discount / 100));
+  req.body.currency = customer.currency;
+  req.body.fullPrice = customer.currency === 'EUR' ? fullPrice : (fullPrice * customerCurrency).toFixed(2);
+  req.body.finalPrice = (fullPrice - (fullPrice * (customer.discount / 100))).toFixed(2);
 };
