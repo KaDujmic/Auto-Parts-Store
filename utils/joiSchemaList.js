@@ -97,14 +97,6 @@ exports.orderSchema = joi.object({
           put: (orderSchema) => orderSchema.required()
         })
     }),
-  currency: joi.string()
-    .min(3)
-    .max(3)
-    .valid(...listOfCurrencies)
-    .alter({
-      post: (orderSchema) => orderSchema.required(),
-      put: (orderSchema) => orderSchema.optional()
-    }),
   deliveryAddress: joi.string()
     .min(3)
     .max(50)

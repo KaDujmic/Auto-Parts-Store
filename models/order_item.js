@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID
     },
     deliveryDate: DataTypes.STRING,
+    status: DataTypes.STRING,
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
