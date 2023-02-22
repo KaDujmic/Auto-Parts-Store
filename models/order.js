@@ -7,12 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       models.user.hasMany(order, {
         foreignKey: {
-          name: 'userId'
+          name: 'id'
         }
       });
       order.belongsTo(models.user, {
         foreignKey: {
-          name: 'id'
+          name: 'userId'
         }
       });
 
