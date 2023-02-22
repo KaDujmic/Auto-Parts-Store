@@ -47,7 +47,7 @@ module.exports =
     password: process.env.DB_PASSWORD,
     database: process.env.DB_CONNECTION,
     host: process.env.DB_HOST,
-    port: 5432,
+    port: process.env.DB_PORT,
     dialect: 'postgres',
     define: {
       freezeTableName: true,
