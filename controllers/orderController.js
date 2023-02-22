@@ -1,7 +1,7 @@
 const { order, item, order_item } = require('../models');
 const crudController = require('../controllers/crudController');
 const { checkAllElements, setOrderPrice, retriveItemOnOrder } = require('../utils/orderService');
-
+const { orderConfirmEmail, orderArrivedEmail } = require('../utils/notificationService');
 exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);
 };
@@ -48,6 +48,7 @@ exports.confirmOrder = async (req, res) => {
   await retriveItemOnOrder(pendingOrder.dataValues, req, res);
   pendingOrder.orderStatus = 'pending_delivery';
   pendingOrder.save();
+  orderConfirmEmail(pendingOrder.userId);
   res.status(200).json(pendingOrder);
 };
 
@@ -78,5 +79,6 @@ exports.orderStatusCheck = async (req, res) => {
     });
     currentOrder.orderStatus = 'ready_for_pickup';
     currentOrder.save();
+    orderArrivedEmail(req.params.firstId);
   }
 };
