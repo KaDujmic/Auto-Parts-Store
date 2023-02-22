@@ -1,18 +1,19 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const { user, order, notification, settings, Sequelize, sequelize, order_item } = require('../models');
+const { user, order, notification, settings, Sequelize, sequelize } = require('../models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerId) {
   const customer = await user.findOne({ where: { id: customerId } });
 
   let emailTemplate = await getSetting('order_confirmation_template');
-  emailTemplate = await personalizeEmail(customer.name, emailTemplate);
+  emailTemplate = personalizeEmail(customer.fullName, emailTemplate);
 
   const mailOptions = createMailOptions(customer.email, emailTemplate);
   sendEmail(mailOptions);
 };
 
+// Email created on all item arrival / order preparation completion at the shop
 exports.orderArrivedEmail = async function (orderId) {
   const customer = await order.findOne({
     where: {
@@ -42,9 +43,9 @@ async function setUpRecurrenceEmail (userId, orderId) {
 }
 
 // Send all recurring emails for the day
-exports.sendRecurringEmails = async function (emailTemplateName, recurrenceSettingName) {
-  const emailTemplate = await getSetting(emailTemplateName);
-  const recurrenceSetting = await getSetting(recurrenceSettingName);
+exports.sendRecurringEmails = async function () {
+  const emailTemplate = await getSetting('order_pickup_template');
+  const recurrenceSetting = await getSetting('order_pickup_recurrence');
 
   let date = new Date();
   date.setDate(date.getDate() - recurrenceSetting.value.recurrence);
@@ -117,7 +118,7 @@ async function getSetting (keyToGet) {
   return setting;
 }
 
-async function personalizeEmail (customerName, emailTemplate) {
+function personalizeEmail (customerName, emailTemplate) {
   const personalEmailTemplate = emailTemplate;
 
   personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
