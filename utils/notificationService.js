@@ -44,10 +44,10 @@ async function setUpRecurrenceEmail (userId, orderId) {
 // Send all recurring emails for the day
 exports.sendRecurringEmails = async function () {
   const emailTemplate = await getSetting('order_pickup_template');
-  const recurranceSetting = await getSetting('order_pickup_recurrence');
+  const recurrenceSetting = await getSetting('order_pickup_recurrence');
 
   let date = new Date();
-  date.setDate(date.getDate() - recurranceSetting.value.recurrence);
+  date.setDate(date.getDate() - recurrenceSetting.value.recurrence);
   date = date.toISOString().split('T')[0];
 
   const listOfNotifications = await notification.findAll({
