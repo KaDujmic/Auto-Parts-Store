@@ -1,7 +1,11 @@
 exports.findAllModel = async (Model, req, res) => {
+  const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
+  const limit = Number(process.env.DEFAULT_LIMIT);
   const models = await Model.findAll({
+    order: [['id', 'ASC']],
     where: { deleted: false },
-    limit: 10,
+    offset,
+    limit,
     hooks: true
   });
   res.status(200).json({ models });
