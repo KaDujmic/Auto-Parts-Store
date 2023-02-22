@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const { user, order, notification, settings, Sequelize } = require('../models');
+const { user, order, notification, settings, Sequelize, sequelize } = require('../models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerId) {
@@ -37,7 +37,7 @@ async function setUpRecurrenceEmail (userId, orderId) {
     {
       userId,
       orderId,
-      last_sent: new Date().toISOString().split('T')[0]
+      lastSent: new Date().toISOString().split('T')[0]
     });
 }
 
@@ -68,9 +68,10 @@ exports.sendRecurringEmails = async function () {
     const mailOptions = createMailOptions(notif.user.email, userEmail);
     sendEmail(mailOptions);
 
+    const todaysDate = new Date().toISOString().split('T')[0];
     notif.set({
       lastSent: new Date().toISOString().split('T')[0],
-      sentHistory: notif.sentHistory.push(new Date().toISOString().split('T')[0])
+      sentHistory: sequelize.fn('array_append', sequelize.col('sent_history'), todaysDate)
     });
     notif.save();
   });
