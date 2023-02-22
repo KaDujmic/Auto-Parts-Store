@@ -57,19 +57,15 @@ module.exports = {
       {
         key: 'item_arrival_template',
         value: {
-          title: 'Auto Parts Store: Order Reminder',
-          body: `Dear salesPersonName,
+          title: 'Auto Parts Store: Item Reminder',
+          body: `Good Morning,
       
         This is a reminder to review today's received orders.
-        Please confirm all items that have arrived at the store. 
+        Please confirm all items from the list below have arrived at the store.
+        Items: itemList
         
         Thank you!`
         },
-        deleted: false
-      },
-      {
-        key: 'item_arrival_recurrence',
-        value: { recurrence: '1' },
         deleted: false
       }
     ], {}, { value: { type: new Sequelize.JSONB() } });
