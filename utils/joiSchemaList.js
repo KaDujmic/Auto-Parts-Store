@@ -48,8 +48,8 @@ exports.userSchema = joi.object({
     .min(5)
     .max(50),
   discount: joi.number()
-    .min(0.01)
-    .max(1)
+    .min(0)
+    .max(100)
     .precision(2),
   currency: joi.string()
     .min(3)
