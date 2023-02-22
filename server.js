@@ -11,7 +11,8 @@ cron.schedule('0 * * * *', function () {
   setSettings();
 });
 
-cron.schedule('0 * * * *', function () {
+// Send at 9 AM, then check every third hour in the day if notifications failed to send prior
+cron.schedule('0 9/6 * * *', function () {
   sendRecurringEmails();
 });
 
