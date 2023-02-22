@@ -22,9 +22,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID
     },
-    status: DataTypes.STRING,
-    last_sent: DataTypes.DATE,
-    sent_history: DataTypes.JSONB,
+    lastSent: DataTypes.DATEONLY,
+    sentHistory: {
+      type: DataTypes.ARRAY(DataTypes.DATEONLY),
+      defaultValue: []
+    },
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

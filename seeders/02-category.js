@@ -17,6 +17,13 @@ module.exports = {
         deleted: false,
         created_at: new Date(),
         updated_at: new Date()
+      },
+      {
+        id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
+        name: 'Interior',
+        deleted: false,
+        created_at: new Date(),
+        updated_at: new Date()
       }
     ]);
   },

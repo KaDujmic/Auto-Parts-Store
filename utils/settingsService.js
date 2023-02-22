@@ -11,20 +11,12 @@ exports.verifySettings = async (req) => {
 };
 
 exports.setSettings = async () => {
-  const retrievedCache = cache.getCache('settings');
-  if (!retrievedCache) {
-    const settingsEntity = await settings.findAll();
-    cache.setCache(settingsEntity, 'settings');
-  }
-};
-
-exports.setSettings = async () => {
   const key = 'settings';
   const retrievedCache = cache.getCache(key);
   const settingsEntity = await settings.findAll();
 
   if (retrievedCache) {
-    cache.del(key);
+    cache.deleteCache(key);
   }
   cache.setCache(settingsEntity, key);
 };

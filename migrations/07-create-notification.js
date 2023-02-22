@@ -13,14 +13,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      status: {
-        type: Sequelize.STRING
-      },
       last_sent: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       sent_history: {
-        type: Sequelize.JSONB
+        type: Sequelize.ARRAY(Sequelize.DATEONLY)
       },
       created_at: {
         allowNull: false,
