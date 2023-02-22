@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const { user, order, notification, settings, Sequelize, sequelize } = require('../models');
+const { user, order, notification, settings, Sequelize, sequelize, order_item } = require('../models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerId) {
@@ -42,9 +42,9 @@ async function setUpRecurrenceEmail (userId, orderId) {
 }
 
 // Send all recurring emails for the day
-exports.sendRecurringEmails = async function () {
-  const emailTemplate = await getSetting('order_pickup_template');
-  const recurrenceSetting = await getSetting('order_pickup_recurrence');
+exports.sendRecurringEmails = async function (emailTemplateName, recurrenceSettingName) {
+  const emailTemplate = await getSetting(emailTemplateName);
+  const recurrenceSetting = await getSetting(recurrenceSettingName);
 
   let date = new Date();
   date.setDate(date.getDate() - recurrenceSetting.value.recurrence);
@@ -117,9 +117,28 @@ async function getSetting (keyToGet) {
   return setting;
 }
 
-function personalizeEmail (customerName, emailTemplate) {
+async function personalizeEmail (customerName, itemList, emailTemplate) {
   const personalEmailTemplate = emailTemplate;
-  personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
+
+  if (emailTemplate === 'order_pickup_template') {
+    personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
+  } else if (emailTemplate === 'item_arrival_template') {
+    const items = await order_item.findAll({
+      where: {
+        deliveryDate: {
+          [Sequelize.Op.lte]: new Date().toISOString().split('T')[0]
+        },
+        deleted: false
+      }
+    });
+    const mapPersonalEmailTemplate = {
+      customerName,
+      itemList: items
+    };
+    personalEmailTemplate.value.body = personalEmailTemplate.value.body.replace(/customerName|itemList/, function (matched) {
+      return mapPersonalEmailTemplate[matched];
+    });
+  }
 
   return personalEmailTemplate;
 }

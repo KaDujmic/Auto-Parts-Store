@@ -12,7 +12,8 @@ cron.schedule('0 * * * *', function () {
 });
 
 cron.schedule('0 9 * * *', function () {
-  sendRecurringEmails();
+  sendRecurringEmails('order_pickup_template', 'order_pickup_recurrence');
+  sendRecurringEmails('item_arrival_template', 'item_arrival_recurrence');
 });
 
 app.listen(port, () => {

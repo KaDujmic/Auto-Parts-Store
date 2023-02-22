@@ -40,7 +40,7 @@ exports.checkAllElements = async (model, req, res) => {
   if (items.length !== idList.length) throw new NotFoundError();
 };
 
-exports.retriveItemOnOrder = async (currentOrder, req, res) => {
+exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
   const idList = currentOrder.itemList.map(el => el.id);
   const items = await item.findAll({
     where: {
