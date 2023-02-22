@@ -68,7 +68,7 @@ exports.orderStatusCheck = async (req, res) => {
   const orderItems = await order_item.findAll({
     where: {
       orderId: req.params.firstId,
-      deleted: false
+      status: 'pending'
     }
   });
   if (orderItems.length === 0) {
