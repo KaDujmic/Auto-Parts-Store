@@ -32,11 +32,7 @@ exports.createOrder = async (req, res) => {
 };
 
 exports.updateOrder = async (req, res) => {
-  const updatedData = await order.update(req.body, {
-    where: { id: req.params.id, deleted: false },
-    returning: true
-  });
-  res.status(200).json(updatedData[1]);
+  await crudController.updateModel(order, req, res);
 };
 
 exports.deleteOrder = async (req, res) => {

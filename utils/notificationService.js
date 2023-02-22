@@ -7,7 +7,7 @@ exports.orderConfirmEmail = async function (customerId) {
   const customer = await user.findOne({ where: { id: customerId } });
 
   let emailTemplate = await getSetting('order_confirmation_template');
-  emailTemplate = personalizeEmail(customer.name, emailTemplate);
+  emailTemplate = await personalizeEmail(customer.name, emailTemplate);
 
   const mailOptions = createMailOptions(customer.email, emailTemplate);
   sendEmail(mailOptions);
@@ -117,28 +117,10 @@ async function getSetting (keyToGet) {
   return setting;
 }
 
-async function personalizeEmail (customerName, itemList, emailTemplate) {
+async function personalizeEmail (customerName, emailTemplate) {
   const personalEmailTemplate = emailTemplate;
 
-  if (emailTemplate === 'order_pickup_template') {
-    personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
-  } else if (emailTemplate === 'item_arrival_template') {
-    const items = await order_item.findAll({
-      where: {
-        deliveryDate: {
-          [Sequelize.Op.lte]: new Date().toISOString().split('T')[0]
-        },
-        deleted: false
-      }
-    });
-    const mapPersonalEmailTemplate = {
-      customerName,
-      itemList: items
-    };
-    personalEmailTemplate.value.body = personalEmailTemplate.value.body.replace(/customerName|itemList/, function (matched) {
-      return mapPersonalEmailTemplate[matched];
-    });
-  }
+  personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
 
   return personalEmailTemplate;
 }
