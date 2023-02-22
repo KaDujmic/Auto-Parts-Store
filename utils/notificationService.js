@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const { user, notification, settings, order, sequelize } = require('../models');
+const { user, order, notification, settings, Sequelize } = require('../models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerId) {
@@ -13,34 +13,32 @@ exports.orderConfirmEmail = async function (customerId) {
   sendEmail(mailOptions);
 };
 
-exports.orderArrivedEmail = async function (customerId) {
-  const customer = await user.findOne({
+exports.orderArrivedEmail = async function (orderId) {
+  const customer = await order.findOne({
     where: {
-      id: customerId
+      id: orderId
     },
-    include: {
-      model: order,
-      attributes: ['orderId']
-    }
+    include: [user],
+    attributes: ['user.id', 'user.full_name', 'user.email']
   });
 
   let emailTemplate = await getSetting('order_arrived_template');
-  emailTemplate = personalizeEmail(customer.name, emailTemplate);
+  emailTemplate = personalizeEmail(customer.user.fullName, emailTemplate);
 
-  const mailOptions = createMailOptions(customer.email, emailTemplate);
+  const mailOptions = createMailOptions(customer.user.email, emailTemplate);
   sendEmail(mailOptions);
 
-  setUpRecurrenceEmail(customer);
+  setUpRecurrenceEmail(customer.user.id, orderId);
 };
 
 // Creates a notification table entry for the recurrence email
-async function setUpRecurrenceEmail (customer) {
-  const notificationData = {
-    user_id: customer.userId,
-    order_id: customer.orderId,
-    status: 'scheduled'
-  };
-  await notification.create({ notificationData });
+async function setUpRecurrenceEmail (userId, orderId) {
+  await notification.create(
+    {
+      userId,
+      orderId,
+      last_sent: new Date().toISOString().split('T')[0]
+    });
 }
 
 // Send all recurring emails for the day
@@ -48,15 +46,16 @@ exports.sendRecurringEmails = async function () {
   const emailTemplate = await getSetting('order_pickup_template');
   const recurranceSetting = await getSetting('order_pickup_recurrence');
 
-  const date = new Date();
+  let date = new Date();
   date.setDate(date.getDate() - recurranceSetting.value.recurrence);
+  date = date.toISOString().split('T')[0];
 
   const listOfNotifications = await notification.findAll({
     where: {
       last_sent: {
-        [sequelize.Op.lte]: date
+        [Sequelize.Op.lte]: date
       },
-      status: 'scheduled'
+      deleted: false
     },
     include: {
       model: user,
@@ -70,8 +69,8 @@ exports.sendRecurringEmails = async function () {
     sendEmail(mailOptions);
 
     notif.set({
-      lastSent: new Date(),
-      sentHistory: notif.sendHistory.push(new Date())
+      lastSent: new Date().toISOString().split('T')[0],
+      sentHistory: notif.sentHistory.push(new Date().toISOString().split('T')[0])
     });
     notif.save();
   });
@@ -103,7 +102,7 @@ function createMailOptions (customerEmail, template) {
 }
 
 async function getSetting (keyToGet) {
-  const cacheSettings = getCache('settingsCache');
+  const cacheSettings = getCache('settings');
   let setting = null;
 
   if (!cacheSettings) {
