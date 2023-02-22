@@ -8,6 +8,7 @@ const categoryRouter = require('./categoryRouter');
 const roleRouter = require('./roleRouter');
 const authRouter = require('./authRouter');
 const orderItemRouter = require('./orderItemRouter');
+const notificationRouter = require('./notificationRouter');
 
 const router = express.Router({ mergeParams: true });
 
@@ -18,7 +19,8 @@ router.use('/settings', settingsRouter);
 router.use('/category', categoryRouter);
 router.use('/manufacturer', manufacturerRouter);
 router.use('/role', roleRouter);
-router.use('/', authRouter);
 router.use('/orderItem', orderItemRouter);
+router.use('/notification', notificationRouter);
+router.use('/', authRouter);
 
 module.exports = router;
