@@ -32,7 +32,7 @@ exports.createOrder = async (req, res) => {
 };
 
 exports.updateOrder = async (req, res) => {
-  await crudController.deleteModel(order, req, res);
+  await crudController.updateModel(order, req, res);
 };
 
 exports.deleteOrder = async (req, res) => {
