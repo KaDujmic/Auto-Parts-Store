@@ -159,11 +159,17 @@ exports.manufacturerSchema = joi.object({
   brand: joi.string()
     .min(3)
     .max(50)
-    .required(),
+    .alter({
+      post: (manufacturerSchema) => manufacturerSchema.required(),
+      put: (manufacturerSchema) => manufacturerSchema.optional()
+    }),
   model: joi.string()
     .min(1)
     .max(50)
-    .required()
+    .alter({
+      post: (manufacturerSchema) => manufacturerSchema.required(),
+      put: (manufacturerSchema) => manufacturerSchema.optional()
+    })
 }).options({ abortEarly: false });
 
 // Role Entity Schema

@@ -24,7 +24,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/user",
+							"raw": "http://localhost:4000/user?page=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -32,6 +32,13 @@
 							"port": "4000",
 							"path": [
 								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number requested"
+								}
 							]
 						}
 					},
@@ -91,7 +98,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"ac5554bb-d628-441a-ac1a-29cf60deab9c\",\n    \"fullName\": \"John Doe\",\n    \"email\": \"goran.stajduhar@agilathon.com\",\n    \"address\": \"1st Blvd\",\n    \"password\": \"test1234\",\n    \"phoneNumber\": \"9159698191\",\n    \"roleName\": \"Salesperson\",\n    \"discount\": 15,\n    \"currency\": \"USD\"\n}",
+							"raw": "{\n    \"id\": \"ac5554bb-d628-441a-ac1a-29cf60deab9c\",\n    \"fullName\": \"John Doe\",\n    \"email\": \"random@agilathon.com\",\n    \"address\": \"1st Blvd\",\n    \"password\": \"test1234\",\n    \"phoneNumber\": \"9159698191\",\n    \"roleName\": \"Salesperson\",\n    \"discount\": 15,\n    \"currency\": \"USD\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,7 +290,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"a1e679a5-f5a6-4070-8f3d-91ea156bcc1b\",\n    \"userId\": \"805a10d7-1735-4a6c-a4cd-0be767aaeca1\",\n    \"deliveryAddress\":\"4rd Blvd\",\n    \"itemList\": [\n        {\"id\": \"fff3cb51-f73a-4fbd-985f-e76054e1a9ea\", \"quantity\": 1}\n    ],\n    \"currency\": \"EUR\"\n}",
+							"raw": "{\n    \"id\": \"6fd0dd12-fbe4-4da4-9266-7f2d95abf876\",\n    \"userId\": \"805a10d7-1735-4a6c-a4cd-0be767aaeca1\",\n    \"deliveryAddress\":\"4rd Blvd\",\n    \"itemList\": [\n        {\"id\": \"fff3cb51-f73a-4fbd-985f-e76054e1a9ea\", \"quantity\": 1}\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +312,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Order",
+					"name": "Confirm Order",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -321,7 +328,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"deliveryAddress\":\"5th Blvd\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -329,7 +336,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/order/:id",
+							"raw": "http://localhost:4000/order/confirm/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -337,12 +344,60 @@
 							"port": "4000",
 							"path": [
 								"order",
+								"confirm",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "5de49635-dbd9-4ecd-9705-53731f42033b",
+									"value": "a1e679a5-f5a6-4070-8f3d-91ea156bcc1b",
+									"description": "Order ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/order/complete/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order",
+								"complete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a1e679a5-f5a6-4070-8f3d-91ea156bcc1b",
 									"description": "Order ID"
 								}
 							]
@@ -589,7 +644,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"31c9d404-d204-497c-8877-08b1be7cba8b\",\n    \"name\": \"stabilizator\",\n    \"serialNumber\": \"BMW002\",\n    \"price\": 15,\n    \"categoryId\": \"1076625a-bcc5-49ea-b0e5-9ce3f8f0b2bf\",\n    \"manufacturerId\": \"1076625a-bcc5-49ea-b0e5-9ce3f8f0b2bf\",\n    \"quantity\": 50\n}",
+							"raw": "{\n    \"id\": \"31c9d404-d204-497c-8877-08b1be7cba8b\",\n    \"name\": \"Rear view mirror\",\n    \"serialNumber\": \"M002\",\n    \"price\": 15,\n    \"categoryId\": \"6ed632dd-f323-43dd-b596-287c17c8a7ea\",\n    \"manufacturerId\": \"4abedb72-1411-4844-a04a-58dbcd2b1a94\",\n    \"quantity\": 50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -627,7 +682,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "      {\n        \"quantity\": 100\n      }",
+							"raw": "      {\n        \"serialNumber\": \"M011\"\n      }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -649,58 +704,6 @@
 								{
 									"key": "id",
 									"value": "f0d0ea4d-0e40-4987-866e-154da59552c5",
-									"description": "Item ID"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Order Item",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/orderItem/:firstId/:secondId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"orderItem",
-								":firstId",
-								":secondId"
-							],
-							"variable": [
-								{
-									"key": "firstId",
-									"value": "a1e679a5-f5a6-4070-8f3d-91ea156bcc2b",
-									"description": "Order ID"
-								},
-								{
-									"key": "secondId",
-									"value": "fff3cb51-f73a-4fbd-985f-e76054e1a9ea",
 									"description": "Item ID"
 								}
 							]
@@ -849,7 +852,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/settings/:id",
+							"raw": "http://localhost:4000/settings/:key",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -857,42 +860,14 @@
 							"port": "4000",
 							"path": [
 								"settings",
-								":id"
+								":key"
 							],
 							"variable": [
 								{
-									"key": "id",
-									"value": "order_notification_recurrence"
+									"key": "key",
+									"value": "order_confirmation_template",
+									"description": "Unique setting key"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Settings Config File",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/settingsHelper",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"settingsHelper"
 							]
 						}
 					},
@@ -915,7 +890,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"key\": \"order_notification_recurrence\",\n    \"value\": 3\n}",
+							"raw": "{\n    \"key\": \"new_notification_recurrence\",\n    \"value\": { \"recurrence\": 3 }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -931,205 +906,6 @@
 							"port": "4000",
 							"path": [
 								"settings"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Manufacturer",
-			"item": [
-				{
-					"name": "Get All Manufacturer",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/manufacturer",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"manufacturer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get One Manufacturer",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/manufacturer/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"manufacturer",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "fc8ea3f5-abe2-4b0c-8fb1-6a1da404f252",
-									"description": "Manufacturer ID"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Manufacturer",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": \"71b4bb75-5400-49a5-b109-ddbacda0fcf5\",\n    \"brand\": \"Audi\",\n    \"model\": \"A1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/manufacturer",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"manufacturer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Manufacturer",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"model\": \"C Class\",\n    \"brand\" : \"Mercedes\" \n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/manufacturer/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"manufacturer",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "71b4bb75-5400-49a5-b109-ddbacda0fcf5"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Manufacturer",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"model\": \"C Class\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/manufacturer/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"manufacturer",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "71b4bb75-5400-49a5-b109-ddbacda0fcf5"
-								}
 							]
 						}
 					},
@@ -1260,7 +1036,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Test123\" \n}",
+							"raw": "{\n    \"name\": \"New Updated Role\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1268,7 +1044,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/role/:id",
+							"raw": "http://localhost:4000/role/:name",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1276,12 +1052,12 @@
 							"port": "4000",
 							"path": [
 								"role",
-								":id"
+								":name"
 							],
 							"variable": [
 								{
-									"key": "id",
-									"value": "Test12",
+									"key": "name",
+									"value": "New Role",
 									"description": "Role Name"
 								}
 							]
@@ -1306,6 +1082,206 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/role/:name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"role",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "New Updated Role",
+									"description": "Role Name"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manufacturer",
+			"item": [
+				{
+					"name": "Get All Manufacturer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/manufacturer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manufacturer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Manufacturer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/manufacturer/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manufacturer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4abedb72-1411-4844-a04a-58dbcd2b1a94",
+									"description": "Manufacturer ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Manufacturer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"71b4bb75-5400-49a5-b109-ddbacda0fcf5\",\n    \"brand\": \"Audi\",\n    \"model\": \"A1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/manufacturer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manufacturer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Manufacturer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"A3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/manufacturer/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"manufacturer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "71b4bb75-5400-49a5-b109-ddbacda0fcf5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Manufacturer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
 							"raw": "{\n    \"model\": \"C Class\"\n}",
 							"options": {
 								"raw": {
@@ -1314,21 +1290,20 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/role/:id",
+							"raw": "http://localhost:4000/manufacturer/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"role",
+								"manufacturer",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "Test123",
-									"description": "Role Name"
+									"value": "71b4bb75-5400-49a5-b109-ddbacda0fcf5"
 								}
 							]
 						}
@@ -1461,7 +1436,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Test123\" \n}",
+							"raw": "{\n    \"name\": \"Updated Test Category\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1482,7 +1457,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "c97ede74-b9e2-4e22-8f75-601a4687906d",
+									"value": "14de46f9-3535-4f9e-9786-cde90cc7455b",
 									"description": "Cateogry ID"
 								}
 							]
@@ -1528,8 +1503,213 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "6ed632dd-f323-43dd-b596-287c17c8a7ea",
+									"value": "14de46f9-3535-4f9e-9786-cde90cc7455b",
 									"description": "Category ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Item",
+			"item": [
+				{
+					"name": "Get Today's Received Items",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/orderItem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"orderItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ordered Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/orderItem/:firstId/:secondId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"orderItem",
+								":firstId",
+								":secondId"
+							],
+							"variable": [
+								{
+									"key": "firstId",
+									"value": "a1e679a5-f5a6-4070-8f3d-91ea156bcc2b",
+									"description": "Order ID"
+								},
+								{
+									"key": "secondId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Get All Active Notifications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/notification",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"notification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Single Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/notification/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"notification",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "805a10d7-1735-4a6c-a4cd-0be767aaeca1",
+									"description": "Order ID of the Notification"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Notification (Cancel) Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/notification/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"notification",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "805a10d7-1735-4a6c-a4cd-0be767aaeca1",
+									"description": "Order ID of the Notification"
 								}
 							]
 						}
