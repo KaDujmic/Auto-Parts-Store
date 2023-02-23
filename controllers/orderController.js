@@ -1,7 +1,7 @@
-const { order, item, order_item, notification } = require('../models');
+const { order, item, order_item, notification } = require('../db/models');
 const crudController = require('../controllers/crudController');
-const { checkAllElements, setOrderPrice, retrieveItemOnOrder } = require('../utils/orderService');
-const { orderConfirmEmail, orderArrivedEmail } = require('../utils/notificationService');
+const { checkAllElements, setOrderPrice, retrieveItemOnOrder } = require('../services/orderService');
+const { orderConfirmEmail, orderArrivedEmail } = require('../services/notificationService');
 
 exports.getAllOrders = async (req, res) => {
   await crudController.findAllModel(order, req, res);

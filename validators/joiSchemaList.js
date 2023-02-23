@@ -1,5 +1,5 @@
 const joi = require('joi');
-const { listOfCurrencies } = require('./supportedCurrencies');
+const { listOfCurrencies } = require('../utils/supportedCurrencies');
 
 // User Entity Schema
 //

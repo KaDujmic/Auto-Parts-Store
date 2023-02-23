@@ -1,8 +1,8 @@
 const app = require('./app');
 const cron = require('node-cron');
-const { setCurrency } = require('./utils/currencyService');
-const { setSettings } = require('./utils/settingsService');
-const { sendRecurringEmails, itemArrivedEmail } = require('./utils/notificationService');
+const { setCurrency } = require('./services/currencyService');
+const { setSettings } = require('./services/settingsService');
+const { sendRecurringEmails, itemArrivedEmail } = require('./services/notificationService');
 
 const port = process.env.PORT || 8080;
 

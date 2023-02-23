@@ -1,4 +1,4 @@
-const { category } = require('../models');
+const { category } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getCategory = async (req, res) => {

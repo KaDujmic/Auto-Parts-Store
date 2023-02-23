@@ -1,4 +1,4 @@
-const { manufacturer } = require('../models');
+const { manufacturer } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getManufacturer = async (req, res) => {

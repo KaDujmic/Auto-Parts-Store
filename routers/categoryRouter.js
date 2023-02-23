@@ -1,7 +1,7 @@
 const express = require('express');
 // eslint-disable-next-line max-len
 const { getAllCategory, getCategory, createCategory, updateCategory, deleteCategory } = require('../controllers/categoryController');
-const { callbackErrorHandler } = require('../utils/errorHandler');
+const { callbackErrorHandler } = require('../validators/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');

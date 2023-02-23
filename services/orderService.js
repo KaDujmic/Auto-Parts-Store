@@ -1,7 +1,7 @@
-const { Sequelize, user, item, order_item } = require('../models');
+const { Sequelize, user, item, order_item } = require('../db/models');
 const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
-const { NotFoundError, ValidationError } = require('./errors');
+const { NotFoundError, ValidationError } = require('../validators/errors');
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);
@@ -28,6 +28,7 @@ const priceCalculation = function (priceList, itemList) {
   return sum;
 };
 
+// Check for duplicate elements and verify all elements are present in database
 exports.checkAllElements = async (model, req, res) => {
   const idList = req.body.itemList.map(el => el.id);
   checkDuplicateElements(idList);
@@ -40,6 +41,7 @@ exports.checkAllElements = async (model, req, res) => {
   if (items.length !== idList.length) throw new NotFoundError();
 };
 
+// Create item order if requested quantity is less than what is in database or subtract quantity from item entity
 exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
   const idList = currentOrder.itemList.map(el => el.id);
   const items = await item.findAll({
@@ -68,6 +70,7 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
   });
 };
 
+// Calculate full price based on user currency
 exports.setOrderPrice = async (req, res) => {
   const customer = await user.findByPk(req.body.userId);
   const itemList = req.body.itemList.map(item => item.id);
