@@ -62,7 +62,7 @@ exports.completeOrder = async (req, res) => {
 };
 
 exports.getCustomerOrders = async (req, res) => {
-  const query = req.body.orderStatus === undefined ? ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'] : req.body.orderStatus;
+  const query = req.body.orderStatus === undefined ? orderStatuses : req.body.orderStatus;
   const customerOrders = await order.findAll({
     where: {
       userId: res.locals.user.id,
