@@ -1,10 +1,11 @@
-const { role } = require('../models');
+const { role } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getRole = async (req, res) => {
   const model = await role.findOne({
     where: { name: req.params.id },
-    hooks: true
+    attributes: { exclude: ['createdAt', 'updatedAt', 'deleted'] }
+
   });
   res.status(200).json(model);
 };

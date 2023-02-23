@@ -1,6 +1,6 @@
 const express = require('express');
 const { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder, getCustomerOrders, confirmOrder, completeOrder } = require('../controllers/orderController');
-const { callbackErrorHandler } = require('../utils/errorHandler');
+const { callbackErrorHandler } = require('../validators/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { bodyValidator } = require('../middleware/dataValidator');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');

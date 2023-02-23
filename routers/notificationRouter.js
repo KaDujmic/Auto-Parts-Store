@@ -1,6 +1,6 @@
 const express = require('express');
 const { getNotifications, deleteNotification } = require('../controllers/notificationController');
-const { callbackErrorHandler } = require('../utils/errorHandler');
+const { callbackErrorHandler } = require('../validators/errorHandler');
 const router = express.Router({ mergeParams: true });
 const { isLoggedIn, restrictTo } = require('../controllers/authController');
 

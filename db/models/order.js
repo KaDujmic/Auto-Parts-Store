@@ -51,10 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'order',
-    hooks: {}
+    modelName: 'order'
   });
   return order;
 };

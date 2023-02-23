@@ -24,8 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    freezeTableName: true,
-    underscored: true,
     modelName: 'order_item'
   });
   return order_item;

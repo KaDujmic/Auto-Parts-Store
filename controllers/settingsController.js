@@ -1,6 +1,6 @@
-const { settings } = require('../models');
+const { settings } = require('../db/models');
 const crudController = require('../controllers/crudController');
-const { verifySettings, setSettings } = require('../utils/settingsService');
+const { verifySettings, setSettings } = require('../services/settingsService');
 
 exports.getAllSettings = async (req, res) => {
   await crudController.findAllModel(settings, req, res);

@@ -1,4 +1,4 @@
-const { notification } = require('../models');
+const { notification } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getNotifications = async (req, res) => {

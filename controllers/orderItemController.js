@@ -1,4 +1,4 @@
-const { order_item, Sequelize } = require('../models');
+const { order_item, Sequelize } = require('../db/models');
 const { orderStatusCheck } = require('../controllers/orderController');
 const Op = Sequelize.Op;
 

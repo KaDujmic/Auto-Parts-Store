@@ -1,5 +1,5 @@
-const { ValidationError, AuthorizationError } = require('../utils/errors');
-const { user } = require('../models');
+const { ValidationError, AuthorizationError } = require('../validators/errors');
+const { user, order } = require('../db/models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
