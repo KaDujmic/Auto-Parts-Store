@@ -852,7 +852,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/settings/:key",
+							"raw": "http://localhost:4000/settings/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -860,13 +860,12 @@
 							"port": "4000",
 							"path": [
 								"settings",
-								":key"
+								":id"
 							],
 							"variable": [
 								{
-									"key": "key",
-									"value": "order_confirmation_template",
-									"description": "Unique setting key"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -1596,12 +1595,13 @@
 							"variable": [
 								{
 									"key": "firstId",
-									"value": "a1e679a5-f5a6-4070-8f3d-91ea156bcc2b",
+									"value": "a1e679a5-f5a6-4070-8f3d-91ea156bcc1b",
 									"description": "Order ID"
 								},
 								{
 									"key": "secondId",
-									"value": ""
+									"value": "a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58",
+									"description": "Item ID"
 								}
 							]
 						}
@@ -1656,43 +1656,6 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/notification/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"notification",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "805a10d7-1735-4a6c-a4cd-0be767aaeca1",
-									"description": "Order ID of the Notification"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Notification (Cancel) Copy",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:4000/notification/:id",
