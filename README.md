@@ -64,7 +64,7 @@ Notable features:
 
 1. Clone the repo
    ```
-   git clone https://github.com/agilathon/goran_stajduhar.git
+   git clone https://github.com/agilathon/auto_parts_store.git
    ```
 2. Install NPM packages
    ```
@@ -144,7 +144,7 @@ logging: false
     </li>
 </ul>
 
-Third Party API used for currency rates: <a href="https://exchangerate.host">Exchange Rate</a>
+Third Party API used for retrieving currency rates: <a href="https://exchangerate.host">Exchange Rate</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
