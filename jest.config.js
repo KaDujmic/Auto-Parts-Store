@@ -3,10 +3,10 @@ require('dotenv').config({
 });
 
 const config = {
-  // reporters: [
-  //   'default',
-  //   ['./node_modules/jest-html-reporter', { pageTitle: 'Test Report' }]
-  // ],
+  reporters: [
+    'default',
+    ['./node_modules/jest-html-reporter', { pageTitle: 'Test Report' }]
+  ],
   collectCoverage: true
 };
 
