@@ -1,13 +1,19 @@
 const { settings } = require('../models');
-const crudController = require('../controllers/crudController');
 const { verifySettings, setSettings } = require('../utils/settingsService');
 
 exports.getAllSettings = async (req, res) => {
-  await crudController.findAllModel(settings, req, res);
+  const foundSettings = await settings.findAll({ where: { deleted: false } });
+  res.status(200).json(foundSettings);
 };
+
 exports.getSettings = async (req, res) => {
-  await crudController.findOne(settings, req, res);
+  const foundSetting = await settings.findOne({
+    where: { key: req.params.id, deleted: false },
+    hooks: true
+  });
+  res.status(200).json(foundSetting);
 };
+
 exports.createSettings = async (req, res) => {
   await verifySettings(req);
 

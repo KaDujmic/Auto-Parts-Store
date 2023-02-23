@@ -20,7 +20,7 @@ exports.updateItem = async (req, res) => {
 };
 
 exports.deleteItem = async (req, res) => {
-  await crudController.deleteModel(item, res, req);
+  await crudController.deleteModel(item, req, res);
 };
 
 exports.createItem = async (req, res) => {
