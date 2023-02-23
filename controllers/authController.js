@@ -23,9 +23,6 @@ const createPassword = async function (
   candidate_password,
   user_password
 ) {
-  if (process.env.NODE_ENV === 'development') {
-    return await candidate_password === user_password;
-  }
   return await bcrypt.compare(candidate_password, user_password);
 };
 
@@ -37,7 +34,7 @@ exports.login = async (req, res) => {
   }
   // 2) Find the current user that wants to log in
   const current_user = await user.findOne({ where: { email } });
-  if (!current_user || (await createPassword(current_user.password, password) === false)) {
+  if (!current_user || (await createPassword(password, current_user.password) === false)) {
     throw new ValidationError('Incorrect email or password!');
   }
   // 3) Create jwt and send the response
