@@ -6,7 +6,7 @@ exports.findAllModel = async (Model, req, res) => {
     where: { deleted: false },
     offset,
     limit,
-    hooks: true
+    attributes: { exclude: ['createdAt', 'updatedAt', 'password', 'deleted'] }
   });
   res.status(200).json({ models });
 };
@@ -14,7 +14,7 @@ exports.findAllModel = async (Model, req, res) => {
 exports.findModel = async (Model, req, res) => {
   const model = await Model.findOne({
     where: { id: req.params.id, deleted: false },
-    hooks: true
+    attributes: { exclude: ['createdAt', 'updatedAt', 'password', 'deleted'] }
   });
   res.status(200).json(model);
 };

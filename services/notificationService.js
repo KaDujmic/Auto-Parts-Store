@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-const { getCache } = require('./cache.js');
-const { user, order, notification, settings, Sequelize, sequelize, order_item } = require('../models');
+const { getCache } = require('../utils/cache.js');
+const { user, order, notification, settings, Sequelize, sequelize, order_item } = require('../db/models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerId) {

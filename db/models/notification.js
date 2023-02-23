@@ -33,10 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'notification',
-    hooks: {}
+    modelName: 'notification'
   });
   return notification;
 };

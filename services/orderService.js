@@ -1,7 +1,7 @@
-const { Sequelize, user, item, order_item } = require('../models');
+const { Sequelize, user, item, order_item } = require('../db/models');
 const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
-const { NotFoundError, ValidationError } = require('./errors');
+const { NotFoundError, ValidationError } = require('../validators/errors');
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);

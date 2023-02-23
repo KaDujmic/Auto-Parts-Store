@@ -1,6 +1,6 @@
-const { ValidationError } = require('./errors.js');
-const cache = require('./cache');
-const { settings } = require('../models');
+const { ValidationError } = require('../validators/errors.js');
+const cache = require('../utils/cache');
+const { settings } = require('../db/models');
 
 exports.verifySettings = async (req) => {
   const { key, value } = req.body;

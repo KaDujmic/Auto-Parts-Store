@@ -1,5 +1,5 @@
-const { currency } = require('../models');
-const cache = require('./cache');
+const { currency } = require('../db/models');
+const cache = require('../utils/cache');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 exports.setCurrency = async () => {
