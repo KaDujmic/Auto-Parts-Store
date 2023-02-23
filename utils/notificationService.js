@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('./cache.js');
-const { user, order, notification, settings, Sequelize, sequelize } = require('../models');
+const { user, order, notification, settings, Sequelize, sequelize, order_item } = require('../models');
 
 // Email created on order confirmation
 exports.orderConfirmEmail = async function (customerId) {
@@ -41,6 +41,31 @@ async function setUpRecurrenceEmail (userId, orderId) {
       lastSent: new Date().toISOString().split('T')[0]
     });
 }
+// Send notification for all items that should arrive
+exports.itemArrivedEmail = async function () {
+  const salesperson = await user.findOne({
+    where: {
+      id: 'ac5554bb-d628-441a-ac1a-29cf60deab9c'
+    },
+    attributes: ['email']
+  });
+  const items = await order_item.findAll({
+    where: {
+      deliveryDate: new Date().toISOString().split('T')[0],
+      deleted: false
+    },
+    attributes: ['itemId']
+  });
+  const allItems = items.map(item => {
+    return `${item.itemId}`;
+  }).join(', ');
+
+  let emailTemplate = await getSetting('item_arrival_template');
+  emailTemplate = createItemBody(allItems, emailTemplate);
+
+  const mailOptions = createMailOptions(salesperson.email, emailTemplate);
+  if (items.length !== 0) { sendEmail(mailOptions); }
+};
 
 // Send all recurring emails for the day
 exports.sendRecurringEmails = async function () {
@@ -122,6 +147,14 @@ function personalizeEmail (customerName, emailTemplate) {
   const personalEmailTemplate = emailTemplate;
 
   personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
+
+  return personalEmailTemplate;
+}
+
+function createItemBody (items, emailTemplate) {
+  const personalEmailTemplate = emailTemplate;
+
+  personalEmailTemplate.value.body = personalEmailTemplate.value.body.replace('itemList', items);
 
   return personalEmailTemplate;
 }
