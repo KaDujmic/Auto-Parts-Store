@@ -3,15 +3,15 @@ const { user, order } = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const sign_token = (id) => {
+const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 };
 
-const create_send_token = (user, status_code, res, req) => {
+const createSendToken = (user, status_code, res, req) => {
   // Sign the token with user ID
-  const token = sign_token(user.id);
+  const token = signToken(user.id);
   res.status(status_code).json({
     status: 'success',
     token,
@@ -19,7 +19,7 @@ const create_send_token = (user, status_code, res, req) => {
   });
 };
 
-const correct_password = async function (
+const createPassword = async function (
   candidate_password,
   user_password
 ) {
@@ -37,11 +37,11 @@ exports.login = async (req, res) => {
   }
   // 2) Find the current user that wants to log in
   const current_user = await user.findOne({ where: { email } });
-  if (!current_user || (await correct_password(current_user.password, password) === false)) {
+  if (!current_user || (await createPassword(current_user.password, password) === false)) {
     throw new ValidationError('Incorrect email or password!');
   }
   // 3) Create jwt and send the response
-  create_send_token(current_user, 200, res, req);
+  createSendToken(current_user, 200, res, req);
 };
 
 exports.isLoggedIn = async (req, res, next) => {
