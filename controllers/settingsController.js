@@ -1,5 +1,5 @@
-const { settings } = require('../models');
-const { verifySettings, setSettings } = require('../utils/settingsService');
+const { settings } = require('../db/models');
+const { verifySettings, setSettings } = require('../services/settingsService');
 
 exports.getAllSettings = async (req, res) => {
   const foundSettings = await settings.findAll({ where: { deleted: false } });

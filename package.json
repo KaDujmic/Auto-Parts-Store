@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon -r dotenv/config server dotenv_config_path=.env.development",
-    "migrate:dev": "npx sequelize-cli db:migrate --env=development",
-    "seed:dev": "npx sequelize-cli db:seed:all --env=development",
-    "undo:migrate:dev": "npx sequelize-cli db:migrate:undo:all --env=development"
+    "migrate:dev": "cd db && npx sequelize-cli db:migrate --env=development",
+    "seed:dev": " cd db && npx sequelize-cli db:seed:all --env=development",
+    "undo:migrate:dev": "cd db && npx sequelize-cli db:migrate:undo:all --env=development"
   },
   "repository": {
     "type": "git",
@@ -42,7 +42,9 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.4.3",
     "nodemon": "^2.0.20",
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.6.0",
+    "supertest": "^6.3.3"
   }
 }

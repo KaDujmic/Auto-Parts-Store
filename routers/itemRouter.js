@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { callbackErrorHandler } = require('../utils/errorHandler');
+const { callbackErrorHandler } = require('../validators/errorHandler');
 const { getItem, getAllItem, updateItem, createItem, deleteItem } = require('../controllers/itemController');
 const { bodyValidator } = require('../middleware/dataValidator');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');

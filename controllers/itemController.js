@@ -1,4 +1,4 @@
-const { item } = require('../models');
+const { item } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getItem = async (req, res) => {
@@ -7,7 +7,7 @@ exports.getItem = async (req, res) => {
 
 exports.getAllItem = async (req, res) => {
   if (typeof req.query !== 'undefined') {
-    const query = { where: [] };
+    const query = { where: [], attributes: { exclude: ['createdAt', 'updatedAt', 'deleted'] } };
     query.where = getWhereOption(req.query);
 
     const foundItems = await item.findAll(query);

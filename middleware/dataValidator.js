@@ -1,5 +1,5 @@
-const joiSchemaList = require('../utils/joiSchemaList');
-const { ValidationError } = require('../utils/errors');
+const joiSchemaList = require('../validators/joiSchemaList');
+const { ValidationError } = require('../validators/errors');
 
 exports.bodyValidator = async (req, res, next) => {
   let schema = null;

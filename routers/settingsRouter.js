@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { callbackErrorHandler } = require('../utils/errorHandler');
+const { callbackErrorHandler } = require('../validators/errorHandler');
 const { getAllSettings, getSettings, createSettings } = require('../controllers/settingsController');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');
 

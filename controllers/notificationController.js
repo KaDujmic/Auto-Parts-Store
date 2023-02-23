@@ -1,4 +1,5 @@
-const { notification } = require('../models');
+const { notification } = require('../db/models');
+const crudController = require('./crudController');
 
 exports.getAllNotifications = async (req, res) => {
   const foundNotifications = await notification.findAll({
