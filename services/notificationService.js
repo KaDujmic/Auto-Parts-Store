@@ -33,15 +33,16 @@ exports.orderArrivedEmail = async function (orderId) {
 };
 
 // Creates a notification table entry for the recurrence email
-async function setUpRecurrenceEmail (userId, orderId) {
+const setUpRecurrenceEmail = async function (userId, orderId) {
   await notification.create(
     {
       userId,
       orderId,
       lastSent: new Date().toISOString().split('T')[0]
     });
-}
-// Send notification for all items that should arrive
+};
+
+// Send notification for all items that should arrive on this date
 exports.itemArrivedEmail = async function () {
   const salesperson = await user.findOne({
     where: {
@@ -104,7 +105,7 @@ exports.sendRecurringEmails = async function () {
 };
 
 // Email sender
-function sendEmail (mailOptions) {
+const sendEmail = function (mailOptions) {
   const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
     auth: {
@@ -119,16 +120,17 @@ function sendEmail (mailOptions) {
 };
 
 // Helper functions for this file
-function createMailOptions (customerEmail, template) {
+const createMailOptions = function (customerEmail, template) {
   return {
     from: process.env.EMAIL,
     to: customerEmail,
     subject: template.value.title,
     text: template.value.body
   };
-}
+};
 
-async function getSetting (keyToGet) {
+// Get settings from cache
+const getSetting = async function (keyToGet) {
   const cacheSettings = getCache('settings');
   let setting = null;
 
@@ -141,20 +143,22 @@ async function getSetting (keyToGet) {
   }
 
   return setting;
-}
+};
 
-function personalizeEmail (customerName, emailTemplate) {
+// Create personalized email template for customer
+const personalizeEmail = function (customerName, emailTemplate) {
   const personalEmailTemplate = emailTemplate;
 
   personalEmailTemplate.value.body = emailTemplate.value.body.replace('customerName', customerName);
 
   return personalEmailTemplate;
-}
+};
 
-function createItemBody (items, emailTemplate) {
+// Create personalized email template for items arrival
+const createItemBody = function (items, emailTemplate) {
   const personalEmailTemplate = emailTemplate;
 
   personalEmailTemplate.value.body = personalEmailTemplate.value.body.replace('itemList', items);
 
   return personalEmailTemplate;
-}
+};
