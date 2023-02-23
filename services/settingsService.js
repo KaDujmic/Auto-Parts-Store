@@ -2,6 +2,7 @@ const { ValidationError } = require('../validators/errors.js');
 const cache = require('../utils/cache');
 const { settings } = require('../db/models');
 
+// Create restraint for recurrence
 exports.verifySettings = async (req) => {
   const { key, value } = req.body;
 
@@ -10,6 +11,7 @@ exports.verifySettings = async (req) => {
   }
 };
 
+// Create cache for settings
 exports.setSettings = async () => {
   const key = 'settings';
   const retrievedCache = cache.getCache(key);
