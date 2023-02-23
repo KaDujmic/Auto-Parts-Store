@@ -2837,7 +2837,7 @@
       }
     },
     "/notification/{id}": {
-      "get": {
+      "delete": {
         "tags": [
           "Notification"
         ],
@@ -2860,7 +2860,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Successful response",
             "content": {
               "application/json": {}
@@ -2889,73 +2889,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/permissionError"
-                }
-              }
-            }
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/serverError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Notification"
-        ],
-        "summary": "Delete Notification (Cancel) Copy",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "description": "Order ID of the Notification",
-            "example": "805a10d7-1735-4a6c-a4cd-0be767aaeca1"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/notLoggedInError"
-                }
-              }
-            }
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/permissionError"
-                }
-              }
-            }
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/resourceNotFound"
                 }
               }
             }
