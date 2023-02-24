@@ -1,3 +1,4 @@
+// List of currencies supported by our app, and particularly what we receive from the third party API with its rates
 exports.listOfCurrencies = [
   'AED',
   'AFN',

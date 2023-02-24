@@ -14,9 +14,3 @@ exports.getCache = (key) => {
   const cachedData = cache.get(key);
   return cachedData;
 };
-
-// FUnction that deletes the cached data for the given key
-exports.deleteCache = (key) => {
-  const cachedData = cache.del(key);
-  return cachedData;
-};

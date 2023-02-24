@@ -114,7 +114,7 @@ A postman collection is included in the working directory. It contains a list of
 Jest is used for testing.<br>
 Use the following command to do a test run:
    ```
-    npm run test:all
+    npm run test
    ```
 After tests are ran, the CLI report can be used to review test coverage. <br>
 HTML generated reports can be found for test results/coverage as well. Test report in the main directory, and the coverage under coverage/lcov-report.

@@ -237,6 +237,26 @@
 					"response": []
 				},
 				{
+					"name": "Get Customer's Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/order/userOrders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order",
+								"userOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get One Order",
 					"request": {
 						"auth": {
@@ -873,7 +893,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Settings",
+					"name": "Update Setting",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -885,11 +905,11 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"key\": \"new_notification_recurrence\",\n    \"value\": { \"recurrence\": 3 }\n}",
+							"raw": "{\n    \"key\": \"order_pickup_template\",\n    \"value\": {\n        \"title\": \"Auto Parts Store: Order Reminder!\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1655,7 +1675,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:4000/notification/:id",
