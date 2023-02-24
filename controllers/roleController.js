@@ -1,4 +1,5 @@
 const { role } = require('../db/models');
+const { NotFoundError } = require('../validators/errors');
 const crudController = require('./crudController');
 
 exports.getRole = async (req, res) => {
@@ -24,9 +25,10 @@ exports.updateRole = async (req, res) => {
 };
 
 exports.deleteRole = async (req, res) => {
-  await role.update({ deleted: true }, {
+  const model = await role.update({ deleted: true }, {
     where: { name: req.params.id }
   });
+  if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
   res.status(204).json();
 };
 

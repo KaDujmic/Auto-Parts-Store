@@ -1,6 +1,7 @@
 const { order_item, Sequelize } = require('../db/models');
 const { orderStatusCheck } = require('../controllers/orderController');
 const Op = Sequelize.Op;
+const { NotFoundError } = require('../validators/errors');
 
 exports.getOrderedItems = async (req, res) => {
   const items = await order_item.findAll({
@@ -17,10 +18,12 @@ exports.getOrderedItems = async (req, res) => {
 
 exports.updateOrderedItem = async (req, res) => {
   const { firstId, secondId } = req.params;
-  const items = await order_item.update({ status: 'delivered' }, {
+  const model = await order_item.update({ status: 'delivered' }, {
     where: { orderId: firstId, itemId: secondId, deleted: false },
-    returning: true
+    returning: true,
+    hooks: true
   });
+  if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
   orderStatusCheck(req, res);
-  res.status(200).json(items);
+  res.status(200).json(model);
 };

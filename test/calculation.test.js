@@ -187,7 +187,6 @@ describe('Testing price calculation', () => {
       }
     ];
     const result = priceCalculation(priceList, itemList);
-    console.log(result);
     expect(result).toEqual(10.00);
   });
 
@@ -205,7 +204,6 @@ describe('Testing price calculation', () => {
       }
     ];
     const result = priceCalculation(priceList, itemList);
-    console.log(result);
     expect(result).toEqual(10.00);
   });
 
@@ -223,7 +221,6 @@ describe('Testing price calculation', () => {
       }
     ];
     const result = priceCalculation(priceList, itemList);
-    console.log(result);
     expect(result).toEqual(10.00);
   });
 });

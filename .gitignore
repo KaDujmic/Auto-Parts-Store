@@ -105,3 +105,4 @@ dist
 
 .env*
 .vscode/settings.json
+test-report.html
