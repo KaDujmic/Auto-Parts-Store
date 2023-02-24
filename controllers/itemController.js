@@ -6,6 +6,7 @@ exports.getItem = async (req, res) => {
 };
 
 exports.getAllItem = async (req, res) => {
+  // If request has query params add them to the db query for filtering purposes
   if (typeof req.query !== 'undefined') {
     const query = { where: [], attributes: { exclude: ['createdAt', 'updatedAt', 'deleted'] } };
     query.where = getWhereOption(req.query);
