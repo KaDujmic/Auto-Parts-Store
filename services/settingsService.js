@@ -11,14 +11,9 @@ exports.verifySettings = async (req) => {
   }
 };
 
-// Create cache for settings
+// Create cache for settings, or overwrite with new data if key exists
 exports.setSettings = async () => {
   const key = 'settings';
-  const retrievedCache = cache.getCache(key);
   const settingsEntity = await settings.findAll();
-
-  if (retrievedCache) {
-    cache.deleteCache(key);
-  }
   cache.setCache(settingsEntity, key);
 };
