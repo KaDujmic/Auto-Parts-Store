@@ -13,7 +13,9 @@ exports.getOrder = async (req, res) => {
 };
 
 exports.createOrder = async (req, res) => {
+  // Check all elements and remove duplicates
   await checkAllElements(item, req, res);
+  // Set the full price and final price in order
   await setOrderPrice(req, res);
 
   const { id, userId, deliveryAddress, deliveryDate, orderStatus, itemList, finalPrice, fullPrice, currency } = req.body;
@@ -41,6 +43,7 @@ exports.deleteOrder = async (req, res) => {
   await crudController.deleteModel(order, req, res);
 };
 
+// Once the order is created, this function will confirm it and remove from storage or order items
 exports.confirmOrder = async (req, res) => {
   const pendingOrder = await order.findByPk(req.params.id);
   await retrieveItemOnOrder(pendingOrder.dataValues, req, res);
@@ -50,6 +53,7 @@ exports.confirmOrder = async (req, res) => {
   res.status(200).json(pendingOrder);
 };
 
+// Function to set order status to completed and cancel notifications for that order
 exports.completeOrder = async (req, res) => {
   const orderStatus = { orderStatus: 'completed' };
   await order.update(orderStatus, {
@@ -62,6 +66,7 @@ exports.completeOrder = async (req, res) => {
   res.status(204).json();
 };
 
+// Function that returns orders for the logged in user
 exports.getCustomerOrders = async (req, res) => {
   const query = req.body.orderStatus === undefined ? orderStatuses : req.body.orderStatus;
   const customerOrders = await order.findAll({
@@ -74,6 +79,7 @@ exports.getCustomerOrders = async (req, res) => {
   res.status(200).json(customerOrders);
 };
 
+// Function that checks if all items for that order arrived
 exports.orderStatusCheck = async (req, res) => {
   const orderItems = await order_item.findAll({
     where: {
