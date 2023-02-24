@@ -14,13 +14,10 @@ exports.getSettings = async (req, res) => {
   res.status(200).json(foundSetting);
 };
 
-exports.createSettings = async (req, res) => {
+exports.updateSettings = async (req, res) => {
   await verifySettings(req);
-
-  const [model] = await settings.upsert({
-    key: req.body.key,
-    value: req.body.value
-  }, {
+  const [model] = await settings.update(req.body, {
+    where: { key: req.params.id },
     returning: true
   });
 

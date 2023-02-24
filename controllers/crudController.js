@@ -29,8 +29,7 @@ exports.createModel = async (Model, req, res) => {
 exports.updateModel = async (Model, req, res) => {
   const model = await Model.update(req.body, {
     where: { id: req.params.id, deleted: false },
-    returning: true,
-    hooks: true
+    returning: true
   });
   if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
   res.status(200).json(model);
@@ -39,8 +38,7 @@ exports.updateModel = async (Model, req, res) => {
 exports.deleteModel = async (Model, req, res) => {
   const model = await Model.update({ deleted: true }, {
     where: { id: req.params.id },
-    returning: true,
-    hooks: true
+    returning: true
   });
   if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
   res.status(204).json(model);
