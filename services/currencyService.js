@@ -4,16 +4,17 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 exports.setCurrency = async () => {
   try {
-    // Get the cached currency and if exists for todays date, set ttl to 1h exit the function
+    // Get the cached currency and if exists for todays date, set it again and exit the function
     const currencyCached = cache.getCache('currency');
     if (currencyCached !== undefined && currencyCached.date === new Date().toISOString().split('T')[0]) return;
-    // cached currency is outdated, check the database if there is todays date currency, if there is set it, if not get it from the api
+    // If cached data is wrong, find it in the database
     const latestCurrency = await currency.findOne({
       order: [
         ['date', 'desc']
       ],
       limit: 1
     });
+    // If there is no data in the database for todays date, fetch it from the third party api
     if (!latestCurrency || latestCurrency.date !== new Date().toISOString().split('T')[0]) {
       const response = await fetch('https://api.exchangerate.host/latest');
       const currencies = await response.json();
@@ -33,6 +34,7 @@ exports.setCurrency = async () => {
   }
 };
 
+// Function that will fetch the rate for a specific currency
 exports.getCurrency = async (curr) => {
   const cachedCurrency = cache.getCache('currency');
   if (!cachedCurrency) {

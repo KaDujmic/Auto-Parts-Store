@@ -3,6 +3,7 @@ const { orderStatusCheck } = require('../controllers/orderController');
 const Op = Sequelize.Op;
 const { NotFoundError } = require('../validators/errors');
 
+// Function to fetch all items that need to arrive today or before
 exports.getOrderedItems = async (req, res) => {
   const items = await order_item.findAll({
     where: {
@@ -16,6 +17,7 @@ exports.getOrderedItems = async (req, res) => {
   res.status(200).json(items);
 };
 
+// Function to change ordered item status to delivered
 exports.updateOrderedItem = async (req, res) => {
   const { firstId, secondId } = req.params;
   const model = await order_item.update({ status: 'delivered' }, {
