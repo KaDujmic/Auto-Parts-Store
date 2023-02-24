@@ -8,6 +8,10 @@
     "migrate:dev": "cd db && npx sequelize-cli db:migrate --env=development",
     "seed:dev": " cd db && npx sequelize-cli db:seed:all --env=development",
     "undo:migrate:dev": "cd db && npx sequelize-cli db:migrate:undo:all --env=development",
+    "start:test": "nodemon -r dotenv/config server dotenv_config_path=.env.development",
+    "migrate:test": "cd db && npx sequelize-cli db:migrate --env=development",
+    "seed:test": " cd db && npx sequelize-cli db:seed:all --env=development",
+    "undo:migrate:test": "cd db && npx sequelize-cli db:migrate:undo:all --env=development",
     "test": "npx jest --runInBand --verbose --collectCoverage"
   },
   "repository": {
