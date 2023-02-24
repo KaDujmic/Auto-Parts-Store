@@ -73,7 +73,7 @@ exports.sendRecurringEmails = async function () {
   const emailTemplate = await getSetting('order_pickup_template');
   const recurrenceSetting = await getSetting('order_pickup_recurrence');
 
-  let date = new Date();
+  let date = new Date(); // rename to make more sense
   date.setDate(date.getDate() - recurrenceSetting.value.recurrence);
   date = date.toISOString().split('T')[0];
 
@@ -97,7 +97,7 @@ exports.sendRecurringEmails = async function () {
 
     const todaysDate = new Date().toISOString().split('T')[0];
     notif.set({
-      lastSent: new Date().toISOString().split('T')[0],
+      lastSent: todaysDate,
       sentHistory: sequelize.fn('array_append', sequelize.col('sent_history'), todaysDate)
     });
     notif.save();

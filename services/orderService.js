@@ -25,7 +25,7 @@ const priceCalculation = function (priceList, itemList) {
       }
     });
   });
-  return sum;
+  return Number(sum.toFixed(2));
 };
 
 // Check for duplicate elements and verify all elements are present in database
