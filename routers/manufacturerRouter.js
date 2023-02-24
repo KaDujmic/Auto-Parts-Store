@@ -1,5 +1,4 @@
 const express = require('express');
-// eslint-disable-next-line max-len
 const { getAllManufacturer, getManufacturer, createManufacturer, updateManufacturer, deleteManufacturer } = require('../controllers/manufacturerController');
 const { callbackErrorHandler } = require('../validators/errorHandler');
 const router = express.Router({ mergeParams: true });

@@ -1,5 +1,4 @@
 const express = require('express');
-// eslint-disable-next-line max-len
 const { getAllCategory, getCategory, createCategory, updateCategory, deleteCategory } = require('../controllers/categoryController');
 const { callbackErrorHandler } = require('../validators/errorHandler');
 const router = express.Router({ mergeParams: true });
