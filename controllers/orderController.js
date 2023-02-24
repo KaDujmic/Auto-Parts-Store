@@ -56,14 +56,14 @@ exports.confirmOrder = async (req, res) => {
 // Function to set order status to completed and cancel notifications for that order
 exports.completeOrder = async (req, res) => {
   const orderStatus = { orderStatus: 'completed' };
-  await order.update(orderStatus, {
+  const completedOrder = await order.update(orderStatus, {
     where: { id: req.params.id, deleted: false },
     returning: true
   });
   await notification.update({ deleted: true }, {
     where: { orderId: req.params.id }
   });
-  res.status(204).json();
+  res.status(200).json(completedOrder);
 };
 
 // Function that returns orders for the logged in user
