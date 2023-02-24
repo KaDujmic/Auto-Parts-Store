@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
 };
 
 exports.isLoggedIn = async (req, res, next) => {
-  // 1) Getting the token and check if there is a Bearer or Cookie
+  // 1) Getting the token and check if there is a Bearer
   let token;
   if (
     req.headers.authorization &&
@@ -67,7 +67,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.roleName)) {
+    if (!roles.includes(res.locals.user.roleName)) {
       return res
         .status(403)
         .json('You do not have permission to access this route!');
