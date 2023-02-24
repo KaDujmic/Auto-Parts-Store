@@ -13,7 +13,7 @@ exports.orderConfirmEmail = async function (customerId) {
   sendEmail(email);
 };
 
-// Email created whem all items are ready for pickup by the customer
+// Email created when all items are ready for pickup by the customer
 exports.orderArrivedEmail = async function (orderId) {
   const customer = await order.findOne({
     where: {
@@ -43,7 +43,7 @@ const setUpRecurrenceEmail = async function (userId, orderId) {
 };
 
 // Send notifications for all items that should arrive on this date
-exports.itemArrivedEmail = async function () {
+exports.verifyItemArrivedEmail = async function () {
   const salesperson = await user.findOne({
     where: {
       id: 'ac5554bb-d628-441a-ac1a-29cf60deab9c'
