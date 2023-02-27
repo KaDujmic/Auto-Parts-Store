@@ -1,5 +1,5 @@
 const { order_item, Sequelize } = require('../db/models');
-const { orderStatusCheck } = require('../controllers/orderController');
+const { orderStatusCheck } = require('./orderController');
 const Op = Sequelize.Op;
 const { NotFoundError } = require('../validators/errors');
 
