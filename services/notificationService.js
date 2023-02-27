@@ -73,7 +73,8 @@ exports.sendRecurringEmails = async function () {
   const emailTemplate = await getSetting('order_pickup_template');
   const recurrenceSetting = await getSetting('order_pickup_recurrence');
 
-  let date = new Date(); // rename to make more sense
+  // Date is adjusted based on recurrence value, to check which notifications must be sent again
+  let date = new Date();
   date.setDate(date.getDate() - recurrenceSetting.value.recurrence);
   date = date.toISOString().split('T')[0];
 
