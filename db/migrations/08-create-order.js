@@ -15,9 +15,6 @@ module.exports = {
       delivery_address: {
         type: Sequelize.STRING
       },
-      delivery_date: {
-        type: Sequelize.DATEONLY
-      },
       order_date: {
         type: Sequelize.DATEONLY
       },
