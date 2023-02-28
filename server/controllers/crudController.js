@@ -1,12 +1,10 @@
 const { NotFoundError } = require('../validators/errors');
-const { user } = require('../db/models');
 
 exports.findAllModel = async (Model, req, res) => {
   const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
   const limit = Number(process.env.DEFAULT_LIMIT);
   const models = await Model.findAll({
     order: [['id', 'ASC']],
-    include: user,
     where: { deleted: false },
     offset,
     limit,
@@ -18,7 +16,6 @@ exports.findAllModel = async (Model, req, res) => {
 exports.findModel = async (Model, req, res) => {
   const model = await Model.findOne({
     where: { id: req.params.id, deleted: false },
-    include: user,
     attributes: { exclude: ['createdAt', 'updatedAt', 'password', 'deleted'] }
   });
   res.status(200).json(model);
