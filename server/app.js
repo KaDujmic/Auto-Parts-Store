@@ -4,8 +4,10 @@ const router = require('./routers');
 const { errorMiddleware } = require('./validators/errorHandler');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(morgan('dev'));
