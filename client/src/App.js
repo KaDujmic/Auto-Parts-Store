@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import Order from './components/Order';
+import ItemList from './components/ItemList'
 import Container from '@mui/material/Container';
 
 function App() {
@@ -17,13 +18,20 @@ function App() {
 								</>
 							}
 						></Route>
-            <Route
+            			<Route
 							exact
 							path="/order"
 							element={
 								<>
 									<Order />
 								</>
+							}
+						></Route>
+						<Route
+							exact
+							path="/"
+							element={
+									<ItemList/>
 							}
 						></Route>
 					</Routes>
