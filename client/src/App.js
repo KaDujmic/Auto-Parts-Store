@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import Order from './components/Order';
-import ItemList from './components/ItemList'
+import ItemList from './components/ItemList';
+import CreateUser from './components/CreateUser';
 import Container from '@mui/material/Container';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 								</>
 							}
 						></Route>
-            			<Route
+            <Route
 							exact
 							path="/order"
 							element={
@@ -27,6 +28,15 @@ function App() {
 								</>
 							}
 						></Route>
+            <Route
+							exact
+							path="/user"
+							element={
+								<>
+									<CreateUser />
+								</>
+							}
+						></Route>						
 						<Route
 							exact
 							path="/"
