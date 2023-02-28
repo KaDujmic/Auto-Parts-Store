@@ -6,12 +6,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import OrderCard from './OrderCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom"
 
 // Fetch all items from backend
 const theme = createTheme();
 const OrderList = () => {
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
  
   useEffect(() => {
     async function fetchData() {
@@ -26,7 +28,7 @@ const OrderList = () => {
       }
       catch(err)
       {
-        setIsLoading(false)
+        navigate("/login")
         console.log(err.response.data)
       }
     }

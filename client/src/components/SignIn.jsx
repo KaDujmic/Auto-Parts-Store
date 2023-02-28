@@ -54,7 +54,6 @@ export default function SignIn() {
       if(err.response && err.response.status === 400)
       {
         alert(err.response.data.message)
-        //alert(err.response.data.message);
       }
       else{
         console.log(err)
