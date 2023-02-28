@@ -1,15 +1,30 @@
-const { order, item, order_item, notification } = require('../db/models');
+const { order, item, order_item, notification, user } = require('../db/models');
 const crudController = require('./crudController');
 const { checkAllElements, setOrderPrice, retrieveItemOnOrder } = require('../services/orderService');
 const { orderConfirmEmail, orderArrivedEmail } = require('../services/notificationService');
 const orderStatuses = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
 exports.getAllOrders = async (req, res) => {
-  await crudController.findAllModel(order, req, res);
+  const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
+  const limit = Number(process.env.DEFAULT_LIMIT);
+  const models = await order.findAll({
+    order: [['id', 'ASC']],
+    where: { deleted: false },
+    include: user,
+    offset,
+    limit,
+    attributes: { exclude: ['createdAt', 'updatedAt', 'password', 'deleted'] }
+  });
+  res.status(200).json({ models });
 };
 
 exports.getOrder = async (req, res) => {
-  await crudController.findModel(order, req, res);
+  const model = await order.findOne({
+    where: { id: req.params.id, deleted: false },
+    include: user,
+    attributes: { exclude: ['createdAt', 'updatedAt', 'password', 'deleted'] }
+  });
+  res.status(200).json(model);
 };
 
 exports.createOrder = async (req, res) => {
