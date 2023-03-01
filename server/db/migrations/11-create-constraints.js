@@ -68,6 +68,27 @@ module.exports = {
         field: 'id'
       }
     });
+    await queryInterface.addConstraint('order_item', {
+      fields: ['order_id'],
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+      type: 'foreign key',
+      references: {
+        table: 'order',
+        field: 'id'
+      }
+    });
+
+    await queryInterface.addConstraint('order_item', {
+      fields: ['item_id'],
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+      type: 'foreign key',
+      references: {
+        table: 'item',
+        field: 'id'
+      }
+    });
   },
 
   async down (queryInterface, Sequelize) {}

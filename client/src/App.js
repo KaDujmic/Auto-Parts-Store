@@ -2,8 +2,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import OrderList from './components/OrderList';
 import CreateUser from './components/CreateUser';
-import ItemList from './components/itemList'
+import ItemList from './components/ItemList'
 import Container from '@mui/material/Container';
+import PendingItems from './components/PendingItems'
 
 function App() {
 	return (
@@ -42,6 +43,13 @@ function App() {
 							path="/"
 							element={
 									<ItemList/>
+							}
+						></Route>
+						<Route
+							exact
+							path="/pendingitems"
+							element={
+									<PendingItems/>
 							}
 						></Route>
 					</Routes>
