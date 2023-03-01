@@ -14,7 +14,7 @@ import ListItem from '@mui/material/ListItem';
 import Input from '@mui/material/Input';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -34,20 +34,31 @@ const MenuProps = {
 };
 
 const CreateOrder = () => {
+  /*
+    itemList = List of all items available, retrieved from backend
+    selectedItemList = List of items selected during order creation
+
+    customerList = List of all customers (id and email), retrieved from backend
+    selectedCustomer = Specific customer the order is meant for, selected during order creation
+  */
   const [itemList, setItemList] = useState([])
   const [selectedItemList, setSelectedItemList] = useState([]);
   const [customerList, setCustomerList] = useState([]);
-  const [selectedCustomerEmail, setInputEmail] = useState('')
+  const [selectedCustomer, setSelectedCustomer] = useState({})
 
+  const jwt = localStorage.getItem("token");
+  const config = { headers: { Authorization: `Bearer ${jwt}` }};
+        
+  //Get Item and User list from Backend, and update their respective states
   useEffect(() => {
     async function fetchData() {
       try {
         const itemListGetResponse = await axios.get(`http://localhost:4000/item`)
         const fullItemList = itemListGetResponse.data
 
-        const userListGetResponse = await axios.get(`http://localhost:4000/user`)
-        const fullUserList = userListGetResponse.data
-
+        const userListGetResponse = await axios.get(`http://localhost:4000/user`, config)
+        const fullUserList = userListGetResponse.data.models
+        
         //Remove properties sent from Backend that aren't required for this component
         const filteredItemList = fullItemList.map(({ serialNumber, price, categoryId, manufacturerId, quantity, ...keepAttributes }) => keepAttributes)
         const filteredUserList = fullUserList.map(({ fullName, address, phoneNumber, roleName, discount, currency, ...keepAttributes }) => keepAttributes)
@@ -62,6 +73,7 @@ const CreateOrder = () => {
     fetchData()
   }, [])
 
+  //Changes Selected Item List state when user selects items from the Select Element
   const handleSelectChange = (event) => {
     const {
       target: { value },
@@ -70,19 +82,12 @@ const CreateOrder = () => {
     setSelectedItemList(value);
   };
 
-  const handleEmailChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-
-    setInputEmail(value)
+  //Changes Selected Item List state when user selects items from the Select Element
+  const handleEmailChange = (selectedCustomer) => {
+    setSelectedCustomer(selectedCustomer)
   };
 
-  const filterOptions = createFilterOptions({
-    matchFrom: 'start',
-    stringify: (customerList) => customerList.email,
-  });
-
+  //Changes quantity of the item updated
   const handleValueChange = (event, modifiedItemId) => {
     const {
       target: { value },
@@ -97,16 +102,23 @@ const CreateOrder = () => {
     setSelectedItemList(ItemList)
   };
 
-  const handleSubmit = (event) => {
+  //Send POST request on Order button selection
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const filteredItemList = selectedItemList.map(({ name, ...keepAttributes }) => keepAttributes)
 
+    //Set default quantity of an item to 1 if the employee hasn't specified a different value during order
+    filteredItemList.forEach(item => {
+      if(item.hasOwnProperty('quantity') === false) {
+        item.quantity = 1
+    }})
+
     const objectToPost = {
       id: uuidv4(),
-      email: selectedCustomerEmail,
+      userId: selectedCustomer.id,
       itemList: filteredItemList
     }
-    console.log(objectToPost);
+    await axios.post(`http://localhost:4000/order`, objectToPost, config)
   };
 
   return (
@@ -122,25 +134,20 @@ const CreateOrder = () => {
           }}
         >
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 500 }}>
-            {/* <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Email Address"
-              name="email"
-              type="email"
-              id="email"
-              onChange={handleEmailChange}
-            /> */}
+            {/* Autocomplete Element serves as a dropdown email list of users the order can be submitted for.*/}
+            <InputLabel id="customer-email-list">Customer Email</InputLabel>
             <Autocomplete
               id="filter"
-              customerList={customerList}
-              getOptionLabel={(customerList) => customerList.email}
-              filterOptions={filterOptions}
+              options={customerList}
+              getOptionLabel={(option) => option.email}
+              isOptionEqualToValue={(option, value) => option.email === value.email}
               sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Email" />}
-              onChange = {handleEmailChange}
+              renderInput={(params) => <TextField {...params}/>}
+              onChange = {(event, data) => {
+                handleEmailChange(data);
+              }}
             />
+            {/* Select Element serves as a multiple checkbox dropdown list of items the order can contain.*/}
             <InputLabel id="item-list">Item List</InputLabel>
             <Select
               labelId="item-list"
@@ -165,6 +172,7 @@ const CreateOrder = () => {
                 </MenuItem>
               ))}
             </Select>
+            {/* List Element serves as a item quantity overview, and possible addition of the number of each item type the customer requires*/}
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
               {[...selectedItemList].map((selectedItem) => (
                 <ListItem
