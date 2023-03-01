@@ -28,9 +28,8 @@ const FilterManufacturer = ({onChange}) => {
         id="tags-outlined"
         options={manufacturer}
         getOptionLabel={(option) => option.brand}
-        isOptionEqualToValue={(option, value) => option.id === value.id && option.name === value.name}
+        isOptionEqualToValue={(option, value) => option.brand === value.brand}
         onChange={onChange}
-        filterSelectedOptions
         renderInput={(params) => (
           <TextField
             {...params}
