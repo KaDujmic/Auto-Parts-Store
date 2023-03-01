@@ -3,40 +3,41 @@ import SignIn from './components/SignIn';
 import OrderList from './components/OrderList';
 import ItemList from './components/itemList'
 import Container from '@mui/material/Container';
+import Navbar from './components/Navbar';
+import {AuthContext, AuthService} from './context/authContext';
+
+
 
 function App() {
 	return (
+		<AuthContext.Provider value={new AuthService()}>
+			<Navbar></Navbar>
 			<Router>
 				<Container maxWidth="sm">
 					<Routes>
 						<Route
 							exact
 							path="/login"
-							element={
-								<>
-									<SignIn />
-								</>
-							}
+							element={<>
+								<SignIn />
+							</>}
 						></Route>
-            <Route
+						<Route
 							exact
 							path="/order"
-							element={
-								<>
-									<OrderList />
-								</>
-							}
+							element={<>
+								<OrderList />
+							</>}
 						></Route>
 						<Route
 							exact
 							path="/"
-							element={
-									<ItemList/>
-							}
+							element={<ItemList />}
 						></Route>
 					</Routes>
 				</Container>
 			</Router>
+		</AuthContext.Provider>
 	);
 }
 
