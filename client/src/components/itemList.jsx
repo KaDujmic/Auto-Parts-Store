@@ -43,7 +43,6 @@ const ItemList = () => {
         if(selectedManufacturer.length > 0 && !selectedManufacturer.includes(item.manufacturerId))
         return false
 
-          console.log(item,'items')
         return item
       })
       setFilteredItems(filteredAllItems)
