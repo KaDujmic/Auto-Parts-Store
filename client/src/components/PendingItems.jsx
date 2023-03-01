@@ -4,11 +4,14 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Title from './Title'
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import axios from 'axios';
 
 export default function Items() {
     const [pendingItems, setPendingItems] = useState([])
+    const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
           try {
@@ -21,6 +24,7 @@ export default function Items() {
     }
           catch(err)
           {
+            navigate("/login")
             console.log(err)
           }
         }
@@ -29,6 +33,7 @@ export default function Items() {
       console.log(pendingItems)
   return (
     <React.Fragment>
+    <Title>Pending Items</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
