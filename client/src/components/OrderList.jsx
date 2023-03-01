@@ -6,17 +6,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import OrderCard from './OrderCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom"
 
 // Fetch all items from backend
 const theme = createTheme();
 const OrderList = () => {
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
  
   useEffect(() => {
     async function fetchData() {
       try {
-        const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwYzEyOTdlLTU4ZjYtNDU4Ny04NDJiLTIzMWZmNjU4MzA4NiIsImlhdCI6MTY3NzU3ODA1OSwiZXhwIjoxNjg1MzU0MDU5fQ.-u6vDFdPz7_pK3FXxZMqZdeTCFBcCj-s3o_OqyO_rho'
+        const jwt = localStorage.getItem("token");
         const config = {
           headers: { Authorization: `Bearer ${jwt}` }
         };
@@ -26,7 +28,8 @@ const OrderList = () => {
       }
       catch(err)
       {
-        console.log(err)
+        navigate("/login")
+        console.log(err.response.data)
       }
     }
    fetchData()

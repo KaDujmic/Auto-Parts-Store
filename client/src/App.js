@@ -5,6 +5,7 @@ import CreateUser from './components/CreateUser';
 import CreateOrder from './components/CreateOrder';
 import ItemList from './components/ItemList'
 import Container from '@mui/material/Container';
+import PendingItems from './components/PendingItems'
 
 function App() {
 	return (
@@ -52,6 +53,13 @@ function App() {
 							path="/"
 							element={
 									<ItemList/>
+							}
+						></Route>
+						<Route
+							exact
+							path="/pendingitems"
+							element={
+									<PendingItems/>
 							}
 						></Route>
 					</Routes>
