@@ -59,7 +59,7 @@ const OrderCard = ( { order } ) => {
             <Typography variant='h5'>Price:</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography variant='h5'>{order.finalPrice}</Typography>
+            <Typography variant='h5'>{order.finalPrice} {order.currency}</Typography>
           </Grid>
         </Grid>
       </Grid>
