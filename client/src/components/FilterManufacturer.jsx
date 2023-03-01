@@ -22,7 +22,7 @@ const FilterManufacturer = ({onChange}) => {
    fetchData()
   }, [])
   return (
-    <Stack spacing={3} sx={{ width: 250 }}>
+    <Stack spacing={3} sx={{ width: 200 }}>
         <Autocomplete
         multiple
         id="tags-outlined"
