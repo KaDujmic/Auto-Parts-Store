@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import OrderList from './components/OrderList';
-import ItemList from './components/itemList'
+import CreateUser from './components/CreateUser';
+import ItemList from './components/ItemList'
 import Container from '@mui/material/Container';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './context/authContext';
-
-
+import PendingItems from './components/PendingItems'
 
 function App() {
 	return (
@@ -29,10 +29,26 @@ function App() {
 								<OrderList />
 							</>}
 						></Route>
+            <Route
+							exact
+							path="/user"
+							element={
+								<>
+									<CreateUser />
+								</>
+							}
+						></Route>						
 						<Route
 							exact
 							path="/"
 							element={<ItemList />}
+						></Route>
+						<Route
+							exact
+							path="/pendingitems"
+							element={
+									<PendingItems/>
+							}
 						></Route>
 					</Routes>
 				</Container>
