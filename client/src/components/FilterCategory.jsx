@@ -24,7 +24,7 @@ const FilterCategory = ({onChange}) => {
   }, [])
 
   return (
-    <Stack spacing={3} sx={{ width: 250 }}>
+    <Stack spacing={3} sx={{ width: 200 }}>
       <Autocomplete
         multiple
         id="tags-outlined"
@@ -32,7 +32,6 @@ const FilterCategory = ({onChange}) => {
         getOptionLabel={(option) => option.name}
         isOptionEqualToValue={(option, value) => option.id === value.id && option.name === value.name}
         onChange={onChange}
-        sx = {{mt:2.5}}
         renderInput={(params) => (
           <TextField
             {...params}
