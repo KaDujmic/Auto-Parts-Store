@@ -5,9 +5,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useState } from 'react';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -15,22 +17,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 export default function SignIn() {
+  const [error, setError] = useState()
   const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
@@ -53,11 +43,11 @@ export default function SignIn() {
     {
       if(err.response && err.response.status === 400)
       {
-        alert(err.response.data.message)
+        setError(err.response.data.message)
       }
       else{
         console.log(err)
-        alert("Oops something went wrong...")
+        setError("Oops something went wrong...")
       }
     }
   };
@@ -119,15 +109,14 @@ export default function SignIn() {
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+          {error && 
+            <Alert severity='error'>
+              {error}
+            </Alert>
+          }
       </Container>
     </ThemeProvider>
   );
