@@ -17,7 +17,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import {AuthContext, AuthService} from '../context/authContext';
+import {AuthContext, UserInfo} from '../context/authContext';
 
 const theme = createTheme();
 
@@ -25,7 +25,7 @@ export default function SignIn() {
   const [error, setError] = useState();
   const navigate = useNavigate();
 
-  const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ export default function SignIn() {
       const response = await axios.post('http://localhost:4000/login',
         request
       );
-      authContext.setOnLogin(response.data.token, response.data.user.roleName);
+      authContext.setCurrentUser(new UserInfo(response.data.token, response.data.role))
       localStorage.setItem("token", response.data.token);
       navigate("/")
     }
