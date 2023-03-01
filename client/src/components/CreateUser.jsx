@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function CreateUser() {
+const CreateUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -106,3 +106,4 @@ export default function CreateUser() {
     </ThemeProvider>
   );
 }
+export default CreateUser;
