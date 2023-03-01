@@ -30,7 +30,7 @@ const FilterCategory = ({onChange}) => {
         id="tags-outlined"
         options={category}
         getOptionLabel={(option) => option.name}
-        isOptionEqualToValue={(option, value) => option.id === value.id && option.name === value.name}
+        isOptionEqualToValue={(option, value) =>  option.name === value.name}
         onChange={onChange}
         renderInput={(params) => (
           <TextField
