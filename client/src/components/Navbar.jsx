@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import {AuthContext, AuthService} from '../context/authContext';
+import { AuthContext } from '../context/authContext';
 
 export default function ButtonAppBar() {
   const authContext = useContext(AuthContext);
@@ -29,7 +29,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Auto Parts
           </Typography>
-          {authContext.getUser() 
+          {authContext.currentUser
             ? <Button color="inherit" href='/login'>Logout</Button> 
             : <Button color="inherit" href='/login'>Login</Button> 
           }
