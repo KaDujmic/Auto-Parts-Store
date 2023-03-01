@@ -4,21 +4,26 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ItemCard from './ItemCard';
-import {useEffect, useState, useMemo} from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 import SearchField from './Search';
+import FilterCategory from './FilterCategory';
+import FilterManufacturer from './FilterManufacturer';
 
 // Fetch all items from backend
 const theme = createTheme();
 const ItemList = () => {
   const [items, setItems] = useState([])
-  const [query, setQuery] = useState('') 
- 
+  const [searchText, setSearchText] = useState('') 
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const [selectedManufacturer, setSelectedManufacturer] = useState([])
+  const [filteredItems, setFilteredItems] = useState([])
+
+
   useEffect(() => {
     async function fetchData() {
       try {
         let response = await axios.get(`http://localhost:4000/item`)
-        console.log(response.data)
         setItems(response.data)
       }
       catch(err)
@@ -29,23 +34,33 @@ const ItemList = () => {
    fetchData()
   }, [])
 
-  //Filter data only when items or query parameters change
-  const filteredData = useMemo(() => {
-  return items.filter((item) => {
-   return item.name.toLowerCase().includes(query.toLocaleLowerCase())
-  })
-  },[items,query])
+      useEffect(()=> { 
+        const filteredAllItems = items.filter(item => {
+        if (searchText.length > 0 && !item.name.toLowerCase().includes(searchText.toLocaleLowerCase()))
+        return false
+        if (selectedCategories.length > 0 && !selectedCategories.includes(item.categoryId))
+        return false
+        if(selectedManufacturer.length > 0 && !selectedManufacturer.includes(item.manufacturerId))
+        return false
 
+          console.log(item,'items')
+        return item
+      })
+      setFilteredItems(filteredAllItems)
+    },[items,searchText,selectedCategories,selectedManufacturer])
+      
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
         <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-      <SearchField  value = {query} onChange={e => setQuery(e.target.value)}/>
+      <SearchField onChange={e => setSearchText(e.target.value)}/>
+      <FilterCategory onChange={(e, value) => setSelectedCategories(value.map( e => e.id))}  />
+      <FilterManufacturer onChange={(e, value) => setSelectedManufacturer(value.map( e => e.id))}  />
       </Grid>
         <Container sx={{ py: 6 }}  maxWidth="md">
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {filteredData.map((x) => (
+            {filteredItems.map((x) => (
             <ItemCard item={x} key={x.id}/>
            ))}</Grid>
         </Container>
