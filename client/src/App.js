@@ -4,13 +4,13 @@ import OrderList from './components/OrderList';
 import ItemList from './components/itemList'
 import Container from '@mui/material/Container';
 import Navbar from './components/Navbar';
-import {AuthContext, AuthService} from './context/authContext';
+import { AuthProvider } from './context/authContext';
 
 
 
 function App() {
 	return (
-		<AuthContext.Provider value={new AuthService()}>
+		<AuthProvider>
 			<Navbar></Navbar>
 			<Router>
 				<Container maxWidth="sm">
@@ -37,7 +37,7 @@ function App() {
 					</Routes>
 				</Container>
 			</Router>
-		</AuthContext.Provider>
+		</AuthProvider>
 	);
 }
 
