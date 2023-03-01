@@ -96,13 +96,6 @@ exports.orderSchema = joi.object({
           post: (orderSchema) => orderSchema.forbidden(),
           put: (orderSchema) => orderSchema.required()
         })
-    }),
-  deliveryAddress: joi.string()
-    .min(3)
-    .max(50)
-    .alter({
-      post: (orderSchema) => orderSchema.required(),
-      put: (orderSchema) => orderSchema.optional()
     })
 }).options({ abortEarly: false });
 
