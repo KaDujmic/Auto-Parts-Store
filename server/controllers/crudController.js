@@ -1,20 +1,32 @@
 const { NotFoundError } = require('../validators/errors');
 const EXCLUDE_LIST = ['createdAt', 'updatedAt', 'password', 'deleted'];
 
-exports.findAllModel = async (Model, query, req, res) => {
-  const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
-  const limit = Number(process.env.DEFAULT_LIMIT);
-  const models = await Model.findAll({
+exports.findManyModel = async (Model, customQuery, req, res) => {
+  // Default query used by all requests
+  const query = {
     order: [['id', 'ASC']],
-    where: { deleted: false },
-    offset,
-    limit,
+    where: [{ deleted: false }],
     attributes: { exclude: EXCLUDE_LIST }
-  });
-  res.status(200).json({ models });
+  };
+
+  // Addition of any custom query parameters forwarded to this function
+  if (customQuery) {
+    for (const property in customQuery) {
+      query[property].push(customQuery[property]);
+    }
+  }
+
+  // If the request is asking for a specific page, do not query/return the entire entity
+  if (req.query.page) {
+    query.offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1);
+    query.limit = Number(process.env.DEFAULT_LIMIT);
+  }
+
+  const models = await Model.findAll(query);
+  res.status(200).json(models);
 };
 
-exports.findModel = async (Model, query, req, res) => {
+exports.findModel = async (Model, req, res) => {
   const model = await Model.findOne({
     where: { id: req.params.id, deleted: false },
     attributes: { exclude: EXCLUDE_LIST }
@@ -45,12 +57,12 @@ exports.deleteModel = async (Model, req, res) => {
   res.status(204).json(model);
 };
 
-exports.getNumberOfPages = async (Model, req, res) => {
+exports.findNumberOfPages = async (Model, req, res) => {
   const rowCount = await Model.count();
-  const pageCount = rowCount / process.env.DEFAULT_LIMIT;
+  const pageCount = Math.ceil(rowCount / process.env.DEFAULT_LIMIT);
 
   if (pageCount > 0) {
-    res.status(200).json(Math.ceil(pageCount));
+    res.status(200).json(pageCount);
   } else {
     throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
   }
