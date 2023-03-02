@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import OrderList from './components/OrderList';
 import CreateUser from './components/CreateUser';
+import CreateOrder from './components/CreateOrder';
 import ItemList from './components/ItemList'
 import Container from '@mui/material/Container';
 import PendingItems from './components/PendingItems'
@@ -26,6 +27,15 @@ function App() {
 							element={
 								<>
 									<OrderList />
+								</>
+							}
+						></Route>
+						<Route
+							exact
+							path="/order-create"
+							element={
+								<>
+									<CreateOrder />
 								</>
 							}
 						></Route>

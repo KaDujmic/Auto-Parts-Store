@@ -11,11 +11,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function CreateUser() {
+const CreateUser = () => {
+  const jwt = localStorage.getItem("token");
+  const config = { headers: { Authorization: `Bearer ${jwt}` }};
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(...data);
+    // Post User Creation
   };
 
   return (
@@ -106,3 +109,4 @@ export default function CreateUser() {
     </ThemeProvider>
   );
 }
+export default CreateUser;
