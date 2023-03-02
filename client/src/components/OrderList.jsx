@@ -28,6 +28,7 @@ const OrderList = () => {
       }
       catch(err)
       {
+        localStorage.removeItem("token")
         navigate("/login")
         console.log(err.response.data)
       }

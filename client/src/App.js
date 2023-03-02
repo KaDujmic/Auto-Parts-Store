@@ -5,30 +5,30 @@ import CreateUser from './components/CreateUser';
 import CreateOrder from './components/CreateOrder';
 import ItemList from './components/ItemList'
 import Container from '@mui/material/Container';
+import Navbar from './components/Navbar';
+import { AuthProvider } from './context/authContext';
 import PendingItems from './components/PendingItems'
 
 function App() {
 	return (
+		<AuthProvider>
 			<Router>
+				<Navbar></Navbar>
 				<Container maxWidth="sm">
 					<Routes>
 						<Route
 							exact
 							path="/login"
-							element={
-								<>
-									<SignIn />
-								</>
-							}
+							element={<>
+								<SignIn />
+							</>}
 						></Route>
-            <Route
+						<Route
 							exact
 							path="/order"
-							element={
-								<>
-									<OrderList />
-								</>
-							}
+							element={<>
+								<OrderList />
+							</>}
 						></Route>
 						<Route
 							exact
@@ -51,9 +51,7 @@ function App() {
 						<Route
 							exact
 							path="/"
-							element={
-									<ItemList/>
-							}
+							element={<ItemList />}
 						></Route>
 						<Route
 							exact
@@ -65,6 +63,7 @@ function App() {
 					</Routes>
 				</Container>
 			</Router>
+		</AuthProvider>
 	);
 }
 
