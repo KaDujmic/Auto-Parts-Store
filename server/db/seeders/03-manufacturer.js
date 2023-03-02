@@ -15,6 +15,12 @@ module.exports = {
         brand: 'BMW',
         model: '3 series',
         deleted: false
+      },
+      {
+        id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
+        brand: 'Fiat',
+        model: 'Punto',
+        deleted: false
       }
     ]);
   },
