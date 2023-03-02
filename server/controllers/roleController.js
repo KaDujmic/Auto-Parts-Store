@@ -11,7 +11,7 @@ exports.getRole = async (req, res) => {
   res.status(200).json(foundRole);
 };
 
-exports.getAllRole = async (req, res) => {
+exports.getManyRole = async (req, res) => {
   const foundRoles = await role.findAll({ where: { deleted: false } });
   res.status(200).json(foundRoles);
 };

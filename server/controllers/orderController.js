@@ -4,7 +4,7 @@ const { checkAllElements, setOrderPrice, retrieveItemOnOrder } = require('../ser
 const { orderConfirmEmail, orderArrivedEmail } = require('../services/notificationService');
 const orderStatuses = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
-exports.getAllOrders = async (req, res) => {
+exports.getManyOrder = async (req, res) => {
   const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
   const limit = Number(process.env.DEFAULT_LIMIT);
   const models = await order.findAll({

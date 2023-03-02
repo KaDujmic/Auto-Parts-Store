@@ -1,15 +1,17 @@
 const express = require('express');
-const router = express.Router({ mergeParams: true });
-const { callbackErrorHandler } = require('../validators/errorHandler');
-const { getUser, getAllUser, updateUser, createUser, deleteUser } = require('../controllers/userController');
-const { bodyValidator } = require('../middleware/dataValidator');
+
+const { getUser, getManyUser, updateUser, createUser, deleteUser } = require('../controllers/userController');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');
+const { bodyValidator } = require('../middleware/dataValidator');
+const { callbackErrorHandler } = require('../validators/errorHandler');
+
+const router = express.Router({ mergeParams: true });
 
 router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
-  .get(restrictTo('Salesperson'), callbackErrorHandler(getAllUser))
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getManyUser))
   .post(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(createUser));
 
 router

@@ -1,11 +1,13 @@
 const express = require('express');
-const router = express.Router({ mergeParams: true });
-const { callbackErrorHandler } = require('../validators/errorHandler');
-const { getItem, getAllItem, updateItem, createItem, deleteItem } = require('../controllers/itemController');
-const { bodyValidator } = require('../middleware/dataValidator');
-const { isLoggedIn, restrictTo } = require('../controllers/authController');
 
-router.get('/', callbackErrorHandler(getAllItem));
+const { getItem, getManyItem, updateItem, createItem, deleteItem } = require('../controllers/itemController');
+const { isLoggedIn, restrictTo } = require('../controllers/authController');
+const { bodyValidator } = require('../middleware/dataValidator');
+const { callbackErrorHandler } = require('../validators/errorHandler');
+
+const router = express.Router({ mergeParams: true });
+
+router.get('/', callbackErrorHandler(getManyItem));
 router.get('/:id', callbackErrorHandler(getItem));
 router.use(callbackErrorHandler(isLoggedIn));
 

@@ -5,22 +5,17 @@ exports.getItem = async (req, res) => {
   await crudController.findModel(item, req, res);
 };
 
-exports.getAllItem = async (req, res) => {
-  console.log(req.query);
-  console.log(typeof req.query);
-  if (typeof req.query === 'undefined') {
-    await crudController.findAllModel(item, req, res);
+exports.getManyItem = async (req, res) => {
+  if (req.query.page && req.query.page !== 'count') {
+    // Request can come with params used for filtering (manufacturer, category)
+    const query = {};
+    query.where = createWhereOption(req.query);
+    await crudController.findManyModel(item, query, req, res);
   } else if (req.query.page === 'count') {
-    await crudController.getNumberOfPages(item, req, res);
+    // Request to get the number of pages; used by frontend page selection
+    await crudController.findNumberOfPages(item, req, res);
   } else {
-    // If request has query params add them to the db query for filtering purposes
-    const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
-    const limit = Number(process.env.DEFAULT_LIMIT);
-    const query = { order: [['id', 'ASC']], offset, limit, where: [{ deleted: false }], attributes: { exclude: ['createdAt', 'updatedAt', 'deleted'] } };
-    query.where = getWhereOption(req.query);
-
-    const foundItems = await item.findAll(query);
-    res.status(200).json(foundItems);
+    await crudController.findManyModel(item, null, req, res);
   }
 };
 
@@ -36,14 +31,14 @@ exports.createItem = async (req, res) => {
   await crudController.createModel(item, req, res);
 };
 
-function getWhereOption (queryParams) {
+function createWhereOption (requestQueryParams) {
   const whereOption = [];
 
-  if (queryParams.category) {
-    whereOption.push({ category_id: queryParams.category });
+  if (requestQueryParams.category) {
+    whereOption.push({ category_id: requestQueryParams.category });
   }
-  if (queryParams.manufacturer) {
-    whereOption.push({ manufacturer_id: queryParams.manufacturer });
+  if (requestQueryParams.manufacturer) {
+    whereOption.push({ manufacturer_id: requestQueryParams.manufacturer });
   }
 
   return whereOption;

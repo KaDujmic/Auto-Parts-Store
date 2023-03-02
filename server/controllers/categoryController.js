@@ -5,8 +5,8 @@ exports.getCategory = async (req, res) => {
   await crudController.findModel(category, req, res);
 };
 
-exports.getAllCategory = async (req, res) => {
-  await crudController.findAllModel(category, req, res);
+exports.getManyCategory = async (req, res) => {
+  await crudController.findManyModel(category, null, req, res);
 };
 
 exports.updateCategory = async (req, res) => {
