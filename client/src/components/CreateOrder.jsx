@@ -34,13 +34,6 @@ const MenuProps = {
 };
 
 const CreateOrder = () => {
-  /*
-    itemList = List of all items available, retrieved from backend
-    selectedItemList = List of items selected during order creation
-
-    customerList = List of all customers (id and email), retrieved from backend
-    selectedCustomer = Specific customer the order is meant for, selected during order creation
-  */
   const [itemList, setItemList] = useState([])
   const [selectedItemList, setSelectedItemList] = useState([]);
   const [customerList, setCustomerList] = useState([]);
@@ -49,7 +42,6 @@ const CreateOrder = () => {
   const jwt = localStorage.getItem("token");
   const config = { headers: { Authorization: `Bearer ${jwt}` }};
         
-  //Get Item and User list from Backend, and update their respective states
   useEffect(() => {
     async function fetchData() {
       try {
@@ -73,7 +65,7 @@ const CreateOrder = () => {
     fetchData()
   }, [])
 
-  //Changes Selected Item List state when user selects items from the Select Element
+  //Handles Selected Item List state when user selects items from the Select Element
   const handleSelectChange = (event) => {
     const {
       target: { value },
@@ -82,12 +74,12 @@ const CreateOrder = () => {
     setSelectedItemList(value);
   };
 
-  //Changes Selected Item List state when user selects items from the Select Element
+  //Handles Selected Customer state when employee selects items from the Autocomplete Element
   const handleEmailChange = (selectedCustomer) => {
     setSelectedCustomer(selectedCustomer)
   };
 
-  //Changes quantity of the item updated
+  //Handles quantity of the item updated
   const handleValueChange = (event, modifiedItemId) => {
     const {
       target: { value },
@@ -102,7 +94,6 @@ const CreateOrder = () => {
     setSelectedItemList(ItemList)
   };
 
-  //Send POST request on Order button selection
   const handleSubmit = async (event) => {
     event.preventDefault();
     const filteredItemList = selectedItemList.map(({ name, ...keepAttributes }) => keepAttributes)
