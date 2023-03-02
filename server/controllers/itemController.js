@@ -10,11 +10,11 @@ exports.getManyItem = async (req, res) => {
   const query = {};
   query.where = createWhereOption(req.query);
 
-  if (Object.keys(query).length !== 0 && !req.query.page) {
+  if (Object.keys(query).length !== 0 && req.query.page !== 'count') {
     // Find filtered items
     await crudController.findManyModel(item, query, req, res);
   } else if (req.query.page === 'count') {
-    // Find page number of items
+    // Find number of pages
     await crudController.findNumberOfPages(item, query, req, res);
   } else {
     // Find complete list of Items
