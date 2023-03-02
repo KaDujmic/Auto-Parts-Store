@@ -109,7 +109,12 @@ const CreateOrder = () => {
       userId: selectedCustomer.id,
       itemList: filteredItemList
     }
-    await axios.post(`http://localhost:4000/order`, objectToPost, config);
+
+    try {
+      await axios.post(`http://localhost:4000/order`, objectToPost, config);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

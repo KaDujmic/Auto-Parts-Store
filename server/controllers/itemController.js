@@ -6,14 +6,22 @@ exports.getItem = async (req, res) => {
 };
 
 exports.getAllItem = async (req, res) => {
-  // If request has query params add them to the db query for filtering purposes
-  if (typeof req.query !== 'undefined') {
-    const query = { where: [], attributes: { exclude: ['createdAt', 'updatedAt', 'deleted'] } };
+  console.log(req.query);
+  console.log(typeof req.query);
+  if (typeof req.query === 'undefined') {
+    await crudController.findAllModel(item, req, res);
+  } else if (req.query.page === 'count') {
+    await crudController.getNumberOfPages(item, req, res);
+  } else {
+    // If request has query params add them to the db query for filtering purposes
+    const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
+    const limit = Number(process.env.DEFAULT_LIMIT);
+    const query = { order: [['id', 'ASC']], offset, limit, where: [{ deleted: false }], attributes: { exclude: ['createdAt', 'updatedAt', 'deleted'] } };
     query.where = getWhereOption(req.query);
 
     const foundItems = await item.findAll(query);
     res.status(200).json(foundItems);
-  } else await crudController.findAllModel(item, req, res);
+  }
 };
 
 exports.updateItem = async (req, res) => {

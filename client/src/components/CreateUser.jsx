@@ -23,7 +23,11 @@ const CreateUser = () => {
     const objectToPost = {id: uuidv4()};
     retrievedInput.forEach((value, key) => (objectToPost[key] = value));
 
-    await axios.post(`http://localhost:4000/user`, objectToPost, config);
+    try {
+      await axios.post(`http://localhost:4000/user`, objectToPost, config);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
