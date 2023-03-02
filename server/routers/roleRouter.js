@@ -1,15 +1,17 @@
 const express = require('express');
-const { getAllRole, getRole, createRole, updateRole, deleteRole } = require('../controllers/roleController');
-const { callbackErrorHandler } = require('../validators/errorHandler');
-const router = express.Router({ mergeParams: true });
-const { bodyValidator } = require('../middleware/dataValidator');
+
+const { getManyRole, getRole, createRole, updateRole, deleteRole } = require('../controllers/roleController');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');
+const { bodyValidator } = require('../middleware/dataValidator');
+const { callbackErrorHandler } = require('../validators/errorHandler');
+
+const router = express.Router({ mergeParams: true });
 
 router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
-  .get(restrictTo('Salesperson'), callbackErrorHandler(getAllRole))
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getManyRole))
   .post(restrictTo('Salesperson'), bodyValidator, callbackErrorHandler(createRole));
 
 router

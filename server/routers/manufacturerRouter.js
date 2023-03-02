@@ -1,11 +1,13 @@
 const express = require('express');
-const { getAllManufacturer, getManufacturer, createManufacturer, updateManufacturer, deleteManufacturer } = require('../controllers/manufacturerController');
-const { callbackErrorHandler } = require('../validators/errorHandler');
-const router = express.Router({ mergeParams: true });
-const { bodyValidator } = require('../middleware/dataValidator');
-const { isLoggedIn, restrictTo } = require('../controllers/authController');
 
-router.get('/', callbackErrorHandler(getAllManufacturer));
+const { getManyManufacturer, getManufacturer, createManufacturer, updateManufacturer, deleteManufacturer } = require('../controllers/manufacturerController');
+const { isLoggedIn, restrictTo } = require('../controllers/authController');
+const { bodyValidator } = require('../middleware/dataValidator');
+const { callbackErrorHandler } = require('../validators/errorHandler');
+
+const router = express.Router({ mergeParams: true });
+
+router.get('/', callbackErrorHandler(getManyManufacturer));
 router.get('/:id', callbackErrorHandler(getManufacturer));
 router.use(callbackErrorHandler(isLoggedIn));
 
