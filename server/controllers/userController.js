@@ -5,8 +5,8 @@ exports.getUser = async (req, res) => {
   await crudController.findModel(user, req, res);
 };
 
-exports.getAllUser = async (req, res) => {
-  await crudController.findAllModel(user, req, res);
+exports.getManyUser = async (req, res) => {
+  await crudController.findManyModel(user, null, req, res);
 };
 
 exports.updateUser = async (req, res) => {

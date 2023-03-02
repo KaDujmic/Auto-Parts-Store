@@ -5,8 +5,8 @@ exports.getManufacturer = async (req, res) => {
   await crudController.findModel(manufacturer, req, res);
 };
 
-exports.getAllManufacturer = async (req, res) => {
-  await crudController.findAllModel(manufacturer, req, res);
+exports.getManyManufacturer = async (req, res) => {
+  await crudController.findManyModel(manufacturer, null, req, res);
 };
 
 exports.updateManufacturer = async (req, res) => {

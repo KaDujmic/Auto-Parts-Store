@@ -1,7 +1,7 @@
 const { notification } = require('../db/models');
 const { NotFoundError } = require('../validators/errors');
 
-exports.getAllNotifications = async (req, res) => {
+exports.getManyNotification = async (req, res) => {
   const foundNotifications = await notification.findAll({
     where: { deleted: false }
   });
