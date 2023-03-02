@@ -6,7 +6,7 @@ exports.getItem = async (req, res) => {
 };
 
 exports.getManyItem = async (req, res) => {
-  if (req.query.page && req.query.page !== 'count') {
+  if (req.query && !req.query.page) {
     // Request can come with params used for filtering (manufacturer, category)
     const query = {};
     query.where = createWhereOption(req.query);
