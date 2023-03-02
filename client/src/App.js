@@ -11,8 +11,8 @@ import PendingItems from './components/PendingItems'
 function App() {
 	return (
 		<AuthProvider>
-			<Navbar></Navbar>
 			<Router>
+				<Navbar></Navbar>
 				<Container maxWidth="sm">
 					<Routes>
 						<Route

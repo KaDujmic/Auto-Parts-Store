@@ -35,7 +35,7 @@ export default function SignIn() {
       const response = await axios.post('http://localhost:4000/login',
         request
       );
-      authContext.setCurrentUser(new UserInfo(response.data.token, response.data.role))
+      authContext.setCurrentUser(new UserInfo(response.data.token, response.data.user.roleName))
       localStorage.setItem("token", response.data.token);
       navigate("/")
     }
