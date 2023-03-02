@@ -49,7 +49,7 @@ const CreateOrder = () => {
         const fullItemList = itemListGetResponse.data;
 
         const userListGetResponse = await axios.get(`http://localhost:4000/user`, config);
-        const fullUserList = userListGetResponse.data.models;
+        const fullUserList = userListGetResponse.data;
         
         //Remove properties sent from Backend that aren't required for this component
         const filteredItemList = fullItemList.map(({ serialNumber, price, categoryId, manufacturerId, quantity, ...keepAttributes }) => keepAttributes);
