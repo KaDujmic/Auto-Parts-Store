@@ -52,11 +52,12 @@ const ItemList = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
-        <Grid container rowSpacing={2}>
-      <Grid  container xs={12} justifyContent="center"><SearchField onChange={e => setSearchText(e.target.value)}/></Grid>
-      <Grid  container xs={6} justifyContent="center"><FilterCategory onChange={(e, value) => setSelectedCategories(value.map( e => e.id))}  /></Grid>
-      <Grid  container xs={6} justifyContent="center"><FilterManufacturer onChange={(e, value) => setSelectedManufacturer(value.map( e => e.id))}/></Grid>
-      </Grid>
+      <Container  maxWidth="md">
+      <Grid container spacing={2} >
+      <Grid  item xs={12} justifyContent="center"><SearchField onChange={e => setSearchText(e.target.value)}/></Grid>
+      <Grid  item xs={6} justifyContent="center"><FilterCategory onChange={(e, value) => setSelectedCategories(value.map( e => e.id))}  /></Grid>
+      <Grid  item xs={6} justifyContent="center"><FilterManufacturer onChange={(e, value) => setSelectedManufacturer(value.map( e => e.id))}/></Grid>
+      </Grid></Container>
         <Container sx={{ py: 6 }}  maxWidth="md">
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             {filteredItems.map((x) => (
