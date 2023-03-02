@@ -13,7 +13,7 @@ const FilterCategory = ({onChange}) => {
     async function fetchData() {
       try {
         let response = await axios.get(`http://localhost:4000/category`)
-        setCategory(response.data.models)
+        setCategory(response.data)
       }
       catch(err)
       {
@@ -22,11 +22,9 @@ const FilterCategory = ({onChange}) => {
     }
    fetchData()
   }, [])
-
   return (
     <Stack spacing={3} sx={{ width: 200 }}>
       <Autocomplete
-        multiple
         id="tags-outlined"
         options={category}
         getOptionLabel={(option) => option.name}

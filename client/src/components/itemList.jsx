@@ -9,45 +9,43 @@ import axios from 'axios';
 import SearchField from './Search';
 import FilterCategory from './FilterCategory';
 import FilterManufacturer from './FilterManufacturer';
+import PaginationLink from './Pagination';
 
 // Fetch all items from backend
 const theme = createTheme();
 const ItemList = () => {
   const [items, setItems] = useState([])
   const [searchText, setSearchText] = useState('') 
-  const [selectedCategories, setSelectedCategories] = useState([])
-  const [selectedManufacturer, setSelectedManufacturer] = useState([])
-  const [filteredItems, setFilteredItems] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState([])
+  const [selectedManufacturer, setSelectedManufacturer] = useState({})
 
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        let response = await axios.get(`http://localhost:4000/item`)
-        setItems(response.data)
+  async function fetchData (selectedCategoryId,selectedManufacturerId) {
+    try {
+      const params = {}
+      if(selectedCategoryId) {
+        params.category = selectedCategoryId
+      }    
+      if(selectedManufacturerId) {
+        params.manufacturer = selectedManufacturerId
       }
-      catch(err)
-      {
-        console.log(err)
-      }
+      console.log(params,'params')
+      let response = await axios.get(`http://localhost:4000/item`,{params})
+      setItems(response.data)
     }
-   fetchData()
+    catch(err)
+    {
+      console.log(err)
+    }}
+  useEffect(() => {
+    fetchData(undefined, undefined)    
   }, [])
 
-      useEffect(()=> { 
-        const filteredAllItems = items.filter(item => {
-        if (searchText.length > 0 && !item.name.toLowerCase().includes(searchText.toLocaleLowerCase()))
-        return false
-        if (selectedCategories.length > 0 && !selectedCategories.includes(item.categoryId))
-        return false
-        if(selectedManufacturer.length > 0 && !selectedManufacturer.includes(item.manufacturerId))
-        return false
-
-        return item
+    //Filter data only when items or query parameters change
+      const searchData =
+      items.filter((item) => {
+      return item.name.toLowerCase().includes(searchText.toLocaleLowerCase())
       })
-      setFilteredItems(filteredAllItems)
-    },[items,searchText,selectedCategories,selectedManufacturer])
-      
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -55,15 +53,24 @@ const ItemList = () => {
       <Container  maxWidth="md">
       <Grid container spacing={2} >
       <Grid  item xs={12} justifyContent="center"><SearchField onChange={e => setSearchText(e.target.value)}/></Grid>
-      <Grid  item xs={6} justifyContent="center"><FilterCategory onChange={(e, value) => setSelectedCategories(value.map( e => e.id))}  /></Grid>
-      <Grid  item xs={6} justifyContent="center"><FilterManufacturer onChange={(e, value) => setSelectedManufacturer(value.map( e => e.id))}/></Grid>
+      <Grid  item xs={6} justifyContent="center"><FilterCategory onChange={async(e, value) => { 
+        setSelectedCategory(value)
+        await fetchData(value ? value.id : undefined, selectedManufacturer);
+
+      } }  /></Grid>
+      <Grid  item xs={6} justifyContent="center"><FilterManufacturer onChange={async(e, value) => { 
+        setSelectedManufacturer(value)
+        await fetchData(selectedCategory, value ? value.id : undefined);
+
+      } }/></Grid>
       </Grid></Container>
         <Container sx={{ py: 6 }}  maxWidth="md">
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {filteredItems.map((x) => (
+            {searchData.map((x) => (
             <ItemCard item={x} key={x.id}/>
            ))}</Grid>
         </Container>
+        <PaginationLink></PaginationLink>
       </main>
     </ThemeProvider>
   );

@@ -12,7 +12,7 @@ const FilterManufacturer = ({onChange}) => {
     async function fetchData() {
       try {
         let response = await axios.get(`http://localhost:4000/manufacturer`)
-        setManufacturer(response.data.models)
+        setManufacturer(response.data)
       }
       catch(err)
       {
@@ -24,7 +24,6 @@ const FilterManufacturer = ({onChange}) => {
   return (
     <Stack spacing={3} sx={{ width: 200 }}>
         <Autocomplete
-        multiple
         id="tags-outlined"
         options={manufacturer}
         getOptionLabel={(option) => option.brand}
