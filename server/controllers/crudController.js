@@ -57,8 +57,8 @@ exports.deleteModel = async (Model, req, res) => {
   res.status(204).json(model);
 };
 
-exports.findNumberOfPages = async (Model, req, res) => {
-  const rowCount = await Model.count();
+exports.findNumberOfPages = async (Model, query, req, res) => {
+  const rowCount = await Model.count(query);
   const pageCount = Math.ceil(rowCount / process.env.DEFAULT_LIMIT);
 
   if (pageCount > 0) {
