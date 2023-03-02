@@ -89,7 +89,8 @@ exports.getCustomerOrders = async (req, res) => {
       userId: res.locals.user.id,
       orderStatus: query,
       deleted: false
-    }
+    },
+    include: user
   });
   res.status(200).json(customerOrders);
 };
