@@ -79,7 +79,7 @@ const CreateOrder = () => {
     setSelectedCustomer(selectedCustomer)
   };
 
-  //Handles quantity of the item updated
+  //Handles quantity of the updated item
   const handleValueChange = (event, modifiedItemId) => {
     const {
       target: { value },
