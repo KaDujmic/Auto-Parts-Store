@@ -18,7 +18,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios'
+import axios from 'axios';
 
 const theme = createTheme();
 
@@ -34,10 +34,10 @@ const MenuProps = {
 };
 
 const CreateOrder = () => {
-  const [itemList, setItemList] = useState([])
+  const [itemList, setItemList] = useState([]);
   const [selectedItemList, setSelectedItemList] = useState([]);
   const [customerList, setCustomerList] = useState([]);
-  const [selectedCustomer, setSelectedCustomer] = useState({})
+  const [selectedCustomer, setSelectedCustomer] = useState({});
 
   const jwt = localStorage.getItem("token");
   const config = { headers: { Authorization: `Bearer ${jwt}` }};
@@ -45,24 +45,24 @@ const CreateOrder = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const itemListGetResponse = await axios.get(`http://localhost:4000/item`)
-        const fullItemList = itemListGetResponse.data
+        const itemListGetResponse = await axios.get(`http://localhost:4000/item`);
+        const fullItemList = itemListGetResponse.data;
 
-        const userListGetResponse = await axios.get(`http://localhost:4000/user`, config)
-        const fullUserList = userListGetResponse.data.models
+        const userListGetResponse = await axios.get(`http://localhost:4000/user`, config);
+        const fullUserList = userListGetResponse.data.models;
         
         //Remove properties sent from Backend that aren't required for this component
-        const filteredItemList = fullItemList.map(({ serialNumber, price, categoryId, manufacturerId, quantity, ...keepAttributes }) => keepAttributes)
-        const filteredUserList = fullUserList.map(({ fullName, address, phoneNumber, roleName, discount, currency, ...keepAttributes }) => keepAttributes)
+        const filteredItemList = fullItemList.map(({ serialNumber, price, categoryId, manufacturerId, quantity, ...keepAttributes }) => keepAttributes);
+        const filteredUserList = fullUserList.map(({ fullName, address, phoneNumber, roleName, discount, currency, ...keepAttributes }) => keepAttributes);
 
-        setItemList(filteredItemList)
-        setCustomerList(filteredUserList)
+        setItemList(filteredItemList);
+        setCustomerList(filteredUserList);
       }
       catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
-    fetchData()
+    fetchData();
   }, [])
 
   //Handles Selected Item List state when user selects items from the Select Element
@@ -76,7 +76,7 @@ const CreateOrder = () => {
 
   //Handles Selected Customer state when employee selects items from the Autocomplete Element
   const handleEmailChange = (selectedCustomer) => {
-    setSelectedCustomer(selectedCustomer)
+    setSelectedCustomer(selectedCustomer);
   };
 
   //Handles quantity of the updated item
@@ -84,14 +84,14 @@ const CreateOrder = () => {
     const {
       target: { value },
     } = event;
-    const ItemList = selectedItemList
+    const ItemList = selectedItemList;
     const foundItemIndex = ItemList.findIndex(item => item.id === modifiedItemId);
 
-    const itemToModify = ItemList[foundItemIndex]
-    itemToModify.quantity = value
-    ItemList[foundItemIndex] = itemToModify
+    const itemToModify = ItemList[foundItemIndex];
+    itemToModify.quantity = value;
+    ItemList[foundItemIndex] = itemToModify;
 
-    setSelectedItemList(ItemList)
+    setSelectedItemList(ItemList);
   };
 
   const handleSubmit = async (event) => {
@@ -101,7 +101,7 @@ const CreateOrder = () => {
     //Set default quantity of an item to 1 if the employee hasn't specified a different value during order
     filteredItemList.forEach(item => {
       if(item.hasOwnProperty('quantity') === false) {
-        item.quantity = 1
+        item.quantity = 1;
     }})
 
     const objectToPost = {
@@ -109,7 +109,7 @@ const CreateOrder = () => {
       userId: selectedCustomer.id,
       itemList: filteredItemList
     }
-    await axios.post(`http://localhost:4000/order`, objectToPost, config)
+    await axios.post(`http://localhost:4000/order`, objectToPost, config);
   };
 
   return (

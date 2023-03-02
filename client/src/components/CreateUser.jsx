@@ -8,6 +8,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 const theme = createTheme();
 
@@ -15,10 +17,13 @@ const CreateUser = () => {
   const jwt = localStorage.getItem("token");
   const config = { headers: { Authorization: `Bearer ${jwt}` }};
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // Post User Creation
+    const retrievedInput = new FormData(event.currentTarget);
+    const objectToPost = {id: uuidv4()};
+    retrievedInput.forEach((value, key) => (objectToPost[key] = value));
+
+    await axios.post(`http://localhost:4000/user`, objectToPost, config);
   };
 
   return (
@@ -47,10 +52,19 @@ const CreateUser = () => {
               margin="normal"
               required
               fullWidth
-              label="Email Address"
+              label="Email"
               name="email"
               type="email"
               id="email"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Address"
+              name="address"
+              type="address"
+              id="address"
             />
             <TextField
               margin="normal"
@@ -90,9 +104,9 @@ const CreateUser = () => {
             />           
             <Box sx={{ mt: 4 }}>
               Role:
-              <RadioGroup aria-label="role" name="role" row  >
-                <FormControlLabel value="customer" control={<Radio />} label="Customer" />
-                <FormControlLabel value="salesPerson" control={<Radio />} label="Sales Person" />
+              <RadioGroup aria-label="roleName" name="roleName" row  >
+                <FormControlLabel value="Customer" control={<Radio />} label="Customer" />
+                <FormControlLabel value="SalesPerson" control={<Radio />} label="Sales Person" />
               </RadioGroup>
             </Box>
             <Button
