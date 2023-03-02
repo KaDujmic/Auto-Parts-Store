@@ -6,15 +6,18 @@ exports.getItem = async (req, res) => {
 };
 
 exports.getManyItem = async (req, res) => {
-  if (req.query && !req.query.page) {
-    // Request can come with params used for filtering (manufacturer, category)
-    const query = {};
-    query.where = createWhereOption(req.query);
+  // See if Category or Manufacturer query parameters exist, and add to the 'where' query option if they do
+  const query = {};
+  query.where = createWhereOption(req.query);
+
+  if (Object.keys(query).length !== 0 && !req.query.page) {
+    // Find filtered items
     await crudController.findManyModel(item, query, req, res);
   } else if (req.query.page === 'count') {
-    // Request to get the number of pages; used by frontend page selection
-    await crudController.findNumberOfPages(item, req, res);
+    // Find page number of items
+    await crudController.findNumberOfPages(item, query, req, res);
   } else {
+    // Find complete list of Items
     await crudController.findManyModel(item, null, req, res);
   }
 };
