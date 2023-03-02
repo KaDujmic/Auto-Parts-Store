@@ -30,7 +30,6 @@ export default function Items() {
         }
        fetchData()
       }, [])
-      console.log(pendingItems)
   return (
     <React.Fragment>
     <Title>Pending Items</Title>

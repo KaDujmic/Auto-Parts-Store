@@ -4,6 +4,7 @@ import OrderList from './components/OrderList';
 import CreateUser from './components/CreateUser';
 import CreateOrder from './components/CreateOrder';
 import ItemList from './components/ItemList'
+import UserOrderList from './components/UserOrderList';
 import Container from '@mui/material/Container';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './context/authContext';
@@ -38,6 +39,13 @@ function App() {
 									<CreateOrder />
 								</>
 							}
+						></Route>
+						<Route
+							exact
+							path="/userOrders"
+							element={<>
+								<UserOrderList />
+							</>}
 						></Route>
             <Route
 							exact
