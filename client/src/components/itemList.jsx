@@ -3,6 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import ItemCard from './ItemCard';
@@ -61,31 +62,31 @@ const ItemList = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <main>
-      <Container  maxWidth="md">
-      <Grid container spacing={2} >
-      <Grid  item xs={12} justifyContent="center"><SearchField onChange={e => setSearchText(e.target.value)}/></Grid>
-      <Grid  item xs={6} justifyContent="center"><FilterCategory onChange={async(e, value) => { 
-        setSelectedCategory(value)
-        await fetchData(page, value ? value.id : undefined, selectedManufacturer?.id);
-
-      } }  /></Grid>
-      <Grid  item xs={6} justifyContent="center"><FilterManufacturer onChange={async(e, value) => { 
-        setSelectedManufacturer(value)
-        await fetchData( page, selectedCategory?.id, value ? value.id : undefined);
-
-      } }/></Grid>
-      </Grid></Container>
-        <Container sx={{ py: 6 }}  maxWidth="md">
-          <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Box sx={{ justifyContent: 'center', alignItems: 'center', sm: 12 }}  maxWidth="lg">
+        <Container  maxWidth="sm" sx={{ paddingLeft: 3, display:'flex', justifyContent: 'center' }}>
+          <Grid container spacing={2} marginTop={0} justifyContent='center' paddingLeft={2} >
+            <Grid  item xs={12} justifyContent="center"><SearchField onChange={e => setSearchText(e.target.value)}/></Grid>
+            <Grid  item xs={6} justifyContent="center"><FilterCategory onChange={async(e, value) => { 
+              setSelectedCategory(value)
+              await fetchData(page, value ? value.id : undefined, selectedManufacturer?.id);
+            } }  /></Grid>
+            <Grid item xs={6} justifyContent="center"><FilterManufacturer onChange={async(e, value) => { 
+              setSelectedManufacturer(value)
+              await fetchData( page, selectedCategory?.id, value ? value.id : undefined);
+            } }/></Grid>
+          </Grid>
+        </Container>
+        <Container sx={{display: 'flex', py: 2, justifyContent: 'space-between', alignContent: 'center' }}  maxWidth="sm">
+          <Grid container columns={{ xs: 12, sm: 12, md: 12 }}>
             {searchData.map((x) => (
             <ItemCard item={x} key={x.id}/>
-           ))}</Grid>
+          ))}</Grid>
         </Container>
-        <Stack spacing={2}>
-      <Pagination count={+pageCount} page={page} onChange={handleChange} />
-    </Stack>
-      </main>
+        <Stack spacing={2} paddingTop={2} paddingLeft={62.5}>
+          <Pagination count={+pageCount} page={page} onChange={handleChange} />
+        </Stack>
+      </Box>
+      
     </ThemeProvider>
   );
 }

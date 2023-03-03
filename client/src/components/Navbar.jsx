@@ -24,7 +24,7 @@ export default function ButtonAppBar() {
           <Button color="inherit" onClick={()=> {handleClick('/dashboard')}}>Dashboard</Button>
           <Button color="inherit" onClick={()=> {handleClick('/order')}}>Orders</Button>
           <Button color="inherit" onClick={()=> {handleClick('/order-create')}}>Create Order</Button>
-          <Button color="inherit" onClick={()=> {handleClick('/user')}}>Create Customer</Button>
+          <Button color="inherit" onClick={()=> {handleClick('/user')}}>Create User</Button>
           <Button color="inherit" onClick={()=> {handleClick('/pendingItems')}}>Pending Items</Button>
           <Button color="inherit" onClick={()=> {handleClick('/')}}>Items</Button>
         </> 

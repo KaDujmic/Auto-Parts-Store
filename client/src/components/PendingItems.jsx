@@ -30,13 +30,17 @@ export default function Items() {
           }
         }
        fetchData()
-      }, [])
+      }, [navigate])
   return (
     <React.Fragment>
+      <Title>Pending Items</Title>
       <Box sx={{
         padding: 4,
+        borderRadius: 1, 
+        boxShadow: 2,
+        paddingTop: 3,
+        backgroundColor: 'white'
       }}>
-        <Title>Pending Items</Title>
         <Table size="small">
           <TableHead>
             <TableRow>

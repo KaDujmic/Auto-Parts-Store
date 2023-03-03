@@ -34,7 +34,7 @@ const OrderList = () => {
       }
     }
    fetchData()
-  }, [])
+  }, [navigate])
 
   return (
     isLoading ? <div>Loading...</div> : 

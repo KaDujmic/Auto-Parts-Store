@@ -21,7 +21,8 @@ function App() {
 					theme.palette.mode === 'light'
 						? theme.palette.grey[100]
 						: theme.palette.grey[900],
-					minHeight: '1000px'
+					minHeight: '1000px',
+					paddingTop: '10px'
 				}}>
 					<Routes>
 						<Route

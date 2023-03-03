@@ -131,7 +131,7 @@ const CreateOrder = () => {
             
           }}
         >
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 500, backgroundColor: 'white', padding: 4, borderRadius: 3, boxShadow: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 500, backgroundColor: 'white', padding: 4, borderRadius: 1, boxShadow: 2 }}>
             {/* Autocomplete Element serves as a dropdown email list of users the order can be submitted for.*/}
             <InputLabel id="customer-email-list">Customer Email</InputLabel>
             <Autocomplete
@@ -139,7 +139,6 @@ const CreateOrder = () => {
               options={customerList}
               getOptionLabel={(option) => option.email}
               isOptionEqualToValue={(option, value) => option.email === value.email}
-              sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params}/>}
               onChange = {(event, data) => {
                 handleEmailChange(data);

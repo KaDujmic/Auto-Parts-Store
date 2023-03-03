@@ -43,7 +43,7 @@ const CreateUser = () => {
             alignItems: 'center',
           }}
         >
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, backgroundColor: 'white', padding: 4, borderRadius: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, backgroundColor: 'white', padding: 4, borderRadius: 1, boxShadow: 2  }}>
             <TextField
               margin="normal"
               required
