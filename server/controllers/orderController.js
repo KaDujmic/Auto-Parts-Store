@@ -2,20 +2,18 @@ const { order, item, order_item, notification, user } = require('../db/models');
 const crudController = require('./crudController');
 const { checkAllElements, setOrderPrice, retrieveItemOnOrder } = require('../services/orderService');
 const { orderConfirmEmail, orderArrivedEmail } = require('../services/notificationService');
-const orderStatuses = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
+const ORDER_STATUS_LIST = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
 exports.getManyOrder = async (req, res) => {
-  const query = { include: user };
+  const query = { include: { model: user, attributes: ['id', 'fullName', 'email'] } };
   await crudController.findManyModel(order, query, req, res);
 };
 
 exports.getOrder = async (req, res) => {
-  const model = await order.findOne({
-    where: { id: req.params.id, deleted: false },
-    include: user,
-    attributes: { exclude: ['createdAt', 'updatedAt', 'password', 'deleted'] }
-  });
-  res.status(200).json(model);
+  const query = {
+    include: { model: user, attributes: ['id', 'fullName', 'email'] }
+  };
+  await crudController.findModel(order, query, req, res);
 };
 
 exports.createOrder = async (req, res) => {
@@ -24,19 +22,13 @@ exports.createOrder = async (req, res) => {
   // Set the full price and final price in order
   await setOrderPrice(req, res);
 
-  const { id, userId, deliveryAddress, deliveryDate, orderStatus, itemList, finalPrice, fullPrice, currency } = req.body;
-  const orderDate = new Date();
+  const { id, userId, itemList } = req.body;
+  const orderDate = new Date().toISOString().split('T')[0];
   const model = await order.create({
     id,
     userId,
-    deliveryAddress,
-    deliveryDate,
-    orderDate,
-    orderStatus,
     itemList,
-    finalPrice,
-    fullPrice,
-    currency
+    orderDate
   });
   res.status(201).json(model);
 };
@@ -74,7 +66,7 @@ exports.completeOrder = async (req, res) => {
 
 // Function that returns orders for the logged in user
 exports.getCustomerOrders = async (req, res) => {
-  const query = req.body.orderStatus === undefined ? orderStatuses : req.body.orderStatus;
+  const query = req.body.orderStatus === undefined ? ORDER_STATUS_LIST : req.body.orderStatus;
   const customerOrders = await order.findAll({
     where: {
       userId: res.locals.user.id,

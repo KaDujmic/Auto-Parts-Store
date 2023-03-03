@@ -3,12 +3,8 @@ const { NotFoundError } = require('../validators/errors');
 const crudController = require('./crudController');
 
 exports.getRole = async (req, res) => {
-  const foundRole = await role.findOne({
-    where: { name: req.params.id },
-    attributes: { exclude: ['createdAt', 'updatedAt', 'deleted'] }
-
-  });
-  res.status(200).json(foundRole);
+  const query = { where: { name: req.params.id } };
+  await crudController.findModel(role, query, req, res);
 };
 
 exports.getManyRole = async (req, res) => {
@@ -28,7 +24,7 @@ exports.deleteRole = async (req, res) => {
   const model = await role.update({ deleted: true }, {
     where: { name: req.params.id }
   });
-  if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
+  if (model[0] === 0) throw new NotFoundError();
   res.status(204).json();
 };
 

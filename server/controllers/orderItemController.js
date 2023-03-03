@@ -31,7 +31,7 @@ exports.updateOrderedItem = async (req, res) => {
     returning: true,
     hooks: true
   });
-  if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
+  if (model[0] === 0) throw new NotFoundError();
   orderStatusCheck(req, res);
   res.status(200).json(model);
 };

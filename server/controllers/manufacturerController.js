@@ -2,7 +2,7 @@ const { manufacturer } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getManufacturer = async (req, res) => {
-  await crudController.findModel(manufacturer, req, res);
+  await crudController.findModel(manufacturer, null, req, res);
 };
 
 exports.getManyManufacturer = async (req, res) => {

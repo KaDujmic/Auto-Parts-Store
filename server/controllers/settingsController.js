@@ -8,11 +8,8 @@ exports.getManySetting = async (req, res) => {
 };
 
 exports.getSettings = async (req, res) => {
-  const foundSetting = await settings.findOne({
-    where: { key: req.params.id, deleted: false },
-    hooks: true
-  });
-  res.status(200).json(foundSetting);
+  const query = { where: { key: req.params.id } };
+  await crudController.findModel(settings, query, req, res);
 };
 
 exports.updateSettings = async (req, res) => {
