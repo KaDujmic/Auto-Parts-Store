@@ -4,10 +4,15 @@ const EXCLUDE_LIST = ['createdAt', 'updatedAt', 'password', 'deleted'];
 exports.findManyModel = async (Model, customQuery, req, res) => {
   // Default query used by all requests
   const query = {
-    order: [['id', 'ASC']],
+    attributes: { exclude: EXCLUDE_LIST },
     where: [{ deleted: false }],
-    attributes: { exclude: EXCLUDE_LIST }
+    order: [],
+    include: []
   };
+  // Some tables do not use the standard ID as the Primary Key
+  if (!('order' in customQuery)) {
+    query.order.push(['id', 'ASC']);
+  }
 
   // Addition of any custom query parameters forwarded to this function
   if (customQuery) {
@@ -25,6 +30,7 @@ exports.findManyModel = async (Model, customQuery, req, res) => {
 
     query.offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1);
     query.limit = Number(process.env.DEFAULT_LIMIT);
+
     const pageCount = await findNumberOfPages(Model, query);
 
     res.set('Access-Control-Expose-Headers', 'X-Total-Pages');

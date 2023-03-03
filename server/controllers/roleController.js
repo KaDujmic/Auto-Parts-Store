@@ -12,8 +12,8 @@ exports.getRole = async (req, res) => {
 };
 
 exports.getManyRole = async (req, res) => {
-  const foundRoles = await role.findAll({ where: { deleted: false } });
-  res.status(200).json(foundRoles);
+  const query = { order: [['name', 'ASC']] };
+  await crudController.findManyModel(role, query, req, res);
 };
 
 exports.updateRole = async (req, res) => {

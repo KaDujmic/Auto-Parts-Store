@@ -1,11 +1,10 @@
+const crudController = require('./crudController');
 const { notification } = require('../db/models');
 const { NotFoundError } = require('../validators/errors');
 
 exports.getManyNotification = async (req, res) => {
-  const foundNotifications = await notification.findAll({
-    where: { deleted: false }
-  });
-  res.status(200).json(foundNotifications);
+  const query = { order: [['userId', 'ASC']] };
+  await crudController.findManyModel(notification, query, req, res);
 };
 
 exports.getNotification = async (req, res) => {

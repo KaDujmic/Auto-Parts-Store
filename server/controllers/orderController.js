@@ -5,17 +5,8 @@ const { orderConfirmEmail, orderArrivedEmail } = require('../services/notificati
 const orderStatuses = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
 exports.getManyOrder = async (req, res) => {
-  const offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1) || 0;
-  const limit = Number(process.env.DEFAULT_LIMIT);
-  const models = await order.findAll({
-    order: [['id', 'ASC']],
-    where: { deleted: false },
-    include: user,
-    offset,
-    limit,
-    attributes: { exclude: ['createdAt', 'updatedAt', 'password', 'deleted'] }
-  });
-  res.status(200).json({ models });
+  const query = { include: user };
+  await crudController.findManyModel(order, query, req, res);
 };
 
 exports.getOrder = async (req, res) => {
