@@ -1,9 +1,10 @@
 const { settings } = require('../db/models');
 const { verifySettings, setSettings } = require('../services/settingsService');
+const crudController = require('./crudController');
 
 exports.getManySetting = async (req, res) => {
-  const foundSettings = await settings.findAll({ where: { deleted: false } });
-  res.status(200).json(foundSettings);
+  const query = { order: [['key', 'ASC']] };
+  await crudController.findManyModel(settings, query, req, res);
 };
 
 exports.getSettings = async (req, res) => {
