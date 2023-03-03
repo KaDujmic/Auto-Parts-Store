@@ -12,7 +12,6 @@ exports.getManyItem = async (req, res) => {
 
   if (Object.keys(query).length !== 0 && req.query.page !== 'count') {
     // Find filtered items
-    console.log(query);
     await crudController.findManyModel(item, query, req, res);
   } else {
     // Find complete list of Items
