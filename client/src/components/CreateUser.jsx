@@ -36,13 +36,14 @@ const CreateUser = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            paddingTop: 4,
+            paddingBottom: 4,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, backgroundColor: 'white', padding: 4, borderRadius: 3 }}>
             <TextField
               margin="normal"
               required

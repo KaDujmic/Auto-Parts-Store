@@ -40,10 +40,8 @@ const OrderList = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
-        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-      </Grid>
-        <Container sx={{ py: 6 }}  maxWidth="md">
-          <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Container sx={{ py: 6, justifyContent: 'center' }}  maxWidth="lg">
+          <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }}>
             {
               orders.map((x) => (
               <OrderCard order={x} key={x.id}/>

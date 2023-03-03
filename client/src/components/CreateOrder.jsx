@@ -119,17 +119,19 @@ const CreateOrder = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="md">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            paddingTop: 4,
+            paddingBottom: 4,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            
           }}
         >
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 500 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 500, backgroundColor: 'white', padding: 4, borderRadius: 3, boxShadow: 3 }}>
             {/* Autocomplete Element serves as a dropdown email list of users the order can be submitted for.*/}
             <InputLabel id="customer-email-list">Customer Email</InputLabel>
             <Autocomplete

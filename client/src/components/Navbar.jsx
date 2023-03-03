@@ -21,6 +21,7 @@ export default function ButtonAppBar() {
     if( role === 'Salesperson' ) {
       return(
         <>
+          <Button color="inherit" onClick={()=> {handleClick('/dashboard')}}>Dashboard</Button>
           <Button color="inherit" onClick={()=> {handleClick('/order')}}>Orders</Button>
           <Button color="inherit" onClick={()=> {handleClick('/order-create')}}>Create Order</Button>
           <Button color="inherit" onClick={()=> {handleClick('/user')}}>Create Customer</Button>
