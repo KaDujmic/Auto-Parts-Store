@@ -25,7 +25,7 @@ const ItemList = () => {
   async function fetchData ( page,selectedCategoryId,selectedManufacturerId) {
     try {
       const params = {}
-      if(selectedCategoryId && selectedCategoryId) {
+      if(selectedCategoryId && selectedManufacturerId) {
         params.category = selectedCategoryId
         params.manufacturer = selectedManufacturerId
       }    
@@ -37,7 +37,7 @@ const ItemList = () => {
       }
       let response = await axios.get(`http://localhost:4000/item?page=${page}`,{params})
       setItems(response.data)
-      
+
       setPageCount(+response.headers['x-total-pages'])
     }
     catch(err)
