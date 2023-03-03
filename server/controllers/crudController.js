@@ -1,4 +1,4 @@
-const { NotFoundError } = require('../validators/errors');
+const { NotFoundError, ValidationError } = require('../validators/errors');
 const EXCLUDE_LIST = ['createdAt', 'updatedAt', 'password', 'deleted'];
 
 exports.findManyModel = async (Model, customQuery, req, res) => {
@@ -16,10 +16,18 @@ exports.findManyModel = async (Model, customQuery, req, res) => {
     }
   }
 
-  // If the request is asking for a specific page, do not query/return the entire entity
+  // If the request is asking for a specific page, do not return the entire entity
+  // The specific page will be returned, and the total number of pages for frontend pagination purposes
   if (req.query.page) {
+    if (isNaN(req.query.page) || req.query.page < 1) {
+      throw new ValidationError('Page requested is not a valid number.');
+    }
+
     query.offset = process.env.DEFAULT_LIMIT * (Number(req.query.page) - 1);
     query.limit = Number(process.env.DEFAULT_LIMIT);
+    const pageCount = await findNumberOfPages(Model, query);
+
+    res.set('page-count', pageCount);
   }
 
   const models = await Model.findAll(query);
@@ -57,13 +65,13 @@ exports.deleteModel = async (Model, req, res) => {
   res.status(204).json(model);
 };
 
-exports.findNumberOfPages = async (Model, query, req, res) => {
+const findNumberOfPages = async (Model, query) => {
   const rowCount = await Model.count(query);
   const pageCount = Math.ceil(rowCount / process.env.DEFAULT_LIMIT);
 
-  if (pageCount > 0) {
-    res.status(200).json(pageCount);
-  } else {
+  if (pageCount <= 0) {
     throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
   }
+
+  return (pageCount);
 };
