@@ -19,6 +19,7 @@ module.exports = {
       {
         id: '5de49635-dbd9-4ecd-9705-53731f42033b',
         user_id: '805a10d7-1735-4a6c-a4cd-0be767aaeca1',
+        order_status: 'pending_confirmation',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
@@ -32,6 +33,32 @@ module.exports = {
         id: 'fdc0d18f-55f9-48be-b42e-9979da9d69f2',
         user_id: '805a10d7-1735-4a6c-a4cd-0be767aaeca1',
         order_status: 'ready_for_pickup',
+        item_list: [
+          { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
+          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+        ],
+        currency: 'USD',
+        created_at: new Date(),
+        updated_at: new Date(),
+        deleted: false
+      },
+      {
+        id: '501f51c5-e288-4771-a415-d26c9e4b63b7',
+        user_id: '805a10d7-1735-4a6c-a4cd-0be767aaeca1',
+        order_status: 'pending_confirmation',
+        item_list: [
+          { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
+          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+        ],
+        currency: 'USD',
+        created_at: new Date(),
+        updated_at: new Date(),
+        deleted: false
+      },
+      {
+        id: '331bdd11-040f-467a-84f5-32e78606f5e9',
+        user_id: '805a10d7-1735-4a6c-a4cd-0be767aaeca1',
+        order_status: 'pending_delivery',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
