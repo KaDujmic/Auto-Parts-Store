@@ -27,6 +27,7 @@ exports.findManyModel = async (Model, customQuery, req, res) => {
     query.limit = Number(process.env.DEFAULT_LIMIT);
     const pageCount = await findNumberOfPages(Model, query);
 
+    res.set('Access-Control-Expose-Headers', 'X-Total-Pages');
     res.set('X-Total-Pages', pageCount);
   }
 

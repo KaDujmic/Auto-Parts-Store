@@ -37,6 +37,7 @@ const ItemList = () => {
       }
       let response = await axios.get(`http://localhost:4000/item?page=${page}`,{params})
       setItems(response.data)
+      
       setPageCount(+response.headers['x-total-pages'])
     }
     catch(err)
