@@ -9,14 +9,29 @@ import Container from '@mui/material/Container';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './context/authContext';
 import PendingItems from './components/PendingItems'
+import Dashboard from './components/Dashboard'
 
 function App() {
 	return (
 		<AuthProvider>
 			<Router>
 				<Navbar></Navbar>
-				<Container maxWidth="sm">
+				<Container maxWidth="lg" sx={{
+					backgroundColor: (theme) =>
+					theme.palette.mode === 'light'
+						? theme.palette.grey[100]
+						: theme.palette.grey[900],
+					minHeight: '1000px',
+					paddingTop: '10px'
+				}}>
 					<Routes>
+						<Route
+							exact
+							path="/dashboard"
+							element={<>
+								<Dashboard />
+							</>}
+						></Route>
 						<Route
 							exact
 							path="/login"

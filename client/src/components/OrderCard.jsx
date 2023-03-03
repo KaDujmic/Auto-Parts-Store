@@ -8,10 +8,9 @@ const OrderCard = ( { order } ) => {
     <Paper
       sx={{
         p: 2,
-        margin: '5%',
+        margin: '2%',
         padding: '4%',
         maxWidth: 500,
-        backgroundColor: '#d3d3d3',
         flexGrow: 1,
       }}
     >

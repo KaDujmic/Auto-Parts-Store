@@ -23,28 +23,27 @@ const OrderList = () => {
           headers: { Authorization: `Bearer ${jwt}` }
         };
         let response = await axios.get(`http://localhost:4000/order`, config)
-        setOrders(response.data.models)
+        setOrders(response.data)
         setIsLoading(false)
       }
       catch(err)
       {
+        console.log(err);
         localStorage.removeItem("token")
         navigate("/login")
         console.log(err.response.data)
       }
     }
    fetchData()
-  }, [])
+  }, [navigate])
 
   return (
     isLoading ? <div>Loading...</div> : 
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
-        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-      </Grid>
-        <Container sx={{ py: 6 }}  maxWidth="md">
-          <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Container sx={{ py: 8, justifyContent: 'center' }}  maxWidth="lg">
+          <Grid container columns={{ xs: 12, sm: 12, md: 12 }}>
             {
               orders.map((x) => (
               <OrderCard order={x} key={x.id}/>
