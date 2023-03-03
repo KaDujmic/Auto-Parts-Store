@@ -11,7 +11,7 @@ const errorMiddleware = async (err, req, res, next) => {
   } else if (err.name === 'AuthorizationError') {
     res.status(err.statusCode).json({ message: err.message });
   } else if (err.name === 'NotFoundError') {
-    res.status(err.statusCode).json({ message: err.message });
+    res.status(err.statusCode).json({ message: 'Requested resource could not be found. Please review the submitted parameters.' });
   } else if (err.name === 'SequelizeUniqueConstraintError') {
     res.status(400).json({ message: 'Item has to be unique' });
   } else {
