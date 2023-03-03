@@ -37,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID
     },
     userId: DataTypes.UUID,
-    deliveryAddress: DataTypes.STRING,
     orderDate: DataTypes.DATEONLY,
     orderStatus: DataTypes.STRING,
     itemList: DataTypes.JSONB,

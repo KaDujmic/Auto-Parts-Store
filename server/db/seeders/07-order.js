@@ -67,6 +67,17 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
+      }, {
+        id: '94aa7d75-08fa-495a-84ef-b077edbe5e3a',
+        user_id: '20c1297e-58f6-4587-842b-231ff6583086',
+        item_list: [
+          { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
+          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+        ],
+        currency: 'USD',
+        created_at: new Date(),
+        updated_at: new Date(),
+        deleted: false
       }
     ], {}, { item_list: { type: new Sequelize.JSONB() } });
   },
