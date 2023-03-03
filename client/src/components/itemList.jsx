@@ -21,21 +21,6 @@ const ItemList = () => {
   const [selectedManufacturer, setSelectedManufacturer] = useState({})
   const [page, setPage] = useState(1)
   const [pageCount, setPageCount] = useState(0)
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       let response = await axios.get(`http://localhost:4000/item?page=count`)
-  //       setPageCount(response.data)
-  //       console.log(page)
-  //     }
-  //     catch(err)
-  //     {
-  //       console.log(err)
-  //     }
-  //   }
-  //  fetchData()
-  // }, [])
   
   async function fetchData ( page,selectedCategoryId,selectedManufacturerId) {
     try {
