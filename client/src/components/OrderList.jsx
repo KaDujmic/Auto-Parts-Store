@@ -23,11 +23,12 @@ const OrderList = () => {
           headers: { Authorization: `Bearer ${jwt}` }
         };
         let response = await axios.get(`http://localhost:4000/order`, config)
-        setOrders(response.data.models)
+        setOrders(response.data)
         setIsLoading(false)
       }
       catch(err)
       {
+        console.log(err);
         localStorage.removeItem("token")
         navigate("/login")
         console.log(err.response.data)

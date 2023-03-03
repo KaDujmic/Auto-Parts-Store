@@ -21,7 +21,7 @@ export default function Items() {
             headers: { Authorization: `Bearer ${jwt}` }
         };
             let response = await axios.get(`http://localhost:4000/order`, config)
-            setDashboardOrder(response.data.models.splice(0,3))
+            setDashboardOrder(response.data.splice(0,3))
     }
           catch(err)
           {
