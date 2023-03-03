@@ -3,43 +3,69 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import ItemCard from './ItemCard';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import SearchField from './Search';
 import FilterCategory from './FilterCategory';
 import FilterManufacturer from './FilterManufacturer';
-import PaginationLink from './Pagination';
 
 // Fetch all items from backend
 const theme = createTheme();
 const ItemList = () => {
   const [items, setItems] = useState([])
   const [searchText, setSearchText] = useState('') 
-  const [selectedCategory, setSelectedCategory] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState({})
   const [selectedManufacturer, setSelectedManufacturer] = useState({})
+  const [page, setPage] = useState(1)
+  const [pageCount, setPageCount] = useState(0)
 
-  async function fetchData (selectedCategoryId,selectedManufacturerId) {
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       let response = await axios.get(`http://localhost:4000/item?page=count`)
+  //       setPageCount(response.data)
+  //       console.log(page)
+  //     }
+  //     catch(err)
+  //     {
+  //       console.log(err)
+  //     }
+  //   }
+  //  fetchData()
+  // }, [])
+  
+  async function fetchData ( page,selectedCategoryId,selectedManufacturerId) {
     try {
       const params = {}
-      if(selectedCategoryId) {
+      if(selectedCategoryId && selectedCategoryId) {
         params.category = selectedCategoryId
+        params.manufacturer = selectedManufacturerId
       }    
-      if(selectedManufacturerId) {
+      else if(selectedManufacturerId) {
         params.manufacturer = selectedManufacturerId
       }
-      console.log(params,'params')
-      let response = await axios.get(`http://localhost:4000/item`,{params})
+      else if(selectedCategoryId) {
+        params.category = selectedCategoryId
+      }
+      let response = await axios.get(`http://localhost:4000/item?page=${page}`,{params})
       setItems(response.data)
+      setPageCount(+response.headers['x-total-pages'])
     }
     catch(err)
     {
       console.log(err)
     }}
-  useEffect(() => {
-    fetchData(undefined, undefined)    
-  }, [])
+  const handleChange = async(event,value) => {
+      setPage(value);
+    };
 
+  useEffect(() => {
+    fetchData(page, selectedCategory?.id, selectedManufacturer?.id) 
+  }, [selectedCategory,selectedManufacturer, page])
+  
     //Filter data only when items or query parameters change
       const searchData =
       items.filter((item) => {
@@ -55,12 +81,12 @@ const ItemList = () => {
       <Grid  item xs={12} justifyContent="center"><SearchField onChange={e => setSearchText(e.target.value)}/></Grid>
       <Grid  item xs={6} justifyContent="center"><FilterCategory onChange={async(e, value) => { 
         setSelectedCategory(value)
-        await fetchData(value ? value.id : undefined, selectedManufacturer);
+        await fetchData(page, value ? value.id : undefined, selectedManufacturer?.id);
 
       } }  /></Grid>
       <Grid  item xs={6} justifyContent="center"><FilterManufacturer onChange={async(e, value) => { 
         setSelectedManufacturer(value)
-        await fetchData(selectedCategory, value ? value.id : undefined);
+        await fetchData( page, selectedCategory?.id, value ? value.id : undefined);
 
       } }/></Grid>
       </Grid></Container>
@@ -70,7 +96,9 @@ const ItemList = () => {
             <ItemCard item={x} key={x.id}/>
            ))}</Grid>
         </Container>
-        <PaginationLink></PaginationLink>
+        <Stack spacing={2}>
+      <Pagination count={+pageCount} page={page} onChange={handleChange} />
+    </Stack>
       </main>
     </ThemeProvider>
   );
