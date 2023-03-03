@@ -1,4 +1,4 @@
-const { Sequelize, user, item, order_item } = require('../db/models');
+const { Sequelize, user, item, order_item, order } = require('../db/models');
 const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('../validators/errors');
@@ -87,4 +87,16 @@ exports.setOrderPrice = async (req, res) => {
   req.body.currency = customer.currency;
   req.body.fullPrice = customer.currency === 'EUR' ? fullPrice : (fullPrice * customerCurrency).toFixed(2);
   req.body.finalPrice = (fullPrice - (fullPrice * (customer.discount / 100))).toFixed(2);
+};
+
+exports.checkCustomerOrders = async (req, res) => {
+  // const customer = await user.findByPk(req.body.userId);
+  const orders = await order.findAll({
+    where: {
+      userId: req.body.userId
+    }
+  });
+  if (orders.length > 4 && orders.orderStatus !== 'completed') {
+    throw new ValidationError('User already has 5 orders that are not completed');
+  };
 };
