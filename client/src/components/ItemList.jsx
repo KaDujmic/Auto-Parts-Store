@@ -82,7 +82,7 @@ const ItemList = () => {
             <ItemCard item={x} key={x.id}/>
           ))}</Grid>
         </Container>
-        <Stack spacing={2} paddingTop={2} paddingLeft={62.5}>
+        <Stack spacing={2} paddingTop={2} paddingLeft={50}>
           <Pagination count={+pageCount} page={page} onChange={handleChange} />
         </Stack>
       </Box>
