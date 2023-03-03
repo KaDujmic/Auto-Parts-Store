@@ -2,15 +2,15 @@ const { item } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getItem = async (req, res) => {
-  await crudController.findModel(item, req, res);
+  await crudController.findModel(item, null, req, res);
 };
 
 exports.getManyItem = async (req, res) => {
-  // See if Category or Manufacturer query parameters exist, and add to the 'where' query option if they do
+  // See if Category or Manufacturer query parameters exist (filtering)
   const query = {};
   query.where = createWhereOption(req.query);
 
-  if (Object.keys(query).length !== 0 && req.query.page !== 'count') {
+  if (Object.keys(query).length !== 0) {
     // Find filtered items
     await crudController.findManyModel(item, query, req, res);
   } else {

@@ -2,7 +2,7 @@ const { category } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getCategory = async (req, res) => {
-  await crudController.findModel(category, req, res);
+  await crudController.findModel(category, null, req, res);
 };
 
 exports.getManyCategory = async (req, res) => {

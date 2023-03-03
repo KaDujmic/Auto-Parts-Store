@@ -9,8 +9,8 @@ exports.findManyModel = async (Model, customQuery, req, res) => {
     order: [],
     include: []
   };
-  // Some tables do not use the standard ID as the Primary Key
-  if (!('order' in customQuery)) {
+  // If customQuery is not handling ordering, use this default
+  if (customQuery && !('order' in customQuery)) {
     query.order.push(['id', 'ASC']);
   }
 
@@ -41,11 +41,26 @@ exports.findManyModel = async (Model, customQuery, req, res) => {
   res.status(200).json(models);
 };
 
-exports.findModel = async (Model, req, res) => {
-  const model = await Model.findOne({
-    where: { id: req.params.id, deleted: false },
-    attributes: { exclude: EXCLUDE_LIST }
-  });
+exports.findModel = async (Model, customQuery, req, res) => {
+  const query = {
+    attributes: { exclude: EXCLUDE_LIST },
+    where: [{ deleted: false }],
+    include: []
+  };
+  // If customQuery is not handling search by unique value, use this default
+  if (customQuery && !('where' in customQuery)) {
+    query.where.push({ id: req.params.id });
+  }
+
+  // Addition of any custom query parameters forwarded to this function
+  if (customQuery) {
+    for (const property in customQuery) {
+      query[property].push(customQuery[property]);
+    }
+  }
+
+  const model = await Model.findOne(query);
+  if (!model) throw new NotFoundError();
   res.status(200).json(model);
 };
 
@@ -59,7 +74,7 @@ exports.updateModel = async (Model, req, res) => {
     where: { id: req.params.id, deleted: false },
     returning: true
   });
-  if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
+  if (model[0] === 0) throw new NotFoundError();
   res.status(200).json(model);
 };
 
@@ -68,7 +83,7 @@ exports.deleteModel = async (Model, req, res) => {
     where: { id: req.params.id },
     returning: true
   });
-  if (model[0] === 0) throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
+  if (model[0] === 0) throw new NotFoundError();
   res.status(204).json(model);
 };
 
@@ -77,7 +92,7 @@ const findNumberOfPages = async (Model, query) => {
   const pageCount = Math.ceil(rowCount / process.env.DEFAULT_LIMIT);
 
   if (pageCount <= 0) {
-    throw new NotFoundError('Requested resource could not be found. Please review the submitted parameters.');
+    throw new NotFoundError();
   }
 
   return (pageCount);
