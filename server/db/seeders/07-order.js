@@ -68,19 +68,6 @@ module.exports = {
         updated_at: new Date(),
         deleted: false
       }
-      // {
-      //   id: 'f2f11fe9-b3b1-4de1-a4a2-8661fb80f7a1',
-      //   user_id: '805a10d7-1735-4a6c-a4cd-0be767aaeca1',
-      //   order_status: 'ready_for_pickup',
-      //   item_list: [
-      //     { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
-      //     { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
-      //   ],
-      //   currency: 'USD',
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      //   deleted: false
-      // }
     ], {}, { item_list: { type: new Sequelize.JSONB() } });
   },
 
