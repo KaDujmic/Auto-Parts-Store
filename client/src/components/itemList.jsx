@@ -9,7 +9,7 @@ import axios from 'axios';
 import SearchField from './Search';
 import FilterCategory from './FilterCategory';
 import FilterManufacturer from './FilterManufacturer';
-import PaginationLink from './Pagination';
+//import PaginationLink from './Pagination';
 
 // Fetch all items from backend
 const theme = createTheme();
@@ -70,7 +70,6 @@ const ItemList = () => {
             <ItemCard item={x} key={x.id}/>
            ))}</Grid>
         </Container>
-        <PaginationLink></PaginationLink>
       </main>
     </ThemeProvider>
   );
