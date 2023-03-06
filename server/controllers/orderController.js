@@ -1,7 +1,7 @@
 const { order, item, order_item, notification, user } = require('../db/models');
 const crudController = require('./crudController');
 const { checkAllElements, setOrderPrice, retrieveItemOnOrder, checkCustomerOrders } = require('../services/orderService');
-const { orderConfirmEmail, orderArrivedEmail } = require('../services/notificationService');
+const { orderConfirmEmail, orderReadyEmail } = require('../services/notificationService');
 const ORDER_STATUS_LIST = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
 exports.getManyOrder = async (req, res) => {
@@ -47,9 +47,7 @@ exports.deleteOrder = async (req, res) => {
 // Once the order is created, this function will confirm it and remove from storage or order items
 exports.confirmOrder = async (req, res) => {
   const pendingOrder = await order.findByPk(req.params.id);
-  await retrieveItemOnOrder(pendingOrder.dataValues, req, res);
-  pendingOrder.orderStatus = 'pending_delivery';
-  pendingOrder.save();
+  await retrieveItemOnOrder(pendingOrder, req, res);
   orderConfirmEmail(pendingOrder.userId);
   res.status(200).json(pendingOrder);
 };
@@ -97,6 +95,6 @@ exports.orderStatusCheck = async (req, res) => {
     });
     currentOrder.orderStatus = 'ready_for_pickup';
     currentOrder.save();
-    orderArrivedEmail(req.params.firstId);
+    orderReadyEmail(req.params.firstId);
   }
 };
