@@ -13,6 +13,8 @@ module.exports = {
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 51 }
         ],
         currency: 'EUR',
+        full_price: 153,
+        final_price: 140,
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -26,6 +28,8 @@ module.exports = {
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
         ],
         currency: 'USD',
+        full_price: 201,
+        final_price: 190,
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -39,6 +43,8 @@ module.exports = {
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
         ],
         currency: 'USD',
+        full_price: 100,
+        final_price: 50,
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -52,6 +58,8 @@ module.exports = {
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
         ],
         currency: 'USD',
+        full_price: 303,
+        final_price: 280,
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -65,6 +73,8 @@ module.exports = {
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
         ],
         currency: 'USD',
+        full_price: 122,
+        final_price: 99,
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -77,6 +87,8 @@ module.exports = {
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
         ],
         currency: 'USD',
+        full_price: 1000,
+        final_price: 970,
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
