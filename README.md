@@ -7,7 +7,8 @@
     <li>
       <a href="#about-the-app">About The App</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#notable-backend-features">Backend</a></li>
+        <li><a href="#notable-frontend-features">Frontend</a></li>
       </ul>
     </li>
     <li>
@@ -27,18 +28,18 @@
 The Auto Parts Store is a group project assigned during the Agilathon 2023 dev internship.<br>
 It features a store system where a customer can order different vehicle parts.
 
-### Notable Features:
+### Notable Backend Features:
 * REST API
 * PostgreSQL database
 * Cron job scheduling for repeating functions (e.g. notifications, currency rate updates)
-* Email notifications for both the customers, and employee
+* Email notifications for both the customers, and employee in charge of item shipments
 * Caching of commonly used data
-* Ability for customers to place multiple item orders
+* Ability for employees to place multiple item orders for specific customers
 * Ability for items to be ordered to the shop, in the event that our stock of those items ran out
 * Daily updates to our supported currencies and their rates, via a call to a third party API
 * Authorization based on two roles, customer and sales person
 
-### Built With:
+#### Backend Built With:
 
 * [![nodejs.shield]][nodejs.url]
 * [![express.shield]][express.url]
@@ -47,6 +48,21 @@ It features a store system where a customer can order different vehicle parts.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+### Notable Frontend Features:
+* Authorization system enabling most features for Sales Person accounts only
+* Dashboard displaying a high level of important information
+* Creation of orders and users
+* Review of all active orders for a sales person account, and customer specific orders for a logged in customer
+* Review of pending items shipped to the store
+* All visitors (even if not logged in) can view the list of available items in our store
+* List of items supports advanced filtering based on manufacturer and/or category, in addition to an autocomplete search functionality
+
+#### Frontend Built With:
+
+* [![react.shield]][react.url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 
@@ -64,28 +80,33 @@ It features a store system where a customer can order different vehicle parts.
    ```
    git clone https://github.com/agilathon/auto_parts_store.git
    ```
-2. Install NPM packages
+2. Install NPM packages (In both the server and client subfolders)
    ```
    npm install
    ```
 3. Rename and modify the .env.example file in the working directory, to suit your needs
 
-4. Run the following command to setup the database containers and volumes:
+4. In the server folder run the following command to setup the database containers and volumes:
    ```
    docker compose up
    ```
 
-5. Run the following commands to migrate and seed the database:
+5. In the server folder run the following commands to migrate and seed the database:
    ```
     npm run migrate:{env}
     npm run seed:{env}
    ```
    
-6. Run the following command to start the server:
+6. In the server folder run the following command to start the backend:
    ```
     npm run start:{env}
    ```
- 
+
+7. In the client folder run the following command to start the frontend:
+   ```
+    npm start
+   ```
+   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -152,3 +173,5 @@ Third Party API used for retrieving currency rates: <a href="https://exchangerat
 [postgres.url]: https://www.postgresql.org/
 [sequelize.shield]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white
 [sequelize.url]: https://sequelize.org/
+[react.shield]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
+[react.url]: https://reactjs.org/
