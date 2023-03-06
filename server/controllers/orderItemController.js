@@ -26,7 +26,7 @@ exports.getOrderedItems = async (req, res) => {
 // Function to change ordered item status to delivered
 exports.updateOrderedItem = async (req, res) => {
   const { firstId, secondId } = req.params;
-  const model = await order_item.update({ status: 'delivered' }, {
+  const model = await order_item.update({ status: 'delivered', deleted: true }, {
     where: { orderId: firstId, itemId: secondId, deleted: false },
     returning: true
   });

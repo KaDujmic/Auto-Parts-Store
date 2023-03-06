@@ -28,6 +28,9 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
+      image_link: {
+        type: Sequelize.STRING
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE
