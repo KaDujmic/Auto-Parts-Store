@@ -6,7 +6,7 @@ exports.getItem = async (req, res) => {
 };
 
 exports.getManyItem = async (req, res) => {
-  // Populate query.where if Category and/or Manufacturer parameters exist (for filtering)
+  // Populate query.where if Category, Manufacturer and/or Item name  parameters exist (for filtering)
   const query = {};
   query.where = createWhereOption(req.query);
 
