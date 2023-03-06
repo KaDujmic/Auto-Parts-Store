@@ -50,7 +50,7 @@ const setUpRecurrenceEmail = async function (userId, orderId) {
 exports.verifyItemArrivedEmail = async function () {
   const salesperson = await user.findOne({
     where: {
-      id: 'ac5554bb-d628-441a-ac1a-29cf60deab9c'
+      id: '20c1297e-58f6-4587-842b-231ff6583086'
     },
     attributes: ['email']
   });
