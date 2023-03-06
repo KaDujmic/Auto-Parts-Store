@@ -47,8 +47,11 @@ exports.findModel = async (Model, customQuery, req, res) => {
     where: [{ deleted: false }],
     include: []
   };
-  // If customQuery is not handling search by unique value, use this default
-  if (customQuery && !('where' in customQuery)) {
+  // If customQuery does not exist OR it does but is not handling search by unique value, use this default
+  // Two separate IF statements were required as the latter condition will throw an error in case customQuery is null
+  if (!customQuery) {
+    query.where.push({ id: req.params.id });
+  } else if (!('where' in customQuery)) {
     query.where.push({ id: req.params.id });
   }
 
@@ -75,7 +78,7 @@ exports.updateModel = async (Model, req, res) => {
     returning: true
   });
   if (model[0] === 0) throw new NotFoundError();
-  res.status(200).json(model);
+  res.status(200).json(model[1]);
 };
 
 exports.deleteModel = async (Model, req, res) => {
@@ -84,7 +87,7 @@ exports.deleteModel = async (Model, req, res) => {
     returning: true
   });
   if (model[0] === 0) throw new NotFoundError();
-  res.status(204).json(model);
+  res.status(204).json();
 };
 
 const findNumberOfPages = async (Model, query) => {
