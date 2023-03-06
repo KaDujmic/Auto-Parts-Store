@@ -12,9 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID
       },
-      delivery_address: {
-        type: Sequelize.STRING
-      },
       order_date: {
         type: Sequelize.DATEONLY
       },

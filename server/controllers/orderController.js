@@ -1,6 +1,6 @@
 const { order, item, order_item, notification, user } = require('../db/models');
 const crudController = require('./crudController');
-const { checkAllElements, setOrderPrice, retrieveItemOnOrder } = require('../services/orderService');
+const { checkAllElements, setOrderPrice, retrieveItemOnOrder, checkCustomerOrders } = require('../services/orderService');
 const { orderConfirmEmail, orderArrivedEmail } = require('../services/notificationService');
 const ORDER_STATUS_LIST = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
@@ -21,6 +21,8 @@ exports.createOrder = async (req, res) => {
   await checkAllElements(item, req, res);
   // Set the full price and final price in order
   await setOrderPrice(req, res);
+  // Block new order if user has more than 5 orders that are not completed
+  await checkCustomerOrders(req, res);
 
   const { id, userId, itemList } = req.body;
   const orderDate = new Date().toISOString().split('T')[0];
