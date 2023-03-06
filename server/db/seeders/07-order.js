@@ -7,6 +7,7 @@ module.exports = {
       {
         id: 'a1e679a5-f5a6-4070-8f3d-91ea156bcc1b',
         user_id: '20c1297e-58f6-4587-842b-231ff6583086',
+        order_status: 'pending_confirmation',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 2 },
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 51 }
@@ -59,6 +60,18 @@ module.exports = {
         id: '331bdd11-040f-467a-84f5-32e78606f5e9',
         user_id: '805a10d7-1735-4a6c-a4cd-0be767aaeca1',
         order_status: 'pending_delivery',
+        item_list: [
+          { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
+          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+        ],
+        currency: 'USD',
+        created_at: new Date(),
+        updated_at: new Date(),
+        deleted: false
+      }, {
+        id: '94aa7d75-08fa-495a-84ef-b077edbe5e3a',
+        user_id: '20c1297e-58f6-4587-842b-231ff6583086',
+        order_status: 'pending_confirmation',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
           { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }

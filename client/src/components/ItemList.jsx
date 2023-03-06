@@ -45,6 +45,7 @@ const ItemList = () => {
     {
       console.log(err)
     }}
+    
   const handleChange = async(event,value) => {
       setPage(value);
     };
@@ -69,10 +70,12 @@ const ItemList = () => {
             <Grid  item xs={6} justifyContent="center"><FilterCategory onChange={async(e, value) => { 
               setSelectedCategory(value)
               await fetchData(page, value ? value.id : undefined, selectedManufacturer?.id);
+              setPage(1)
             } }  /></Grid>
             <Grid item xs={6} justifyContent="center"><FilterManufacturer onChange={async(e, value) => { 
               setSelectedManufacturer(value)
               await fetchData( page, selectedCategory?.id, value ? value.id : undefined);
+              setPage(1)
             } }/></Grid>
           </Grid>
         </Container>

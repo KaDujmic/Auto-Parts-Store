@@ -3,6 +3,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import OrderCard from './OrderCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -14,6 +16,8 @@ const OrderList = () => {
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [page, setPage] = useState(1)
+  const [pageCount, setPageCount] = useState(0)
  
   useEffect(() => {
     async function fetchData() {
@@ -22,9 +26,10 @@ const OrderList = () => {
         const config = {
           headers: { Authorization: `Bearer ${jwt}` }
         };
-        let response = await axios.get(`http://localhost:4000/order`, config)
+        let response = await axios.get(`http://localhost:4000/order?page=${page}`, config)
         setOrders(response.data)
         setIsLoading(false)
+        setPageCount(+response.headers['x-total-pages'])
       }
       catch(err)
       {
@@ -35,7 +40,10 @@ const OrderList = () => {
       }
     }
    fetchData()
-  }, [navigate])
+  }, [navigate,page])
+  const handleChange = async(event,value) => {
+    setPage(value);
+  };
 
   return (
     isLoading ? <div>Loading...</div> : 
@@ -51,6 +59,9 @@ const OrderList = () => {
             }
           </Grid>
         </Container>
+        <Stack spacing={2} paddingTop={2} paddingLeft={62.5}>
+          <Pagination count={+pageCount} page={page} onChange={handleChange} />
+        </Stack>
       </main>
     </ThemeProvider>
   );
