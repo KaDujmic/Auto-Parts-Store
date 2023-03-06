@@ -6,17 +6,11 @@ exports.getItem = async (req, res) => {
 };
 
 exports.getManyItem = async (req, res) => {
-  // See if Category or Manufacturer query parameters exist (filtering)
+  // Populate query.where if Category and/or Manufacturer parameters exist (for filtering)
   const query = {};
   query.where = createWhereOption(req.query);
 
-  if (Object.keys(query).length !== 0) {
-    // Find filtered items
-    await crudController.findManyModel(item, query, req, res);
-  } else {
-    // Find complete list of Items
-    await crudController.findManyModel(item, null, req, res);
-  }
+  await crudController.findManyModel(item, query, req, res);
 };
 
 exports.updateItem = async (req, res) => {

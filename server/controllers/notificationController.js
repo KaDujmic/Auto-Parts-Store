@@ -7,11 +7,8 @@ exports.getManyNotification = async (req, res) => {
   await crudController.findManyModel(notification, query, req, res);
 };
 
-exports.getNotification = async (req, res) => {
-  const query = {
-    where: { order_id: req.params.id },
-    order: [['userId', 'ASC']]
-  };
+exports.getOrderNotifications = async (req, res) => {
+  const query = { where: { order_id: req.params.id } };
   await crudController.findModel(notification, query, req, res);
 };
 

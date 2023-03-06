@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { getManyNotification, getNotification, deleteNotification } = require('../controllers/notificationController');
+const { getManyNotification, getOrderNotifications, deleteNotification } = require('../controllers/notificationController');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');
 const { callbackErrorHandler } = require('../validators/errorHandler');
 
@@ -14,7 +14,7 @@ router
 
 router
   .route('/:id')
-  .get(restrictTo('Salesperson'), callbackErrorHandler(getNotification))
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getOrderNotifications))
   .delete(restrictTo('Salesperson'), callbackErrorHandler(deleteNotification));
 
 module.exports = router;

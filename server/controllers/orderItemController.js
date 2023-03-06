@@ -28,8 +28,7 @@ exports.updateOrderedItem = async (req, res) => {
   const { firstId, secondId } = req.params;
   const model = await order_item.update({ status: 'delivered' }, {
     where: { orderId: firstId, itemId: secondId, deleted: false },
-    returning: true,
-    hooks: true
+    returning: true
   });
   if (model[0] === 0) throw new NotFoundError();
   orderStatusCheck(req, res);

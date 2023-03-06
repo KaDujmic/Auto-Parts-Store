@@ -30,7 +30,8 @@ exports.createOrder = async (req, res) => {
     id,
     userId,
     itemList,
-    orderDate
+    orderDate,
+    orderStatus: 'pending_confirmation'
   });
   res.status(201).json(model);
 };
@@ -63,7 +64,7 @@ exports.completeOrder = async (req, res) => {
   await notification.update({ deleted: true }, {
     where: { orderId: req.params.id }
   });
-  res.status(200).json(completedOrder);
+  res.status(200).json(completedOrder[1]);
 };
 
 // Function that returns orders for the logged in user
