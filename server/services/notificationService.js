@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const { getCache } = require('../utils/cache.js');
-const { user, order, notification, settings, Sequelize, sequelize, order_item } = require('../db/models');
+const { item, user, order, notification, settings, Sequelize, sequelize, order_item } = require('../db/models');
 
 // Email created on order confirmation by the sales person
 exports.orderConfirmEmail = async function (customerId) {
@@ -14,7 +14,7 @@ exports.orderConfirmEmail = async function (customerId) {
 };
 
 // Email created when all items are ready for pickup by the customer
-exports.orderArrivedEmail = async function (orderId) {
+exports.orderReadyEmail = async function (orderId) {
   const customer = await order.findOne({
     where: {
       id: orderId
@@ -23,7 +23,7 @@ exports.orderArrivedEmail = async function (orderId) {
     attributes: ['user.id', 'user.full_name', 'user.email']
   });
 
-  let emailTemplate = await getSetting('order_arrived_template');
+  let emailTemplate = await getSetting('order_ready_template');
   emailTemplate = personalizeEmailTemplate(customer.user.fullName, emailTemplate);
 
   const email = createEmail(customer.user.email, emailTemplate);
@@ -34,12 +34,16 @@ exports.orderArrivedEmail = async function (orderId) {
 
 // Creates a notification table entry for a pick up reminder recurrence email
 const setUpRecurrenceEmail = async function (userId, orderId) {
-  await notification.create(
-    {
-      userId,
-      orderId,
-      lastSent: new Date().toISOString().split('T')[0]
-    });
+  try {
+    await notification.create(
+      {
+        userId,
+        orderId,
+        lastSent: new Date().toISOString().split('T')[0]
+      });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Send notifications for all items that should arrive on this date
@@ -55,11 +59,14 @@ exports.verifyItemArrivedEmail = async function () {
       deliveryDate: new Date().toISOString().split('T')[0],
       deleted: false
     },
-    attributes: ['itemId']
+    include: [item],
+    attributes: ['item.name', 'item.serial_number']
   });
-  const allItems = items.map(item => {
-    return `${item.itemId}`;
-  }).join(', ');
+
+  const allItems = items.map(order_item => {
+    const itemInfo = order_item.item;
+    return `${itemInfo.name} ${itemInfo.serialNumber}`;
+  }).join(',<br>');
 
   let emailTemplate = await getSetting('item_arrival_template');
   emailTemplate = createItemBody(allItems, emailTemplate);
@@ -129,7 +136,7 @@ const createEmail = function (emailAddress, emailTemplate) {
     from: process.env.EMAIL,
     to: emailAddress,
     subject: emailTemplate.value.title,
-    text: emailTemplate.value.body
+    html: emailTemplate.value.body
   };
 };
 

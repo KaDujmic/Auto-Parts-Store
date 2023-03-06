@@ -19,24 +19,29 @@ const OrderList = () => {
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(0);
 
-	useEffect(() => {
-		async function fetchData () {
-			try {
-				const jwt = localStorage.getItem('token');
-				const config = {
-					headers: { Authorization: `Bearer ${jwt}` }
-				};
-				const response = await axios.get(`http://localhost:4000/order?page=${page}`, config);
-				setOrders(response.data);
-				setIsLoading(false);
-				setPageCount(+response.headers['x-total-pages']);
-			} catch (err) {
-				console.log(err);
-				localStorage.removeItem('token');
-				navigate('/login');
-				console.log(err.response.data);
-			}
+	const fetchData = async () => {
+		try {
+			const jwt = localStorage.getItem('token');
+			const config = {
+				headers: { Authorization: `Bearer ${jwt}` }
+			};
+			const response = await axios.get(`http://localhost:4000/order?page=${page}`, config);
+			setOrders(response.data);
+			setIsLoading(false);
+			setPageCount(+response.headers['x-total-pages']);
+		} catch (err) {
+			console.log(err);
+			localStorage.removeItem('token');
+			navigate('/login');
+			console.log(err.response.data);
 		}
+	};
+
+	const onChangeCallback = async () => {
+		await fetchData();
+	};
+
+	useEffect(() => {
 		fetchData();
 	}, [navigate, page]);
 	const handleChange = async (event, value) => {
@@ -53,7 +58,7 @@ const OrderList = () => {
 						<Grid container columns={{ xs: 12, sm: 12, md: 12 }}>
 							{
 								orders.map((x) => (
-									<OrderCard order={x} key={x.id}/>
+									<OrderCard onChangeCallback={onChangeCallback} order={x} key={x.id}/>
 								))
 							}
 						</Grid>

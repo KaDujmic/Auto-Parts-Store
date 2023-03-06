@@ -95,7 +95,7 @@ const CreateOrder = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const filteredItemList = selectedItemList.map(({ name, ...keepAttributes }) => keepAttributes);
+		const filteredItemList = selectedItemList.map(({ name, imageLink, ...keepAttributes }) => keepAttributes);
 
 		// Set default quantity of an item to 1 if the employee hasn't specified a different value during order
 		filteredItemList.forEach(item => {

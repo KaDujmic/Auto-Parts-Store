@@ -10,7 +10,7 @@ module.exports = {
         order_status: 'pending_confirmation',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 2 },
-          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 51 }
+          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 51 }
         ],
         currency: 'EUR',
         full_price: 153,
@@ -25,7 +25,7 @@ module.exports = {
         order_status: 'pending_confirmation',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
-          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 50 }
         ],
         currency: 'USD',
         full_price: 201,
@@ -40,7 +40,7 @@ module.exports = {
         order_status: 'ready_for_pickup',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
-          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 50 }
         ],
         currency: 'USD',
         full_price: 100,
@@ -55,7 +55,7 @@ module.exports = {
         order_status: 'pending_confirmation',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
-          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 50 }
         ],
         currency: 'USD',
         full_price: 303,
@@ -70,7 +70,7 @@ module.exports = {
         order_status: 'pending_delivery',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
-          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 50 }
         ],
         currency: 'USD',
         full_price: 122,
@@ -84,7 +84,7 @@ module.exports = {
         order_status: 'pending_confirmation',
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
-          { id: 'fff3cb51-f73a-4fbd-985f-e76054e1a9ea', quantity: 50 }
+          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 50 }
         ],
         currency: 'USD',
         full_price: 1000,

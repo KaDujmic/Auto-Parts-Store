@@ -95,7 +95,8 @@ exports.orderSchema = joi.object({
         .alter({
           post: (orderSchema) => orderSchema.forbidden(),
           put: (orderSchema) => orderSchema.required()
-        })
+        }),
+      imageLink: joi.any()
     })
 }).options({ abortEarly: false });
 
@@ -136,6 +137,7 @@ exports.itemSchema = joi.object({
       post: (itemSchema) => itemSchema.required(),
       put: (itemSchema) => itemSchema.forbidden()
     }),
+  imageLink: joi.any(),
   quantity: joi.number()
     .positive()
 }).options({ abortEarly: false });

@@ -2,6 +2,7 @@ const { Sequelize, user, item, order_item, order } = require('../db/models');
 const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('../validators/errors');
+const { orderReadyEmail } = require('./notificationService');
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);
@@ -43,13 +44,15 @@ exports.checkAllElements = async (model, req, res) => {
 
 // Create item order if requested quantity is less than what is in database or subtract quantity from item entity
 exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
-  const idList = currentOrder.itemList.map(el => el.id);
+  const idList = currentOrder.dataValues.itemList.map(el => el.id);
   const items = await item.findAll({
     where: {
       id: { [Op.or]: idList }
     },
     attributes: ['id', 'quantity']
   });
+  let hadToRequestItemOrder = false;
+
   currentOrder.itemList.forEach(requestItem => {
     const orderItem = items.find(item => item.id === requestItem.id);
     if (orderItem.quantity < requestItem.quantity) {
@@ -63,11 +66,20 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
       }).catch((error) => {
         console.log(error);
       });
+      hadToRequestItemOrder = true;
     } else {
       orderItem.quantity -= requestItem.quantity;
       orderItem.save();
     }
   });
+
+  if (hadToRequestItemOrder) {
+    currentOrder.orderStatus = 'pending_delivery';
+  } else {
+    currentOrder.orderStatus = 'ready_for_pickup';
+    orderReadyEmail(currentOrder.id);
+  }
+  currentOrder.save();
 };
 
 // Calculate full price based on user currency

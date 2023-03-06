@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-export default function OrderCard ({ order }) {
+export default function OrderCard ({ order, onChangeCallback }) {
 	const navigate = useNavigate();
 
 	const handleClickConfirm = async (id) => {
@@ -15,9 +15,8 @@ export default function OrderCard ({ order }) {
 		const config = {
 			headers: { Authorization: `Bearer ${jwt}` }
 		};
-		const response = await axios.put(`http://localhost:4000/order/confirm/${id}`, {}, config);
-		console.log(response);
-		navigate('/dashboard');
+		await axios.put(`http://localhost:4000/order/confirm/${id}`, {}, config);
+		await onChangeCallback();
 	};
 
 	const handleClickComplete = async (id) => {
@@ -25,13 +24,13 @@ export default function OrderCard ({ order }) {
 		const config = {
 			headers: { Authorization: `Bearer ${jwt}` }
 		};
-		const response = await axios.put(`http://localhost:4000/order/complete/${id}`, {}, config);
-		console.log(response);
-		navigate('/dashboard');
+		await axios.put(`http://localhost:4000/order/complete/${id}`, {}, config);
+		await onChangeCallback();
 	};
 
 	OrderCard.propTypes = {
-		order: PropTypes.object
+		order: PropTypes.object,
+		onChangeCallback: PropTypes.func
 	};
 
 	const handleClickItem = () => {

@@ -48,10 +48,7 @@ exports.findModel = async (Model, customQuery, req, res) => {
     include: []
   };
   // If customQuery does not exist OR it does but is not handling search by unique value, use this default
-  // Two separate IF statements were required as the latter condition will throw an error in case customQuery is null
-  if (!customQuery) {
-    query.where.push({ id: req.params.id });
-  } else if (!('where' in customQuery)) {
+  if (!customQuery || (customQuery && !('where' in customQuery))) {
     query.where.push({ id: req.params.id });
   }
 
