@@ -32,7 +32,7 @@ const ItemCard = ({ item }) => {
 							maxWidth: { xs: 350, md: 250 }
 						}}
 						alt="HThere"
-						src={item.image_link}
+						src={item.imageLink}
 					/>
 				</CardContent>
 			</Box>
