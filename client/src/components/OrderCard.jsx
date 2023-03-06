@@ -2,8 +2,55 @@ import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const OrderCard = ( { order } ) => {
+
+export default function OrderCard ( { order } ) {
+
+  const navigate = useNavigate();
+  
+  const handleClickConfirm = async (id) => {
+    const jwt = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${jwt}` }
+    };
+    const response = await axios.put(`http://localhost:4000/order/confirm/${id}`, {}, config)
+    console.log(response);
+    navigate(`/dashboard`)
+  }
+
+  const handleClickComplete = async (id) => {
+    const jwt = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${jwt}` }
+    };
+    const response = await axios.put(`http://localhost:4000/order/complete/${id}`, {}, config)
+    console.log(response);
+    navigate(`/dashboard`)
+  }
+
+  const handleClickItem = () => {
+    navigate(`/pendingItems`)
+  }
+
+  const buttonOnOrder = (order) => {
+    if (order.orderStatus === 'pending_confirmation') {
+      return (
+        <Button color="primary" onClick={()=> {handleClickConfirm(order.id)}}>Confirm Order</Button>
+      )
+    } else if (order.orderStatus === 'ready_for_pickup') {
+      return (
+        <Button color="primary" onClick={()=> {handleClickComplete(order.id)}}>Complete Order</Button>
+      )
+    } else if (order.orderStatus === 'pending_delivery'){
+      return (
+        <Button color="primary" onClick={()=> {handleClickItem()}}>Pending Items</Button>
+      )
+    }
+  }
+
   return (
     <Paper
       sx={{
@@ -61,9 +108,10 @@ const OrderCard = ( { order } ) => {
             <Typography variant='h5'>{order.finalPrice} {order.currency}</Typography>
           </Grid>
         </Grid>
+        <Grid item xs={12} marginTop={3} >
+        { buttonOnOrder(order) }
+        </Grid>
       </Grid>
     </Paper>
   )
 }
-
-export default OrderCard

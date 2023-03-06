@@ -66,7 +66,19 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Box
+            component="img"
+            sx={{
+              height: 50,
+              width: 70,
+              paddingLeft: 1,
+              paddingTop: 0.5,
+              maxHeight: { xs: 233, md: 167 },
+              maxWidth: { xs: 350, md: 250 },
+            }}
+            alt="HI"
+            src="https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1"
+          />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -104,13 +116,6 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
           {error && 

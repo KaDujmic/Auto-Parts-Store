@@ -61,7 +61,7 @@ function DashboardContent() {
                   }}
                 >
                   <DashboardOrder />
-                  <Button onClick={()=> {handleClick('/order')}} maxWidth='sm'>See all</Button>
+                  <Button onClick={()=> {handleClick('/order')}}>See all</Button>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -69,7 +69,7 @@ function DashboardContent() {
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <DashboardItem />
-                  <Button onClick={()=> {handleClick('/pendingItems')}} maxWidth='sm'>See all</Button>
+                  <Button onClick={()=> {handleClick('/pendingItems')}}>See all</Button>
                 </Paper>
               </Grid>
             </Grid>
