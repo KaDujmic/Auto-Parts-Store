@@ -8,52 +8,52 @@ import Button from '@mui/material/Button';
 import { AuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
 
-export default function ButtonAppBar() {
-  const authContext = useContext(AuthContext);
-  const role = authContext.currentUser !== null ? authContext.currentUser.role : false;
-  const navigate = useNavigate();
+export default function ButtonAppBar () {
+	const authContext = useContext(AuthContext);
+	const role = authContext.currentUser !== null ? authContext.currentUser.role : false;
+	const navigate = useNavigate();
 
-  const handleClick = (path) => {
-    navigate(path)
-  }
+	const handleClick = (path) => {
+		navigate(path);
+	};
 
-  const navbarComponents = ()=> {
-    if( role === 'Salesperson' ) {
-      return(
-        <>
-          <Button color="inherit" onClick={()=> {handleClick('/dashboard')}}>Dashboard</Button>
-          <Button color="inherit" onClick={()=> {handleClick('/order')}}>Orders</Button>
-          <Button color="inherit" onClick={()=> {handleClick('/order-create')}}>Create Order</Button>
-          <Button color="inherit" onClick={()=> {handleClick('/user')}}>Create User</Button>
-          <Button color="inherit" onClick={()=> {handleClick('/pendingItems')}}>Pending Items</Button>
-          <Button color="inherit" onClick={()=> {handleClick('/')}}>Items</Button>
-        </> 
-      )
-    } else if ( role === 'Customer') {
-      return (
-        <>
-          <Button color="inherit" onClick={()=> {handleClick('/userOrders')}}>Orders</Button>
-        </> 
-      )
-    } else {
-      <Button color="inherit" onClick={handleClick}>Items</Button>
-    }
-  }
+	const navbarComponents = () => {
+		if (role === 'Salesperson') {
+			return (
+				<>
+					<Button color="inherit" onClick={() => { handleClick('/dashboard'); }}>Dashboard</Button>
+					<Button color="inherit" onClick={() => { handleClick('/order'); }}>Orders</Button>
+					<Button color="inherit" onClick={() => { handleClick('/order-create'); }}>Create Order</Button>
+					<Button color="inherit" onClick={() => { handleClick('/user'); }}>Create User</Button>
+					<Button color="inherit" onClick={() => { handleClick('/pendingItems'); }}>Pending Items</Button>
+					<Button color="inherit" onClick={() => { handleClick('/'); }}>Items</Button>
+				</>
+			);
+		} else if (role === 'Customer') {
+			return (
+				<>
+					<Button color="inherit" onClick={() => { handleClick('/userOrders'); }}>Orders</Button>
+				</>
+			);
+		} else {
+			<Button color="inherit" onClick={handleClick}>Items</Button>;
+		}
+	};
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+	return (
+		<Box sx={{ flexGrow: 1 }}>
+			<AppBar position="static">
+				<Toolbar>
+					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Auto Parts
-          </Typography>
-          { navbarComponents() }
-          {authContext.currentUser
-            ? <Button color="inherit" href='/'>Logout</Button> 
-            : <Button color="inherit" href='/login'>Login</Button> 
-          }
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+					</Typography>
+					{ navbarComponents() }
+					{authContext.currentUser
+						? <Button color="inherit" href='/'>Logout</Button>
+						: <Button color="inherit" href='/login'>Login</Button>
+					}
+				</Toolbar>
+			</AppBar>
+		</Box>
+	);
 }

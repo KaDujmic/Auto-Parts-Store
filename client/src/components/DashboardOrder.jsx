@@ -4,10 +4,10 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from './Title'
+import Title from './Title';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Items() {
