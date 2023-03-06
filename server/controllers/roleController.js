@@ -17,14 +17,15 @@ exports.updateRole = async (req, res) => {
     where: { name: req.params.id },
     returning: true
   });
-  res.status(200).json(updatedRole);
+  if (updatedRole[0] === 0) throw new NotFoundError();
+  res.status(200).json(updatedRole[1]);
 };
 
 exports.deleteRole = async (req, res) => {
-  const model = await role.update({ deleted: true }, {
+  const deletedRole = await role.update({ deleted: true }, {
     where: { name: req.params.id }
   });
-  if (model[0] === 0) throw new NotFoundError();
+  if (deletedRole[0] === 0) throw new NotFoundError();
   res.status(204).json();
 };
 
