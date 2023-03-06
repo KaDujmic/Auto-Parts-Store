@@ -93,7 +93,8 @@ exports.checkCustomerOrders = async (req, res) => {
   // const customer = await user.findByPk(req.body.userId);
   const orders = await order.findAll({
     where: {
-      userId: req.body.userId
+      userId: req.body.userId,
+      deleted: false
     }
   });
   if (orders.length > 4 && orders.orderStatus !== 'completed') {
