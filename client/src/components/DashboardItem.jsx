@@ -51,6 +51,7 @@ export default function Items() {
           >
             <TableHead>
               <TableRow>
+                <TableCell>Order No.</TableCell>
                 <TableCell>Date</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell>Name</TableCell>
@@ -59,6 +60,7 @@ export default function Items() {
             <TableBody>
               {pendingItems.map((row) => (
                 <TableRow item={row} key={row.id}>
+                  <TableCell>{row.orderId}</TableCell>
                   <TableCell>{row.deliveryDate}</TableCell>
                   <TableCell>{row.status}</TableCell>
                   <TableCell>{row.item.name}</TableCell>
