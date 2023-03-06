@@ -1,4 +1,4 @@
-const { item } = require('../db/models');
+const { item, Sequelize } = require('../db/models');
 const crudController = require('./crudController');
 
 exports.getItem = async (req, res) => {
@@ -25,7 +25,7 @@ exports.createItem = async (req, res) => {
   await crudController.createModel(item, req, res);
 };
 
-function createWhereOption (requestQueryParams) {
+const createWhereOption = (requestQueryParams) => {
   const whereOption = [];
 
   if (requestQueryParams.category) {
@@ -34,6 +34,9 @@ function createWhereOption (requestQueryParams) {
   if (requestQueryParams.manufacturer) {
     whereOption.push({ manufacturer_id: requestQueryParams.manufacturer });
   }
-
+  if (requestQueryParams.name) {
+    const term = { name: { [Sequelize.Op.iLike]: '%' + requestQueryParams.name + '%' } };
+    whereOption.push(term);
+  }
   return whereOption;
-}
+};
