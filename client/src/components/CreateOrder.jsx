@@ -25,183 +25,184 @@ const theme = createTheme();
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
+	PaperProps: {
+		style: {
+			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+			width: 250
+		}
+	}
 };
 
 const CreateOrder = () => {
-  const [itemList, setItemList] = useState([]);
-  const [selectedItemList, setSelectedItemList] = useState([]);
-  const [customerList, setCustomerList] = useState([]);
-  const [selectedCustomer, setSelectedCustomer] = useState({});
+	const [itemList, setItemList] = useState([]);
+	const [selectedItemList, setSelectedItemList] = useState([]);
+	const [customerList, setCustomerList] = useState([]);
+	const [selectedCustomer, setSelectedCustomer] = useState({});
 
-  const jwt = localStorage.getItem("token");
-  const config = { headers: { Authorization: `Bearer ${jwt}` }};
-        
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const itemListGetResponse = await axios.get(`http://localhost:4000/item`);
-        const fullItemList = itemListGetResponse.data;
+	const jwt = localStorage.getItem('token');
+	const config = { headers: { Authorization: `Bearer ${jwt}` } };
 
-        const userListGetResponse = await axios.get(`http://localhost:4000/user`, config);
-        const fullUserList = userListGetResponse.data;
-        
-        //Remove properties sent from Backend that aren't required for this component
-        const filteredItemList = fullItemList.map(({ serialNumber, price, categoryId, manufacturerId, quantity, ...keepAttributes }) => keepAttributes);
-        const filteredUserList = fullUserList.map(({ fullName, address, phoneNumber, roleName, discount, currency, ...keepAttributes }) => keepAttributes);
+	useEffect(() => {
+		async function fetchData () {
+			try {
+				const itemListGetResponse = await axios.get('http://localhost:4000/item');
+				const fullItemList = itemListGetResponse.data;
 
-        setItemList(filteredItemList);
-        setCustomerList(filteredUserList);
-      }
-      catch (err) {
-        console.log(err);
-      }
-    }
-    fetchData();
-  }, [])
+				const userListGetResponse = await axios.get('http://localhost:4000/user', config);
+				const fullUserList = userListGetResponse.data;
 
-  //Handles Selected Item List state when user selects items from the Select Element
-  const handleSelectChange = (event) => {
-    const {
-      target: { value },
-    } = event;
+				// Remove properties sent from Backend that aren't required for this component
+				const filteredItemList = fullItemList.map(({ serialNumber, price, categoryId, manufacturerId, quantity, ...keepAttributes }) => keepAttributes);
+				const filteredUserList = fullUserList.map(({ fullName, address, phoneNumber, roleName, discount, currency, ...keepAttributes }) => keepAttributes);
 
-    setSelectedItemList(value);
-  };
+				setItemList(filteredItemList);
+				setCustomerList(filteredUserList);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+		fetchData();
+	}, []);
 
-  //Handles Selected Customer state when employee selects items from the Autocomplete Element
-  const handleEmailChange = (selectedCustomer) => {
-    setSelectedCustomer(selectedCustomer);
-  };
+	// Handles Selected Item List state when user selects items from the Select Element
+	const handleSelectChange = (event) => {
+		const {
+			target: { value }
+		} = event;
 
-  //Handles quantity of the updated item
-  const handleValueChange = (event, modifiedItemId) => {
-    const {
-      target: { value },
-    } = event;
-    const ItemList = selectedItemList;
-    const foundItemIndex = ItemList.findIndex(item => item.id === modifiedItemId);
+		setSelectedItemList(value);
+	};
 
-    const itemToModify = ItemList[foundItemIndex];
-    itemToModify.quantity = value;
-    ItemList[foundItemIndex] = itemToModify;
+	// Handles Selected Customer state when employee selects items from the Autocomplete Element
+	const handleEmailChange = (selectedCustomer) => {
+		setSelectedCustomer(selectedCustomer);
+	};
 
-    setSelectedItemList(ItemList);
-  };
+	// Handles quantity of the updated item
+	const handleValueChange = (event, modifiedItemId) => {
+		const {
+			target: { value }
+		} = event;
+		const ItemList = selectedItemList;
+		const foundItemIndex = ItemList.findIndex(item => item.id === modifiedItemId);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const filteredItemList = selectedItemList.map(({ name, ...keepAttributes }) => keepAttributes)
+		const itemToModify = ItemList[foundItemIndex];
+		itemToModify.quantity = value;
+		ItemList[foundItemIndex] = itemToModify;
 
-    //Set default quantity of an item to 1 if the employee hasn't specified a different value during order
-    filteredItemList.forEach(item => {
-      if(item.hasOwnProperty('quantity') === false) {
-        item.quantity = 1;
-    }})
+		setSelectedItemList(ItemList);
+	};
 
-    const objectToPost = {
-      id: uuidv4(),
-      userId: selectedCustomer.id,
-      itemList: filteredItemList
-    }
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		const filteredItemList = selectedItemList.map(({ name, ...keepAttributes }) => keepAttributes);
 
-    try {
-      await axios.post(`http://localhost:4000/order`, objectToPost, config);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+		// Set default quantity of an item to 1 if the employee hasn't specified a different value during order
+		filteredItemList.forEach(item => {
+			// eslint-disable-next-line no-prototype-builtins
+			if (item.hasOwnProperty('quantity') === false) {
+				item.quantity = 1;
+			}
+		});
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="md">
-        <CssBaseline />
-        <Box
-          sx={{
-            paddingTop: 4,
-            paddingBottom: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            
-          }}
-        >
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 500, backgroundColor: 'white', padding: 4, borderRadius: 1, boxShadow: 2 }}>
-            {/* Autocomplete Element serves as a dropdown email list of users the order can be submitted for.*/}
-            <InputLabel id="customer-email-list">Customer Email</InputLabel>
-            <Autocomplete
-              id="filter"
-              options={customerList}
-              getOptionLabel={(option) => option.email}
-              isOptionEqualToValue={(option, value) => option.email === value.email}
-              renderInput={(params) => <TextField {...params}/>}
-              onChange = {(event, data) => {
-                handleEmailChange(data);
-              }}
-            />
-            {/* Select Element serves as a multiple checkbox dropdown list of items the order can contain.*/}
-            <InputLabel id="item-list">Item List</InputLabel>
-            <Select
-              labelId="item-list"
-              id="multiple-checkbox"
-              multiple
-              fullWidth
-              value={selectedItemList}
-              onChange={handleSelectChange}
-              input={<OutlinedInput label="Tag" />}
-              renderValue={(selected) => {
-                let stringToRender = '';
-                selected.forEach(element => stringToRender += element.name + ', ');
-                //slice the comma at the end of the final string
-                return stringToRender.slice(0, -2);
-              }}
-              MenuProps={MenuProps}
-            >
-              {itemList.map((item) => (
-                <MenuItem key={item.id} value={item} name={item.name}>
-                  <Checkbox checked={selectedItemList.findIndex((selectedItem) => selectedItem.id === item.id) >= 0} />
-                  <ListItemText primary={item.name} />
-                </MenuItem>
-              ))}
-            </Select>
-            {/* List Element serves as a item quantity overview, and possible addition of the number of each item type the customer requires*/}
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-              {[...selectedItemList].map((selectedItem) => (
-                <ListItem
-                  key={selectedItem.id}
-                  disableGutters
-                >
-                  <ListItemText primary={`${selectedItem.name}`} />
-                  <ListItemSecondaryAction>
-                    <Input
-                      defaultValue={1}
-                      type="number"
-                      required={true}
-                      style={{ width: 30 }}
-                      onChange={event => handleValueChange(event, selectedItem.id)}
-                    />
-                  </ListItemSecondaryAction>
+		const objectToPost = {
+			id: uuidv4(),
+			userId: selectedCustomer.id,
+			itemList: filteredItemList
+		};
 
-                </ListItem>
-              ))}
-            </List>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+		try {
+			await axios.post('http://localhost:4000/order', objectToPost, config);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	return (
+		<ThemeProvider theme={theme}>
+			<Container component="main" maxWidth="md">
+				<CssBaseline />
+				<Box
+					sx={{
+						paddingTop: 4,
+						paddingBottom: 4,
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center'
+
+					}}
+				>
+					<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 500, backgroundColor: 'white', padding: 4, borderRadius: 1, boxShadow: 2 }}>
+						{/* Autocomplete Element serves as a dropdown email list of users the order can be submitted for. */}
+						<InputLabel id="customer-email-list">Customer Email</InputLabel>
+						<Autocomplete
+							id="filter"
+							options={customerList}
+							getOptionLabel={(option) => option.email}
+							isOptionEqualToValue={(option, value) => option.email === value.email}
+							renderInput={(params) => <TextField {...params}/>}
+							onChange = {(event, data) => {
+								handleEmailChange(data);
+							}}
+						/>
+						{/* Select Element serves as a multiple checkbox dropdown list of items the order can contain. */}
+						<InputLabel id="item-list">Item List</InputLabel>
+						<Select
+							labelId="item-list"
+							id="multiple-checkbox"
+							multiple
+							fullWidth
+							value={selectedItemList}
+							onChange={handleSelectChange}
+							input={<OutlinedInput label="Tag" />}
+							renderValue={(selected) => {
+								let stringToRender = '';
+								selected.forEach(element => { stringToRender += element.name + ', '; });
+								// slice the comma at the end of the final string
+								return stringToRender.slice(0, -2);
+							}}
+							MenuProps={MenuProps}
+						>
+							{itemList.map((item) => (
+								<MenuItem key={item.id} value={item} name={item.name}>
+									<Checkbox checked={selectedItemList.findIndex((selectedItem) => selectedItem.id === item.id) >= 0} />
+									<ListItemText primary={item.name} />
+								</MenuItem>
+							))}
+						</Select>
+						{/* List Element serves as a item quantity overview, and possible addition of the number of each item type the customer requires */}
+						<List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+							{[...selectedItemList].map((selectedItem) => (
+								<ListItem
+									key={selectedItem.id}
+									disableGutters
+								>
+									<ListItemText primary={`${selectedItem.name}`} />
+									<ListItemSecondaryAction>
+										<Input
+											defaultValue={1}
+											type="number"
+											required={true}
+											style={{ width: 30 }}
+											onChange={event => handleValueChange(event, selectedItem.id)}
+										/>
+									</ListItemSecondaryAction>
+
+								</ListItem>
+							))}
+						</List>
+						<Button
+							type="submit"
+							fullWidth
+							variant="contained"
+							sx={{ mt: 3, mb: 2 }}
+						>
               Order
-            </Button>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-  );
-}
-export default CreateOrder
+						</Button>
+					</Box>
+				</Box>
+			</Container>
+		</ThemeProvider>
+	);
+};
+export default CreateOrder;

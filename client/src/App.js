@@ -1,26 +1,27 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import * as React from 'react';
 import SignIn from './components/SignIn';
 import OrderList from './components/OrderList';
 import CreateUser from './components/CreateUser';
 import CreateOrder from './components/CreateOrder';
-import ItemList from './components/ItemList'
+import ItemList from './components/ItemList';
 import UserOrderList from './components/UserOrderList';
 import Container from '@mui/material/Container';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './context/authContext';
-import PendingItems from './components/PendingItems'
-import Dashboard from './components/Dashboard'
+import PendingItems from './components/PendingItems';
+import Dashboard from './components/Dashboard';
 
-function App() {
+function App () {
 	return (
 		<AuthProvider>
 			<Router>
 				<Navbar></Navbar>
 				<Container maxWidth="lg" sx={{
 					backgroundColor: (theme) =>
-					theme.palette.mode === 'light'
-						? theme.palette.grey[100]
-						: theme.palette.grey[900],
+						theme.palette.mode === 'light'
+							? theme.palette.grey[100]
+							: theme.palette.grey[900],
 					minHeight: '1000px',
 					paddingTop: '10px'
 				}}>
@@ -62,7 +63,7 @@ function App() {
 								<UserOrderList />
 							</>}
 						></Route>
-            <Route
+						<Route
 							exact
 							path="/user"
 							element={
@@ -70,7 +71,7 @@ function App() {
 									<CreateUser />
 								</>
 							}
-						></Route>						
+						></Route>
 						<Route
 							exact
 							path="/"
@@ -80,7 +81,7 @@ function App() {
 							exact
 							path="/pendingitems"
 							element={
-									<PendingItems/>
+								<PendingItems/>
 							}
 						></Route>
 					</Routes>
