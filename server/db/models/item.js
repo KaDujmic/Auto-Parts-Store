@@ -45,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
     categoryId: DataTypes.UUID,
     manufacturerId: DataTypes.UUID,
     quantity: DataTypes.INTEGER,
+    imageLink: {
+      type: DataTypes.STRING,
+      defaultValue: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1'
+    },
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
