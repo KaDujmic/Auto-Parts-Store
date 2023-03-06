@@ -31,7 +31,6 @@ describe('Testing Order endpoints', () => {
         ]
       };
       const response = await request(app).post('/order').send(order).set('Authorization', `Bearer ${jwt}`);
-      console.log(response);
       expect(response.body.orderStatus).toMatch('pending_confirmation');
       expect(response.headers['content-type']).toMatch(/json/);
       expect(response.statusCode).toBe(201);

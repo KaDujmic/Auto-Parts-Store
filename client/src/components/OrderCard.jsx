@@ -15,8 +15,7 @@ export default function OrderCard ({ order, onChangeCallback }) {
 		const config = {
 			headers: { Authorization: `Bearer ${jwt}` }
 		};
-		const response = await axios.put(`http://localhost:4000/order/confirm/${id}`, {}, config);
-		console.log(response);
+		await axios.put(`http://localhost:4000/order/confirm/${id}`, {}, config);
 		await onChangeCallback();
 	};
 
@@ -25,8 +24,7 @@ export default function OrderCard ({ order, onChangeCallback }) {
 		const config = {
 			headers: { Authorization: `Bearer ${jwt}` }
 		};
-		const response = await axios.put(`http://localhost:4000/order/complete/${id}`, {}, config);
-		console.log(response);
+		await axios.put(`http://localhost:4000/order/complete/${id}`, {}, config);
 		await onChangeCallback();
 	};
 
