@@ -9,26 +9,40 @@ import Title from './Title';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Button } from '@mui/material';
 
 export default function Items () {
 	const [pendingItems, setPendingItems] = useState([]);
 	const navigate = useNavigate();
-	useEffect(() => {
-		async function fetchData () {
-			try {
-				const jwt = localStorage.getItem('token');
-				const config = {
-					headers: { Authorization: `Bearer ${jwt}` }
-				};
-				const response = await axios.get('http://localhost:4000/orderItem', config);
-				setPendingItems(response.data);
-			} catch (err) {
-				navigate('/login');
-				console.log(err);
-			}
+	const fetchData = async () => {
+		try {
+			const jwt = localStorage.getItem('token');
+			const config = {
+				headers: { Authorization: `Bearer ${jwt}` }
+			};
+			const response = await axios.get('http://localhost:4000/orderItem', config);
+			setPendingItems(response.data);
+		} catch (err) {
+			navigate('/login');
+			console.log(err);
 		}
+	};
+
+	useEffect(() => {
 		fetchData();
 	}, [navigate]);
+
+	const handleClickItem = async (orderItem) => {
+		const jwt = localStorage.getItem('token');
+		const config = {
+			headers: { Authorization: `Bearer ${jwt}` }
+		};
+		const response = await axios.put(`http://localhost:4000/orderItem/${orderItem.orderId}/${orderItem.itemId}`, {}, config);
+		console.log(response);
+		await fetchData();
+		navigate('/pendingItems');
+	};
+
 	return (
 		<React.Fragment>
 			<Title>Pending Items</Title>
@@ -46,6 +60,7 @@ export default function Items () {
 							<TableCell>Order ID</TableCell>
 							<TableCell>Status</TableCell>
 							<TableCell>Name</TableCell>
+							<TableCell></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -55,6 +70,11 @@ export default function Items () {
 								<TableCell>{row.orderId}</TableCell>
 								<TableCell>{row.status}</TableCell>
 								<TableCell>{row.item.name}</TableCell>
+								{
+									row.status === 'pending'
+										? <TableCell><Button onClick={async () => { await handleClickItem(row); }}>Confirm</Button></TableCell>
+										: <TableCell></TableCell>
+								}
 							</TableRow>
 						))}
 					</TableBody>
