@@ -59,7 +59,7 @@ exports.confirmOrder = async (req, res) => {
 exports.completeOrder = async (req, res) => {
   const orderStatus = { orderStatus: 'completed' };
   const completedOrder = await order.update(orderStatus, {
-    where: { id: req.params.id, deleted: true },
+    where: { id: req.params.id, deleted: false },
     returning: true
   });
   await notification.update({ deleted: true }, {
