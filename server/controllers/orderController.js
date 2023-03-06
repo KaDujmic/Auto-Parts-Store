@@ -24,13 +24,16 @@ exports.createOrder = async (req, res) => {
   // Block new order if user has more than 5 orders that are not completed
   await checkCustomerOrders(req, res);
 
-  const { id, userId, itemList } = req.body;
+  const { id, userId, itemList, finalPrice, fullPrice, currency } = req.body;
   const orderDate = new Date().toISOString().split('T')[0];
   const model = await order.create({
     id,
     userId,
     itemList,
+    finalPrice,
+    fullPrice,
     orderDate,
+    currency,
     orderStatus: 'pending_confirmation'
   });
   res.status(201).json(model);
