@@ -7,7 +7,7 @@ module.exports = {
       {
         id: '20c1297e-58f6-4587-842b-231ff6583086',
         full_name: 'John Doe',
-        email: 'john@example.com',
+        email: 'ivana.gasparov@agilathon.com',
         address: '1st Blvd',
         password: '$2a$12$uvZgtrfGsWx5ZP6z7cbz4.GPP.pOLGe9zJ/tCqinBSLz58QxnVtRC',
         phone_number: '+385915969819',

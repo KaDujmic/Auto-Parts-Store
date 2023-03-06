@@ -32,5 +32,5 @@ exports.updateOrderedItem = async (req, res) => {
   });
   if (model[0] === 0) throw new NotFoundError();
   orderStatusCheck(req, res);
-  res.status(200).json(model);
+  res.status(200).json(model[1]);
 };
