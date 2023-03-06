@@ -37,8 +37,7 @@ export default function Items () {
 		const config = {
 			headers: { Authorization: `Bearer ${jwt}` }
 		};
-		const response = await axios.put(`http://localhost:4000/orderItem/${orderItem.orderId}/${orderItem.itemId}`, {}, config);
-		console.log(response);
+		await axios.put(`http://localhost:4000/orderItem/${orderItem.orderId}/${orderItem.itemId}`, {}, config);
 		await fetchData();
 		navigate('/pendingItems');
 	};
