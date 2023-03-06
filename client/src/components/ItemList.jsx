@@ -23,15 +23,16 @@ const ItemList = () => {
 	const [page, setPage] = useState(1);
 	const [pageCount, setPageCount] = useState(0);
 
-	async function fetchData (page, selectedCategoryId, selectedManufacturerId) {
+	async function fetchData (page, queryText, selectedCategoryId, selectedManufacturerId) {
 		try {
 			const params = {};
-			if (selectedCategoryId && selectedManufacturerId) {
-				params.category = selectedCategoryId;
+			if (queryText) {
+				params.name = queryText.toLowerCase();
+			}
+			if (selectedManufacturerId) {
 				params.manufacturer = selectedManufacturerId;
-			} else if (selectedManufacturerId) {
-				params.manufacturer = selectedManufacturerId;
-			} else if (selectedCategoryId) {
+			}
+			if (selectedCategoryId) {
 				params.category = selectedCategoryId;
 			}
 			const response = await axios.get(`http://localhost:4000/item?page=${page}`, { params });
@@ -39,7 +40,11 @@ const ItemList = () => {
 
 			setPageCount(+response.headers['x-total-pages']);
 		} catch (err) {
-			console.log(err);
+			if (err.response && err.response.status === 404) {
+				setItems([]);
+			} else {
+				console.log(err);
+			}
 		}
 	}
 
@@ -48,13 +53,8 @@ const ItemList = () => {
 	};
 
 	useEffect(() => {
-		fetchData(page, selectedCategory?.id, selectedManufacturer?.id);
-	}, [selectedCategory, selectedManufacturer, page]);
-
-	// Filter data only when items or query parameters change
-	const searchData = items.filter((item) => {
-		return item.name.toLowerCase().includes(searchText.toLocaleLowerCase());
-	});
+		fetchData(page, searchText, selectedCategory?.id, selectedManufacturer?.id);
+	}, [page, searchText, selectedCategory, selectedManufacturer]);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -62,22 +62,26 @@ const ItemList = () => {
 			<Box sx={{ justifyContent: 'center', alignItems: 'center', sm: 12 }} maxWidth="lg">
 				<Container maxWidth="sm" sx={{ paddingLeft: 3, display: 'flex', justifyContent: 'center' }}>
 					<Grid container spacing={2} marginTop={0} justifyContent='center' paddingLeft={2} >
-						<Grid item xs={12} justifyContent="center"><SearchField onChange={e => setSearchText(e.target.value)}/></Grid>
+						<Grid item xs={12} justifyContent="center"><SearchField onChange={async (e) => {
+							setSearchText(e.target.value);
+							await fetchData(page, e.target.value ? e.target.value : undefined, selectedCategory?.id, selectedManufacturer?.id);
+							setPage(1);
+						}}/></Grid>
 						<Grid item xs={6} justifyContent="center"><FilterCategory onChange={async (e, value) => {
 							setSelectedCategory(value);
-							await fetchData(page, value ? value.id : undefined, selectedManufacturer?.id);
+							await fetchData(page, searchText?.name, value ? value.id : undefined, selectedManufacturer?.id);
 							setPage(1);
 						} } /></Grid>
 						<Grid item xs={6} justifyContent="center"><FilterManufacturer onChange={async (e, value) => {
 							setSelectedManufacturer(value);
-							await fetchData(page, selectedCategory?.id, value ? value.id : undefined);
+							await fetchData(page, searchText?.name, selectedCategory?.id, value ? value.id : undefined);
 							setPage(1);
 						} }/></Grid>
 					</Grid>
 				</Container>
 				<Container sx={{ display: 'flex', py: 2, justifyContent: 'space-between', alignContent: 'center' }} maxWidth="sm">
 					<Grid container columns={{ xs: 12, sm: 12, md: 12 }}>
-						{searchData.map((x) => (
+						{items.map((x) => (
 							<ItemCard item={x} key={x.id}/>
 						))}</Grid>
 				</Container>
