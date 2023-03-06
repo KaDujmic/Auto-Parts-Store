@@ -62,7 +62,7 @@ export default function Items() {
               {dashboardOrder.map((row) => (
                 <TableRow item={row} key={row.id}>
                   <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.user.name}</TableCell>
+                  <TableCell>{row.user.fullName}</TableCell>
                   <TableCell>{row.orderDate}</TableCell>
                   <TableCell>{row.orderStatus}</TableCell>
                   <TableCell>{row.finalPrice}{row.currency}</TableCell>
