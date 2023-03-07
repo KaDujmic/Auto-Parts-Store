@@ -6,6 +6,7 @@ const { retrieveItemOnOrder } = require('../services/orderService');
 const { checkCustomerOrders } = require('../services/orderService');
 const { orderConfirmEmail } = require('../services/notificationService');
 const { orderReadyEmail } = require('../services/notificationService');
+const { orderStatuses, itemStatuses } = require('../utils/helper');
 const ORDER_STATUS_LIST = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
 exports.getManyOrder = async (req, res) => {
@@ -38,7 +39,7 @@ exports.createOrder = async (req, res) => {
     fullPrice,
     orderDate,
     currency,
-    orderStatus: 'pending_confirmation'
+    orderStatus: orderStatuses.pending_confirmation
   });
   res.status(201).json(model);
 };
@@ -61,7 +62,7 @@ exports.confirmOrder = async (req, res) => {
 
 // Function to set order status to completed and cancel notifications for that order
 exports.completeOrder = async (req, res) => {
-  const orderStatus = { orderStatus: 'completed' };
+  const orderStatus = { orderStatus: orderStatuses.completed };
   const completedOrder = await order.update(orderStatus, {
     where: { id: req.params.id, deleted: false },
     returning: true
@@ -91,7 +92,7 @@ exports.orderStatusCheck = async (req, res) => {
   const orderItems = await order_item.findAll({
     where: {
       orderId: req.params.firstId,
-      status: 'pending'
+      status: itemStatuses.pending
     }
   });
   if (orderItems.length === 0) {
@@ -100,7 +101,7 @@ exports.orderStatusCheck = async (req, res) => {
         id: req.params.firstId
       }
     });
-    currentOrder.orderStatus = 'ready_for_pickup';
+    currentOrder.orderStatus = orderStatuses.ready_for_pickup;
     currentOrder.save();
     orderReadyEmail(req.params.firstId);
   }

@@ -3,6 +3,7 @@ const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('../validators/errors');
 const { orderReadyEmail } = require('./notificationService');
+const { orderStatuses } = require('../utils/helper');
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);
@@ -74,9 +75,9 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
   });
 
   if (hadToRequestItemOrder) {
-    currentOrder.orderStatus = 'pending_delivery';
+    currentOrder.orderStatus = orderStatuses.pending_delivery;
   } else {
-    currentOrder.orderStatus = 'ready_for_pickup';
+    currentOrder.orderStatus = orderStatuses.ready_for_pickup;
     orderReadyEmail(currentOrder.id);
   }
   currentOrder.save();
@@ -108,7 +109,7 @@ exports.checkCustomerOrders = async (req, res) => {
       userId: req.body.userId
     }
   });
-  if (orders.length > 4 && orders.orderStatus !== 'completed') {
+  if (orders.length > 4 && orders.orderStatus !== orderStatuses.complete) {
     throw new ValidationError('User already has 5 orders that are not completed');
   };
 };
