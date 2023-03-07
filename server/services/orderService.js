@@ -58,22 +58,25 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
   currentOrder.itemList.forEach(requestItem => {
     const orderItem = items.find(item => item.id === requestItem.id);
     if (orderItem.quantity < requestItem.quantity) {
-      const promise = order_item.create({
+      const createOrderItem = order_item.create({
         orderId: currentOrder.id,
         itemId: requestItem.id,
         deliveryDate: getRandomDate()
       }, { transaction: t });
-      promise.then((createdItem) => {
-        t.commit();
+      createOrderItem.then((createdItem) => {
         console.log('Created order item:', createdItem);
       }).catch((error) => {
-        t.rollback();
         console.log(error);
       });
       hadToRequestItemOrder = true;
     } else {
       orderItem.quantity -= requestItem.quantity;
-      orderItem.save();
+      const removeItem = orderItem.save({ transaction: t });
+      removeItem.then((updatedItem) => {
+        console.log('Updated item quantity:', updatedItem);
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   });
 
@@ -83,7 +86,14 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
     currentOrder.orderStatus = orderStatuses.ready_for_pickup;
     orderReadyEmail(currentOrder.id);
   }
-  currentOrder.save();
+  currentOrder.save({ transaction: t })
+    .then((savedOrder) => {
+      t.commit();
+      console.log('Order saved:', savedOrder);
+    }).catch((error) => {
+      t.rollback();
+      console.log(error);
+    });
 };
 
 // Calculate full price based on user currency

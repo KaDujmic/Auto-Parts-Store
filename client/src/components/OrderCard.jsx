@@ -10,6 +10,13 @@ import PropTypes from 'prop-types';
 export default function OrderCard ({ order, onChangeCallback }) {
 	const navigate = useNavigate();
 
+	const orderStatusDisplay = {
+		pending_confirmation: 'Pending Confirmation',
+		pending_delivery: 'Pending Delivery',
+		ready_for_pickup: 'Ready For Pickup',
+		completed: 'Completed'
+	};
+
 	const handleClickConfirm = async (id) => {
 		const jwt = localStorage.getItem('token');
 		const config = {
@@ -99,7 +106,7 @@ export default function OrderCard ({ order, onChangeCallback }) {
 						<Typography variant='h5'>Status:</Typography>
 					</Grid>
 					<Grid item xs={6}>
-						<Typography variant='p'>{order.orderStatus}</Typography>
+						<Typography variant='p'> {orderStatusDisplay[order.orderStatus]}</Typography>
 					</Grid>
 				</Grid>
 				<Grid item xs={12} container>
