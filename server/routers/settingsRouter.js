@@ -10,11 +10,11 @@ router.use(callbackErrorHandler(isLoggedIn));
 
 router
   .route('/')
-  .get(restrictTo('Salesperson'), callbackErrorHandler(getManySetting));
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getManySetting))
+  .post(restrictTo('Salesperson'), callbackErrorHandler(updateSettings));
 
 router
   .route('/:id')
-  .get(restrictTo('Salesperson'), callbackErrorHandler(getSettings))
-  .put(restrictTo('Salesperson'), callbackErrorHandler(updateSettings));
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getSettings));
 
 module.exports = router;

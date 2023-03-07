@@ -14,7 +14,7 @@ exports.getSettings = async (req, res) => {
 
 exports.updateSettings = async (req, res) => {
   await verifySettings(req);
-  const [model] = await settings.update(req.body, {
+  const [model] = await settings.upsert(req.body, {
     where: { key: req.params.id },
     returning: true
   });
