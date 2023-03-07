@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5665b908-d905-4a1e-bbaf-a0cfd8cf5145",
+		"_postman_id": "087cd03e-d9f4-4ab5-b224-46246fe9082e",
 		"name": "Auto Parts",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24878283"
 	},
 	"item": [
 		{
@@ -310,7 +311,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"6fd0dd12-fbe4-4da4-9266-7f2d95abf876\",\n    \"userId\": \"805a10d7-1735-4a6c-a4cd-0be767aaeca1\",\n    \"deliveryAddress\":\"4rd Blvd\",\n    \"itemList\": [\n        {\"id\": \"fff3cb51-f73a-4fbd-985f-e76054e1a9ea\", \"quantity\": 1}\n    ]\n}",
+							"raw": "{\n    \"id\": \"6fd0dd12-fbe4-4da4-9266-7f2d95abf876\",\n    \"userId\": \"805a10d7-1735-4a6c-a4cd-0be767aaeca1\",\n    \"itemList\": [\n        {\"id\": \"f0d0ea4d-0e40-4987-866e-154da59552c5\", \"quantity\": 1}\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -767,6 +768,54 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Filter By Category, Manufacturer and Search",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/item?name=s&category=a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58&manufacturer=8e860a7d-e118-4e64-ba9d-0345e16994d0&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"item"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "s"
+								},
+								{
+									"key": "category",
+									"value": "a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58"
+								},
+								{
+									"key": "manufacturer",
+									"value": "8e860a7d-e118-4e64-ba9d-0345e16994d0",
+									"description": "Manufacturer ID"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -801,7 +850,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"test1234\"\n}",
+							"raw": "{\n    \"email\": \"ivana.gasparov@agilathon.com\",\n    \"password\": \"test1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -820,7 +869,74 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"ivana.gasparov@agilathon.com\",\n    \"password\": \"test1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "606"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25e-mKkzATsCZrOV8wySmQUGss2IWbQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Mar 2023 11:06:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwYzEyOTdlLTU4ZjYtNDU4Ny04NDJiLTIzMWZmNjU4MzA4NiIsImlhdCI6MTY3ODE4NzE2MSwiZXhwIjoxNjg1OTYzMTYxfQ.3PcrLNzcl-5oHhn5QYcZz5jKXSIvunOW-fUzQknFmUs\",\n    \"user\": {\n        \"id\": \"20c1297e-58f6-4587-842b-231ff6583086\",\n        \"fullName\": \"John Doe\",\n        \"email\": \"ivana.gasparov@agilathon.com\",\n        \"password\": \"$2a$12$uvZgtrfGsWx5ZP6z7cbz4.GPP.pOLGe9zJ/tCqinBSLz58QxnVtRC\",\n        \"address\": \"1st Blvd\",\n        \"phoneNumber\": \"+385915969819\",\n        \"roleName\": \"Salesperson\",\n        \"discount\": 20,\n        \"currency\": \"USD\",\n        \"deleted\": true,\n        \"createdAt\": \"2023-03-06T15:48:15.158Z\",\n        \"updatedAt\": \"2023-03-07T11:05:05.107Z\"\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -858,6 +974,9 @@
 				},
 				{
 					"name": "Get One Setting",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -871,6 +990,15 @@
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:4000/settings/:id",
 							"protocol": "http",
@@ -885,7 +1013,8 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "order_pickup_recurrence",
+									"description": "Settings key"
 								}
 							]
 						}
@@ -905,11 +1034,11 @@
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"key\": \"order_pickup_template\",\n    \"value\": {\n        \"title\": \"Auto Parts Store: Order Reminder!\"\n    }\n}",
+							"raw": "{\n    \"key\": \"order_pickup_recurrence\",\n    \"value\": {\n        \"recurrence\": 5\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -917,14 +1046,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/settings",
+							"raw": "http://localhost:4000/settings/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"settings"
+								"settings",
+								""
 							]
 						}
 					},
@@ -1076,7 +1206,7 @@
 							"variable": [
 								{
 									"key": "name",
-									"value": "New Role",
+									"value": "Test12",
 									"description": "Role Name"
 								}
 							]
@@ -1691,7 +1821,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "805a10d7-1735-4a6c-a4cd-0be767aaeca1",
+									"value": "fdc0d18f-55f9-48be-b42e-9979da9d69f2",
 									"description": "Order ID of the Notification"
 								}
 							]
