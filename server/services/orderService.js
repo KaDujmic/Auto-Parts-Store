@@ -1,4 +1,4 @@
-const { Sequelize, user, item, order_item, order } = require('../db/models');
+const { Sequelize, user, item, order_item, order, sequelize } = require('../db/models');
 const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('../validators/errors');
@@ -44,6 +44,7 @@ exports.checkAllElements = async (model, req, res) => {
 
 // Create item order if requested quantity is less than what is in database or subtract quantity from item entity
 exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
+  const t = await sequelize.transaction();
   const idList = currentOrder.dataValues.itemList.map(el => el.id);
   const items = await item.findAll({
     where: {
@@ -60,10 +61,12 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
         orderId: currentOrder.id,
         itemId: requestItem.id,
         deliveryDate: getRandomDate()
-      });
+      }, { transaction: t });
       promise.then((createdItem) => {
+        t.commit();
         console.log('Created order item:', createdItem);
       }).catch((error) => {
+        t.rollback();
         console.log(error);
       });
       hadToRequestItemOrder = true;
