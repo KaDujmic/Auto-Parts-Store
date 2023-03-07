@@ -104,8 +104,23 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
-            }
+              "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "example": {
+                        "id": "ac5554bb-d628-441a-ac1a-29cf60deab9c",
+                        "fullName": "John Doe",
+                        "email": "random@agilathon.com",
+                        "address": "1st Blvd",
+                        "password": "test1234",
+                        "phoneNumber": "9159698191",
+                        "roleName": "Salesperson",
+                        "discount": 15,
+                        "currency": "USD"
+                      }
+                    }
+                  }
+                }
           },
           "401": {
             "content": {
@@ -237,7 +252,7 @@
             "name": "id",
             "in": "path",
             "schema": {
-              "type": "string"
+              
             },
             "required": true,
             "description": "User UUID",
@@ -248,7 +263,21 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                "type": "object",
+                "example": {
+                  "id": "ac5554bb-d628-441a-ac1a-29cf60deab9c",
+                  "fullName": "John Doe",
+                  "email": "random@agilathon.com",
+                  "address": "1st Blvd",
+                  "password": "test1234",
+                  "phoneNumber": "9159698191",
+                  "roleName": "Salesperson",
+                  "discount": 15,
+                  "currency": "USD"
+                }
+              }}
             }
           },
           "400": {
@@ -456,11 +485,36 @@
             "bearerAuth": []
           }
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number requested",
+            "example": "1"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "6fd0dd12-fbe4-4da4-9266-7f2d95abf876",
+                    "userId": "805a10d7-1735-4a6c-a4cd-0be767aaeca1",
+                    "itemList": [
+                      {
+                        "id": "f0d0ea4d-0e40-4987-866e-154da59552c5",
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                }
+              }
             }
           },
           "401": {
@@ -514,10 +568,9 @@
                 "example": {
                   "id": "6fd0dd12-fbe4-4da4-9266-7f2d95abf876",
                   "userId": "805a10d7-1735-4a6c-a4cd-0be767aaeca1",
-                  "deliveryAddress": "4rd Blvd",
                   "itemList": [
                     {
-                      "id": "fff3cb51-f73a-4fbd-985f-e76054e1a9ea",
+                      "id": "f0d0ea4d-0e40-4987-866e-154da59552c5",
                       "quantity": 1
                     }
                   ]
@@ -604,7 +657,21 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "6fd0dd12-fbe4-4da4-9266-7f2d95abf876",
+                    "userId": "805a10d7-1735-4a6c-a4cd-0be767aaeca1",
+                    "itemList": [
+                      {
+                        "id": "f0d0ea4d-0e40-4987-866e-154da59552c5",
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                }
+              }
             }
           },
           "400": {
@@ -888,17 +955,13 @@
         }
       }
     },
+    
     "/item": {
       "get": {
         "tags": [
           "Item"
         ],
-        "summary": "Get Filter By Category And Manufacturer",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "summary": "Get All Items With Or Without Filters",
         "parameters": [
           {
             "name": "category",
@@ -907,7 +970,7 @@
               "type": "string"
             },
             "description": "Category ID",
-            "example": "a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58"
+            "example": "c97ede74-b9e2-4e22-8f75-601a4687906d"
           },
           {
             "name": "manufacturer",
@@ -916,14 +979,36 @@
               "type": "string"
             },
             "description": "Manufacturer ID",
-            "example": "8e860a7d-e118-4e64-ba9d-0345e16994d0"
+            "example": "4abedb72-1411-4844-a04a-58dbcd2b1a94"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "name",
+            "example": "st"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "31c9d404-d204-497c-8877-08b1be7cba8b",
+                    "name": "Rear view mirror",
+                    "serialNumber": "M002",
+                    "price": 15,
+                    "categoryId": "6ed632dd-f323-43dd-b596-287c17c8a7ea",
+                    "manufacturerId": "4abedb72-1411-4844-a04a-58dbcd2b1a94",
+                    "quantity": 50
+                  }
+                }
+              }
             }
           },
           "401": {
@@ -1044,11 +1129,6 @@
           "Item"
         ],
         "summary": "Get One Item",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "parameters": [
           {
             "name": "id",
@@ -1065,7 +1145,18 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {"schema": {
+                "type": "object",
+                "example": {
+                  "id": "31c9d404-d204-497c-8877-08b1be7cba8b",
+                  "name": "Rear view mirror",
+                  "serialNumber": "M002",
+                  "price": 15,
+                  "categoryId": "6ed632dd-f323-43dd-b596-287c17c8a7ea",
+                  "manufacturerId": "4abedb72-1411-4844-a04a-58dbcd2b1a94",
+                  "quantity": 50
+                }
+              }}
             }
           },
           "400": {
@@ -1262,74 +1353,6 @@
         }
       }
     },
-    "/item/": {
-      "get": {
-        "tags": [
-          "Item"
-        ],
-        "summary": "Get Filter By Manufacturer",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "manufacturer",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Manufacturer ID",
-            "example": "8e860a7d-e118-4e64-ba9d-0345e16994d0"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/notLoggedInError"
-                }
-              }
-            }
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/permissionError"
-                }
-              }
-            }
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/resourceNotFound"
-                }
-              }
-            }
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/serverError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/login": {
       "post": {
         "tags": [
@@ -1397,7 +1420,17 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "key": "new_notification_recurrence",
+                    "value": {
+                      "recurrence": 3
+                    }
+                  }
+                }
+              }
             }
           },
           "401": {
@@ -1522,21 +1555,31 @@
         ],
         "parameters": [
           {
-            "name": "key",
+            "name": "id",
             "in": "path",
             "schema": {
               "type": "string"
             },
             "required": true,
             "description": "Unique setting key",
-            "example": "order_confirmation_template"
+            "example": "order_pickup_recurrence"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "key": "new_notification_recurrence",
+                    "value": {
+                      "recurrence": 3
+                    }
+                  }
+                }
+              }
             }
           },
           "400": {
@@ -1593,7 +1636,14 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "name": "Salesperson"
+                  }
+                }
+              }
             }
           },
           "401": {
@@ -1728,7 +1778,14 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "name": "Salesperson"
+                  }
+                }
+              }
             }
           },
           "400": {
@@ -1782,7 +1839,7 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "name": "New Updated Role"
+                  "name": "Test12"
                 }
               }
             }
@@ -1933,16 +1990,20 @@
           "Manufacturer"
         ],
         "summary": "Get All Manufacturer",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "71b4bb75-5400-49a5-b109-ddbacda0fcf5",
+                    "brand": "Audi",
+                    "model": "A1"
+                  }
+                }
+              }
             }
           },
           "401": {
@@ -2059,11 +2120,6 @@
           "Manufacturer"
         ],
         "summary": "Get One Manufacturer",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "parameters": [
           {
             "name": "id",
@@ -2080,7 +2136,16 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "71b4bb75-5400-49a5-b109-ddbacda0fcf5",
+                    "brand": "Audi",
+                    "model": "A1"
+                  }
+                }
+              }
             }
           },
           "400": {
@@ -2281,16 +2346,19 @@
           "Category"
         ],
         "summary": "Get All Category",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "14de46f9-3535-4f9e-9786-cde90cc7455b",
+                    "name": "Test12"
+                  }
+                }
+              }
             }
           },
           "401": {
@@ -2406,11 +2474,6 @@
           "Category"
         ],
         "summary": "Get One Category",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "parameters": [
           {
             "name": "id",
@@ -2427,7 +2490,14 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                "type": "object",
+                "example": {
+                  "id": "14de46f9-3535-4f9e-9786-cde90cc7455b",
+                  "name": "Test12"
+                }
+              }}
             }
           },
           "400": {
@@ -2498,7 +2568,7 @@
               "type": "string"
             },
             "required": true,
-            "description": "Cateogry ID",
+            "description": "Category ID",
             "example": "14de46f9-3535-4f9e-9786-cde90cc7455b"
           }
         ],
