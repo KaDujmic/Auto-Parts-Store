@@ -4,9 +4,8 @@ const { settings } = require('../db/models');
 
 // Create restraint for recurrence
 exports.verifySettings = async (req) => {
-  const key = req.params;
-  const { value } = req.body;
-  if (key.id.includes('recurrence')) {
+  const { key, value } = req.body;
+  if (key.includes('recurrence')) {
     if (value < 1 || value > 10) { throw new ValidationError('ERROR: Supported recurrence is between 1, and 10 days.'); }
   }
 };
