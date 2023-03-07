@@ -1,6 +1,12 @@
 const express = require('express');
-
-const { getManyOrder, getOrder, createOrder, updateOrder, deleteOrder, getCustomerOrders, confirmOrder, completeOrder } = require('../controllers/orderController');
+const { getManyOrder } = require('../controllers/orderController');
+const { getOrder } = require('../controllers/orderController');
+const { createOrder } = require('../controllers/orderController');
+const { updateOrder } = require('../controllers/orderController');
+const { deleteOrder } = require('../controllers/orderController');
+const { getCustomerOrders } = require('../controllers/orderController');
+const { confirmOrder } = require('../controllers/orderController');
+const { completeOrder } = require('../controllers/orderController');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');
 const { bodyValidator } = require('../middleware/dataValidator');
 const { callbackErrorHandler } = require('../validators/errorHandler');
