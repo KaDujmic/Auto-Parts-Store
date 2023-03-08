@@ -10,6 +10,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const orderStatusDisplay = {
+	pending_confirmation: 'Pending Confirmation',
+	pending_delivery: 'Pending Delivery',
+	ready_for_pickup: 'Ready For Pickup',
+	completed: 'Completed'
+};
+
 export default function Items () {
 	const [dashboardOrder, setDashboardOrder] = useState([]);
 	const navigate = useNavigate();
@@ -62,7 +69,7 @@ export default function Items () {
 								<TableCell>{row.id}</TableCell>
 								<TableCell>{row.user.fullName}</TableCell>
 								<TableCell>{row.orderDate}</TableCell>
-								<TableCell>{row.orderStatus}</TableCell>
+								<TableCell>{orderStatusDisplay[row.orderStatus]}</TableCell>
 								<TableCell>{row.finalPrice}{row.currency}</TableCell>
 							</TableRow>
 						))}
