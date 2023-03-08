@@ -1038,7 +1038,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"key\": \"order_pickup_recurrence\",\n    \"value\": {\n        \"recurrence\": 5\n    }\n}",
+							"raw": "{\n    \"key\": \"order_test_recurrence\",\n    \"value\": {\n        \"recurrence\": 5\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1055,6 +1055,52 @@
 							"path": [
 								"settings",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One Setting",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/settings/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"settings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "order_test_recurrence",
+									"description": "Settings key"
+								}
 							]
 						}
 					},
