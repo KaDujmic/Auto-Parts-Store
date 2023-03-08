@@ -33,6 +33,7 @@ export default function ButtonAppBar () {
 			return (
 				<>
 					<Button color="inherit" onClick={() => { handleClick('/userOrders'); }}>Orders</Button>
+					<Button color="inherit" onClick={() => { handleClick('/'); }}>Items</Button>
 				</>
 			);
 		} else {
