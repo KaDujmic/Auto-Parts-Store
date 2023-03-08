@@ -50,6 +50,7 @@ module.exports = {
         price: 122,
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
+        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
         quantity: 200,
         created_at: new Date(),
         updated_at: new Date(),
