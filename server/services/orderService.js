@@ -3,7 +3,6 @@ const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('../validators/errors');
 const { orderReadyEmail } = require('./notificationService');
-const { orderStatuses } = require('../utils/helper');
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);
@@ -55,45 +54,34 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
   });
   let hadToRequestItemOrder = false;
 
-  currentOrder.itemList.forEach(requestItem => {
-    const orderItem = items.find(item => item.id === requestItem.id);
-    if (orderItem.quantity < requestItem.quantity) {
-      const createOrderItem = order_item.create({
-        orderId: currentOrder.id,
-        itemId: requestItem.id,
-        deliveryDate: getRandomDate()
-      }, { transaction: t });
-      createOrderItem.then((createdItem) => {
-        console.log('Created order item:', createdItem);
-      }).catch((error) => {
-        console.log(error);
-      });
-      hadToRequestItemOrder = true;
-    } else {
-      orderItem.quantity -= requestItem.quantity;
-      const removeItem = orderItem.save({ transaction: t });
-      removeItem.then((updatedItem) => {
-        console.log('Updated item quantity:', updatedItem);
-      }).catch((error) => {
-        console.log(error);
-      });
-    }
-  });
-
-  if (hadToRequestItemOrder) {
-    currentOrder.orderStatus = orderStatuses.pending_delivery;
-  } else {
-    currentOrder.orderStatus = orderStatuses.ready_for_pickup;
-    orderReadyEmail(currentOrder.id);
-  }
-  currentOrder.save({ transaction: t })
-    .then((savedOrder) => {
-      t.commit();
-      console.log('Order saved:', savedOrder);
-    }).catch((error) => {
-      t.rollback();
-      console.log(error);
+  try {
+    currentOrder.itemList.forEach(async requestItem => {
+      const orderItem = items.find(item => item.id === requestItem.id);
+      if (orderItem.quantity < requestItem.quantity) {
+        hadToRequestItemOrder = true;
+        await order_item.create({
+          orderId: currentOrder.id,
+          itemId: requestItem.id,
+          deliveryDate: getRandomDate()
+        }, { transaction: t });
+      } else {
+        orderItem.quantity -= requestItem.quantity;
+        await orderItem.save({ transaction: t });
+      }
     });
+    if (hadToRequestItemOrder) {
+      currentOrder.orderStatus = 'pending_delivery';
+    } else {
+      currentOrder.orderStatus = 'ready_for_pickup';
+      orderReadyEmail(currentOrder.id);
+    }
+    await currentOrder.save({ transaction: t });
+    t.commit();
+  } catch (error) {
+    t.rollback();
+    console.log(error);
+    throw new ValidationError('Something went wrong!');
+  };
 };
 
 // Calculate full price based on user currency
@@ -115,15 +103,15 @@ exports.setOrderPrice = async (req, res) => {
   req.body.finalPrice = (fullPrice - (fullPrice * (customer.discount / 100))).toFixed(2);
 };
 
+// Forbid customer from ordering if he has more than 5 not completed orders
 exports.checkCustomerOrders = async (req, res) => {
-  // const customer = await user.findByPk(req.body.userId);
   const orders = await order.findAll({
     where: {
       userId: req.body.userId,
       deleted: false
     }
   });
-  if (orders.length > 4 && orders.orderStatus !== orderStatuses.complete) {
+  if (orders.length > 4 && orders.orderStatus !== 'completed') {
     throw new ValidationError('User already has 5 orders that are not completed');
   };
 };

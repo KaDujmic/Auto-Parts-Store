@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { getManySetting, getSettings, updateSettings } = require('../controllers/settingsController');
+const { getManySetting, getSettings, updateSettings, deleteSettings } = require('../controllers/settingsController');
 const { isLoggedIn, restrictTo } = require('../controllers/authController');
 const { callbackErrorHandler } = require('../validators/errorHandler');
 
@@ -15,6 +15,7 @@ router
 
 router
   .route('/:id')
-  .get(restrictTo('Salesperson'), callbackErrorHandler(getSettings));
+  .get(restrictTo('Salesperson'), callbackErrorHandler(getSettings))
+  .delete(restrictTo('Salesperson'), callbackErrorHandler(deleteSettings));
 
 module.exports = router;

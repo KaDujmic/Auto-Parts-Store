@@ -1,4 +1,5 @@
 const { settings } = require('../db/models');
+const { NotFoundError } = require('../validators/errors');
 const { verifySettings, setSettings } = require('../services/settingsService');
 const crudController = require('./crudController');
 
@@ -23,4 +24,11 @@ exports.updateSettings = async (req, res) => {
   setSettings();
 
   res.status(200).json(model);
+};
+exports.deleteSettings = async (req, res) => {
+  const deletedSettings = await settings.update({ deleted: true }, {
+    where: { key: req.params.id }
+  });
+  if (deletedSettings[0] === 0) throw new NotFoundError();
+  res.status(204).json();
 };
