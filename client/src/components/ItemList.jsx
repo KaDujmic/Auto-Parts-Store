@@ -79,8 +79,8 @@ const ItemList = () => {
 						} }/></Grid>
 					</Grid>
 				</Container>
-				<Container sx={{ display: 'flex', py: 2, justifyContent: 'space-between', alignContent: 'center' }} maxWidth="sm">
-					<Grid container columns={{ xs: 12, sm: 12, md: 12 }}>
+				<Container sx={{ display: 'flex', py: 2, justifyContent: 'space-between', alignContent: 'center' }} maxWidth="md">
+					<Grid container sx={{ display: 'grid', columnGap: 3, rowGap: 1, gridTemplateColumns: 'repeat(2, 1fr)' }}>
 						{items.map((x) => (
 							<ItemCard item={x} key={x.id}/>
 						))}</Grid>
