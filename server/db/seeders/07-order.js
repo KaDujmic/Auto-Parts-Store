@@ -7,7 +7,7 @@ module.exports = {
       {
         id: 'a1e679a5-f5a6-4070-8f3d-91ea156bcc1b',
         user_id: '20c1297e-58f6-4587-842b-231ff6583086',
-        order_status: 'pending_confirmation',
+        order_status: 'pending_delivery',
         order_date: new Date().toISOString().split('T')[0],
         item_list: [
           { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 2 },
