@@ -58,12 +58,12 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
     currentOrder.itemList.forEach(async requestItem => {
       const orderItem = items.find(item => item.id === requestItem.id);
       if (orderItem.quantity < requestItem.quantity) {
+        hadToRequestItemOrder = true;
         await order_item.create({
           orderId: currentOrder.id,
           itemId: requestItem.id,
           deliveryDate: getRandomDate()
         }, { transaction: t });
-        hadToRequestItemOrder = true;
       } else {
         orderItem.quantity -= requestItem.quantity;
         await orderItem.save({ transaction: t });
@@ -103,8 +103,8 @@ exports.setOrderPrice = async (req, res) => {
   req.body.finalPrice = (fullPrice - (fullPrice * (customer.discount / 100))).toFixed(2);
 };
 
+// Forbid customer from ordering if he has more than 5 not completed orders
 exports.checkCustomerOrders = async (req, res) => {
-  // const customer = await user.findByPk(req.body.userId);
   const orders = await order.findAll({
     where: {
       userId: req.body.userId,
