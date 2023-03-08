@@ -24,3 +24,6 @@ exports.updateSettings = async (req, res) => {
 
   res.status(200).json(model);
 };
+exports.deleteSettings = async (req, res) => {
+  await crudController.deleteModel(settings, req, res);
+};
