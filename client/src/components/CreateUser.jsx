@@ -10,12 +10,14 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 const CreateUser = () => {
 	const jwt = localStorage.getItem('token');
 	const config = { headers: { Authorization: `Bearer ${jwt}` } };
+	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -25,6 +27,7 @@ const CreateUser = () => {
 
 		try {
 			await axios.post('http://localhost:4000/user', objectToPost, config);
+			navigate('/order-create');
 		} catch (error) {
 			console.log(error);
 		}
