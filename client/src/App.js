@@ -58,7 +58,7 @@ function App () {
 						></Route>
 						<Route
 							exact
-							path="/userOrders"
+							path="/user-orders"
 							element={<>
 								<UserOrderList />
 							</>}
@@ -79,7 +79,7 @@ function App () {
 						></Route>
 						<Route
 							exact
-							path="/pendingitems"
+							path="/pending-items"
 							element={
 								<PendingItems/>
 							}
