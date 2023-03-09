@@ -19,6 +19,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -38,6 +39,7 @@ const CreateOrder = () => {
 	const [selectedItemList, setSelectedItemList] = useState([]);
 	const [customerList, setCustomerList] = useState([]);
 	const [selectedCustomer, setSelectedCustomer] = useState({});
+	const navigate = useNavigate();
 
 	const jwt = localStorage.getItem('token');
 	const config = { headers: { Authorization: `Bearer ${jwt}` } };
@@ -103,6 +105,7 @@ const CreateOrder = () => {
 			if (item.hasOwnProperty('quantity') === false) {
 				item.quantity = 1;
 			}
+			navigate('/order');
 		});
 
 		const objectToPost = {

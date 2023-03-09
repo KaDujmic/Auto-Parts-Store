@@ -730,7 +730,7 @@
               "type": "string"
             },
             "required": true,
-            "example": "a1e679a5-f5a6-4070-8f3d-91ea156bcc1b"
+            "example": "5de49635-dbd9-4ecd-9705-53731f42033b"
           }
         ],
         "responses": {
@@ -809,7 +809,7 @@
             },
             "required": true,
             "description": "Order ID",
-            "example": "a1e679a5-f5a6-4070-8f3d-91ea156bcc1b"
+            "example": "5de49635-dbd9-4ecd-9705-53731f42033b"
           }
         ],
         "responses": {
@@ -897,7 +897,7 @@
             },
             "required": true,
             "description": "Order ID",
-            "example": "a1e679a5-f5a6-4070-8f3d-91ea156bcc1b"
+            "example": "5de49635-dbd9-4ecd-9705-53731f42033b"
           }
         ],
         "responses": {

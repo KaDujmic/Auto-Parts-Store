@@ -45,7 +45,7 @@ export default function OrderCard ({ order, onChangeCallback }) {
 	};
 
 	const handleClickItem = () => {
-		navigate('/pendingItems');
+		navigate('/pending-items');
 	};
 
 	const buttonOnOrder = (order) => {
