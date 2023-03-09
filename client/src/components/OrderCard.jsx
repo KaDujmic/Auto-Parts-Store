@@ -4,11 +4,15 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
+import { useContext } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
 export default function OrderCard ({ order, onChangeCallback }) {
 	const navigate = useNavigate();
+	const authContext = useContext(AuthContext);
+	const role = authContext.currentUser !== null ? authContext.currentUser.role : false;
 
 	const orderStatusDisplay = {
 		pending_confirmation: 'Pending Confirmation',
@@ -45,18 +49,20 @@ export default function OrderCard ({ order, onChangeCallback }) {
 	};
 
 	const buttonOnOrder = (order) => {
-		if (order.orderStatus === 'pending_confirmation') {
-			return (
-				<Button color="primary" onClick={() => { handleClickConfirm(order.id); }}>Confirm Order</Button>
-			);
-		} else if (order.orderStatus === 'ready_for_pickup') {
-			return (
-				<Button color="primary" onClick={() => { handleClickComplete(order.id); }}>Complete Order</Button>
-			);
-		} else if (order.orderStatus === 'pending_delivery') {
-			return (
-				<Button color="primary" onClick={() => { handleClickItem(); }}>Pending Items</Button>
-			);
+		if (role === 'Salesperson') {
+			if (order.orderStatus === 'pending_confirmation') {
+				return (
+					<Button color="primary" onClick={() => { handleClickConfirm(order.id); }}>Confirm Order</Button>
+				);
+			} else if (order.orderStatus === 'ready_for_pickup') {
+				return (
+					<Button color="primary" onClick={() => { handleClickComplete(order.id); }}>Complete Order</Button>
+				);
+			} else if (order.orderStatus === 'pending_delivery') {
+				return (
+					<Button color="primary" onClick={() => { handleClickItem(); }}>Pending Items</Button>
+				);
+			}
 		}
 	};
 
