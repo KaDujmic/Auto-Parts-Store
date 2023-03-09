@@ -39,7 +39,7 @@ export default function Items () {
 		};
 		await axios.put(`http://localhost:4000/orderItem/${orderItem.orderId}/${orderItem.itemId}`, {}, config);
 		await fetchData();
-		navigate('/pendingItems');
+		navigate('/pending-items');
 	};
 
 	return (
