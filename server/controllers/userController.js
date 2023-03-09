@@ -1,5 +1,6 @@
 const { user } = require('../db/models');
 const crudController = require('./crudController');
+const bcrypt = require('bcrypt');
 
 exports.getUser = async (req, res) => {
   await crudController.findModel(user, null, req, res);
@@ -18,5 +19,6 @@ exports.deleteUser = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
+  req.body.password = await bcrypt.hash(req.body.password, 2);
   await crudController.createModel(user, req, res);
 };
