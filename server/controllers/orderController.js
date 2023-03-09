@@ -39,7 +39,7 @@ exports.createOrder = async (req, res) => {
     fullPrice,
     orderDate,
     currency,
-    orderStatus: orderStatuses.pending_confirmation
+    orderStatus: orderStatuses.pendingConfirmation
   });
   res.status(201).json(model);
 };
@@ -101,7 +101,7 @@ exports.orderStatusCheck = async (req, res) => {
         id: req.params.firstId
       }
     });
-    currentOrder.orderStatus = orderStatuses.ready_for_pickup;
+    currentOrder.orderStatus = orderStatuses.readyForPickup;
     currentOrder.save();
     orderReadyEmail(req.params.firstId);
   }
