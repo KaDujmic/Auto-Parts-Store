@@ -9,7 +9,7 @@ const KEY_STRING = 'recurrence';
 exports.verifySettings = async (req) => {
   const { key, value } = req.body;
   if (key.includes(KEY_STRING)) {
-    if (value < MIN_VALUE || value > MAX_VALUE) {
+    if (value.recurrence < MIN_VALUE || value.recurrence > MAX_VALUE) {
       throw new ValidationError(`ERROR: Supported recurrence is between ${MIN_VALUE}, and ${MAX_VALUE} days.`);
     }
   }
