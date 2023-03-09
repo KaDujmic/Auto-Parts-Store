@@ -9,13 +9,7 @@ import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-const orderStatusDisplay = {
-	pending_confirmation: 'Pending Confirmation',
-	pending_delivery: 'Pending Delivery',
-	ready_for_pickup: 'Ready For Pickup',
-	completed: 'Completed'
-};
+import { orderStatusDisplay } from '../utils/helper';
 
 export default function Items () {
 	const [dashboardOrder, setDashboardOrder] = useState([]);

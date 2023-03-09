@@ -8,18 +8,12 @@ import { AuthContext } from '../context/authContext';
 import { useContext } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { orderStatusDisplay } from '../utils/helper';
 
 export default function OrderCard ({ order, onChangeCallback }) {
 	const navigate = useNavigate();
 	const authContext = useContext(AuthContext);
 	const role = authContext.currentUser !== null ? authContext.currentUser.role : false;
-
-	const orderStatusDisplay = {
-		pending_confirmation: 'Pending Confirmation',
-		pending_delivery: 'Pending Delivery',
-		ready_for_pickup: 'Ready For Pickup',
-		completed: 'Completed'
-	};
 
 	const handleClickConfirm = async (id) => {
 		const jwt = localStorage.getItem('token');
