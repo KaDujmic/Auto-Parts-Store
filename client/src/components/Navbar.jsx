@@ -25,14 +25,14 @@ export default function ButtonAppBar () {
 					<Button color="inherit" onClick={() => { handleClick('/order'); }}>Orders</Button>
 					<Button color="inherit" onClick={() => { handleClick('/order-create'); }}>Create Order</Button>
 					<Button color="inherit" onClick={() => { handleClick('/user'); }}>Create User</Button>
-					<Button color="inherit" onClick={() => { handleClick('/pendingItems'); }}>Pending Items</Button>
+					<Button color="inherit" onClick={() => { handleClick('/pending-items'); }}>Pending Items</Button>
 					<Button color="inherit" onClick={() => { handleClick('/'); }}>Items</Button>
 				</>
 			);
 		} else if (role === 'Customer') {
 			return (
 				<>
-					<Button color="inherit" onClick={() => { handleClick('/userOrders'); }}>Orders</Button>
+					<Button color="inherit" onClick={() => { handleClick('/user-orders'); }}>Orders</Button>
 					<Button color="inherit" onClick={() => { handleClick('/'); }}>Items</Button>
 				</>
 			);
