@@ -12,7 +12,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 200,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -25,7 +25,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -38,7 +38,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 5,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -50,7 +50,7 @@ module.exports = {
         price: 122,
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         quantity: 200,
         created_at: new Date(),
         updated_at: new Date(),
@@ -64,7 +64,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -77,7 +77,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -90,7 +90,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -103,7 +103,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -116,7 +116,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -129,7 +129,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -142,7 +142,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -155,7 +155,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -168,7 +168,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -181,7 +181,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -194,7 +194,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -204,7 +204,7 @@ module.exports = {
         name: 'Seat Fabric',
         serial_number: 'BMW006',
         price: 15,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
@@ -220,7 +220,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -233,7 +233,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -246,7 +246,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -259,7 +259,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -272,7 +272,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -285,7 +285,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -298,7 +298,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -311,7 +311,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -324,7 +324,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -337,7 +337,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -350,7 +350,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -363,7 +363,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -376,7 +376,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -389,7 +389,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -402,7 +402,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -415,7 +415,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
