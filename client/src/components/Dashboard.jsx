@@ -66,7 +66,7 @@ function DashboardContent () {
 							<Grid item xs={12}>
 								<Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
 									<DashboardItem />
-									<Button onClick={() => { handleClick('/pendingItems'); }}>See all</Button>
+									<Button onClick={() => { handleClick('/pending-items'); }}>See all</Button>
 								</Paper>
 							</Grid>
 						</Grid>

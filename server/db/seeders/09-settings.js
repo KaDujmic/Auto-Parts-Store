@@ -52,7 +52,7 @@ module.exports = {
                               <tbody>
                                 <h3>Dear customerName,</h3>
       
-                                <p>The order you have requested on orderDate is ready.<br>
+                                <p>The order you have requested is ready.<br>
                                 Please come by our shop during working hours to pick up your order.</p>
                     
                                 We are looking forward to seeing you!<br>

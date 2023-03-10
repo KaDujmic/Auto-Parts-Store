@@ -3,6 +3,7 @@ const Op = Sequelize.Op;
 const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('../validators/errors');
 const { orderReadyEmail } = require('./notificationService');
+const { orderStatuses } = require('../utils/helper');
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);
@@ -70,9 +71,9 @@ exports.retrieveItemOnOrder = async (currentOrder, req, res) => {
       }
     });
     if (hadToRequestItemOrder) {
-      currentOrder.orderStatus = 'pending_delivery';
+      currentOrder.orderStatus = orderStatuses.pendingDelivery;
     } else {
-      currentOrder.orderStatus = 'ready_for_pickup';
+      currentOrder.orderStatus = orderStatuses.readyForPickup;
       orderReadyEmail(currentOrder.id);
     }
     await currentOrder.save({ transaction: t });
