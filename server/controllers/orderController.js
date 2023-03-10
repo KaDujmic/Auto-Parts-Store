@@ -10,7 +10,7 @@ const { orderStatuses, itemStatuses } = require('../utils/helper');
 const ORDER_STATUS_LIST = ['pending_confirmation', 'pending_delivery', 'ready_for_pickup', 'completed'];
 
 exports.getManyOrder = async (req, res) => {
-  const query = { include: { model: user, attributes: ['id', 'fullName', 'email'] } };
+  const query = { include: { model: user, attributes: ['id', 'fullName', 'email'] }, order: ['orderDate', 'DESC'] };
   await crudController.findManyModel(order, query, req, res);
 };
 
