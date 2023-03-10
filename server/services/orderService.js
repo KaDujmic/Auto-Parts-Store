@@ -4,6 +4,7 @@ const { getCurrency } = require('./currencyService');
 const { NotFoundError, ValidationError } = require('../validators/errors');
 const { orderReadyEmail } = require('./notificationService');
 const { orderStatuses } = require('../utils/helper');
+const MAX_ORDERS = 4;
 
 const checkDuplicateElements = function (array) {
   const duplicate = array.filter((value, index) => array.indexOf(value) !== index);
@@ -112,7 +113,7 @@ exports.checkCustomerOrders = async (req, res) => {
       deleted: false
     }
   });
-  if (orders.length > 4 && orders.orderStatus !== 'completed') {
+  if (orders.length > MAX_ORDERS && orders.orderStatus !== 'completed') {
     throw new ValidationError('User already has 5 orders that are not completed');
   };
 };

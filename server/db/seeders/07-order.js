@@ -26,8 +26,8 @@ module.exports = {
         order_status: 'pending_confirmation',
         order_date: new Date().toISOString().split('T')[0],
         item_list: [
-          { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 5 },
-          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 50 }
+          { id: 'f0d0ea4d-0e40-4987-866e-154da59552c5', quantity: 1 },
+          { id: '0d7c9848-2a69-407e-bfcf-9b1079fc1121', quantity: 2 }
         ],
         currency: 'USD',
         full_price: 201,

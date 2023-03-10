@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "087cd03e-d9f4-4ab5-b224-46246fe9082e",
 		"name": "Auto Parts",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests a user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24878283"
 	},
@@ -665,7 +666,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"31c9d404-d204-497c-8877-08b1be7cba8b\",\n    \"name\": \"Rear view mirror\",\n    \"serialNumber\": \"M002\",\n    \"price\": 15,\n    \"categoryId\": \"6ed632dd-f323-43dd-b596-287c17c8a7ea\",\n    \"manufacturerId\": \"4abedb72-1411-4844-a04a-58dbcd2b1a94\",\n    \"quantity\": 50\n}",
+							"raw": "{\n    \"id\": \"31c9d404-d204-497c-8877-08b1be7cba8b\",\n    \"name\": \"Rear view mirror\",\n    \"serialNumber\": \"M002\",\n    \"price\": 15,\n    \"categoryId\": \"6ed632dd-f323-43dd-b596-287c17c8a7ea\",\n    \"manufacturerId\": \"4abedb72-1411-4844-a04a-58dbcd2b1a94\",\n    \"quantity\": 50,\n    \"imageLink\": \"https://di-uploads-pod14.dealerinspire.com/toyotaoforlando/uploads/2019/04/car-parts-1024x683.jpg\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"

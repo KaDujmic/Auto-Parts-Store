@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
@@ -12,7 +13,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 200,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.autostanic.hr/Content/Images/uploaded/shutterstock_211134982.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -25,7 +26,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.yenmak.com.tr/Upload/kaplamali_piston-24022020_160051.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -38,7 +39,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 5,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.yenmak.com.tr/Upload/kaplamali_piston-24022020_160051.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -50,7 +51,7 @@ module.exports = {
         price: 122,
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Wing_mirror.jpg',
         quantity: 200,
         created_at: new Date(),
         updated_at: new Date(),
@@ -64,7 +65,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://energyeducation.ca/wiki/images/thumb/c/cd/Camshaft.jpg/500px-Camshaft.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -77,7 +78,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Pushrod2.PNG',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -90,7 +91,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://lastingcar.com/wp-content/uploads/2022/04/what-is-a-crankcase.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -103,7 +104,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://images.cdn.circlesix.co/image/1/640/0/uploads/posts/2017/01/d4bb55adf1305cf769934ccb5428e0a4.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -116,7 +117,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://oldtimer-shop.eu/wp-content/uploads/2021/11/p604_6.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -129,7 +130,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://files.ekmcdn.com/turbovanes/images/original-mercedes-benz-sprinter-2.2-cdi-diesel-fuel-injector-0445115068-3452-p.jpg?v=2C5EB995-6160-41AE-A63C-C816445F714B',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -142,7 +143,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://oldtimer-shop.eu/wp-content/uploads/2021/11/p604_6.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -155,7 +156,7 @@ module.exports = {
         category_id: 'c97ede74-b9e2-4e22-8f75-601a4687906d',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://files.ekmcdn.com/turbovanes/images/original-mercedes-benz-sprinter-2.2-cdi-diesel-fuel-injector-0445115068-3452-p.jpg?v=2C5EB995-6160-41AE-A63C-C816445F714B',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -168,7 +169,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://play-lh.googleusercontent.com/zOktdSU2RWDXxw5RGvRs5AOE_VUapU7B8VdN_FvTjuWtkkVLxJSmC12O1hcDmvmh10s',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -181,7 +182,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://carorbis.com/wp-content/uploads/2022/03/02Carorbis-Blog_What-is-a-handbrake-scaled.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -194,7 +195,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.automobiletrim.com/images/headlining/automotive-headlining-material.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -204,7 +205,7 @@ module.exports = {
         name: 'Seat Fabric',
         serial_number: 'BMW006',
         price: 15,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.automobiletrim.com/images/headlining/automotive-headlining-material.jpg',
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
@@ -220,7 +221,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.drivespark.com/img/2018/02/clicking-sound-of-indicators-reason-a-1519731775.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -233,7 +234,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://files.ekmcdn.com/turbovanes/images/original-mercedes-benz-sprinter-2.2-cdi-diesel-fuel-injector-0445115068-3452-p.jpg?v=2C5EB995-6160-41AE-A63C-C816445F714B',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -246,7 +247,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.iihs.org/media/5cc8d3a4-94f4-43af-991e-165318bc3e2c/vwV78g/Topics/AIRBAGS/dual-airbag-system.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -259,7 +260,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://cdn.auto-ricambi.eu/images/0/19dcf991d56bb4e2/25/front-door-trim-panel-fiat-ducato-250-right.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -272,7 +273,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://m.media-amazon.com/images/I/81om0zfxcIL.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -285,7 +286,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://m.media-amazon.com/images/I/61H1hcL2zQL._AC_UF894,1000_QL80_.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -298,7 +299,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://images.cars.com/cldstatic/wp-content/uploads/audi-r8-2008-gatedshifter.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -311,7 +312,7 @@ module.exports = {
         category_id: '6ed632dd-f323-43dd-b596-287c17c8a7ea',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://carorbis.com/wp-content/uploads/2022/03/02Carorbis-Blog_What-is-a-handbrake-scaled.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -324,7 +325,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://cdn.shopify.com/s/files/1/0601/6296/5676/products/KARBEL_2_823d46f1-a03f-4ea6-9843-5f45e5987096.jpg?v=1661326515',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -337,7 +338,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.shutterstock.com/image-photo/detailed-close-petrol-cap-cover-260nw-179573873.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -350,7 +351,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '4abedb72-1411-4844-a04a-58dbcd2b1a94',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://media.istockphoto.com/id/946650986/photo/car-ventilation.jpg?s=612x612&w=0&k=20&c=JDLDH7kMJNzlzYAZN6-tCjcy11gtvaqDnLq-TKKVNFE=',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -363,7 +364,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.fandis.com/images/articoli/FC-003.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -376,7 +377,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://m.media-amazon.com/images/I/61BwIRw2yML.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -389,7 +390,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '8e860a7d-e118-4e64-ba9d-0345e16994d0',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://m.media-amazon.com/images/I/51d6bMYlbZL._AC_.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -402,7 +403,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://www.shutterstock.com/image-photo/dirty-rural-road-countryside-260nw-116808835.jpg',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
@@ -415,7 +416,7 @@ module.exports = {
         category_id: 'a4c9bd4a-6b68-47da-9968-a3ff2ef0fb58',
         manufacturer_id: '0d2b13c0-181e-4faf-99ef-16e4b49e0c7e',
         quantity: 50,
-        image_link: 'https://i0.wp.com/auralcrave.com/wp-content/uploads/2023/03/cagepascal.jpg?resize=810%2C580&ssl=1',
+        image_link: 'https://toughcountry.com/wp-content/uploads/2016/03/deluxe-front-tough-country-bumpers.png',
         created_at: new Date(),
         updated_at: new Date(),
         deleted: false
