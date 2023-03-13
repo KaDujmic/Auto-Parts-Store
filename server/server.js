@@ -24,6 +24,4 @@ app.listen(port, () => {
   // Set cache keys on startup
   setCurrency();
   setSettings();
-  // On server startup send arrived items email
-  verifyItemArrivedEmail();
 });
